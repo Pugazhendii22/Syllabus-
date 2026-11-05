@@ -1,0 +1,1157 @@
+[
+  {
+    "id": "course-1",
+    "semester": 1,
+    "title": "English Literature- I",
+    "page": 7,
+    "units": [
+      {
+        "title": "Unit 1 · Poetry I",
+        "content": "Geoffrey Chaucer: Prologue to The Canterbury Tales \nEdmund Spenser: “Epithalamion” \nWilliam Shakespeare: “Sonnet 116” / “Sonnet 130”"
+      },
+      {
+        "title": "Unit 2 · Poetry II",
+        "content": "John Donne: “A Valediction: Forbidding Mourning” \nJohn Milton: Book IX (Lines 568-732) Paradise Lost \nAlexander Pope: The Rape of the Lock (Canto I)"
+      },
+      {
+        "title": "Unit 3 · Prose",
+        "content": "Francis Bacon: “Of Studies” \nJoseph Addison: “Sir Roger at the Theatre” \nJonathan Swift: “A Proposal for Correcting, Improving and  \n Ascertaining the English Tongue”"
+      },
+      {
+        "title": "Unit 4 · Drama",
+        "content": "Christopher Marlowe: Doctor Faustus \nThomas Dekker: The Shoemaker’s Holiday \nWilliam Shakespeare: King Lear"
+      },
+      {
+        "title": "Unit 5 · Fiction",
+        "content": "Daniel Defoe: Robinson Crusoe \nSamuel Richardson: Pamela \nHenry Fielding: Tom Jones"
+      }
+    ]
+  },
+  {
+    "id": "course-2",
+    "semester": 1,
+    "title": "Communicative English",
+    "page": 11,
+    "units": [
+      {
+        "title": "Unit 1 · Basics of Communication",
+        "content": "Introduction to Communication skills, Importance of Communication, \nCommunication Process, Verbal and Non-verbal Communication, Barriers \nto Effective Communication"
+      },
+      {
+        "title": "Unit 2 · Listening and Speaking Skills",
+        "content": "Importance of Listening, Types of Listening, Barriers, Dialogue and \nConversation, Discussion, Public Speaking, Extempore"
+      },
+      {
+        "title": "Unit 3 · Reading Skills",
+        "content": "General and Technical Comprehension, Intensive reading, Extensive \nreading, Skimming and Scanning ,Vocabulary, Idioms and Phrases, \nSynonyms and Antonyms"
+      },
+      {
+        "title": "Unit 4 · Writing Skills",
+        "content": "Functional Grammar, Common Errors, Paragraphs and Essays, Report \nWriting, Formal and Informal Letters, Emails, Notices, Agenda, Minutes "
+      },
+      {
+        "title": "Unit 5 · Personality Development",
+        "content": "Personality Development, Soft Skills, Self-assessment, Emotional Quotient, \nBody Language; Leadership Qualities; Time Management; Professional \nEthics"
+      }
+    ]
+  },
+  {
+    "id": "course-3",
+    "semester": 1,
+    "title": "English For Competitive Exams",
+    "page": 17,
+    "units": [
+      {
+        "title": "Unit 1 · Reading Comprehension",
+        "content": "Reading for main idea and details; Inferring from the context; Critical reading \nand evaluation of texts; Reading strategies; Types of reading - skimming, \nscanning, intensive and extensive reading; Understanding tone and style, \nrhetorical devices in texts; Reading comprehension practice using different \ntypes of passages"
+      },
+      {
+        "title": "Unit 2 · Functional Grammar",
+        "content": "Parts of speech; Articles; Prepositions; Subject -verb Agreement; \nActive/Passive Voice; Phrasal verbs; Clauses; Reported speech; Idioms and \nPhrases; Synonyms and Antonyms"
+      },
+      {
+        "title": "Unit 3 · Written Communication",
+        "content": "Paragraph Writing; Essay Writing; Description and Narration; Developing \nan argument; Presenting  arguments, ideas and opinions; Report Writing; \nFormal and Informal Letters; Note-making; Summarizing and Paraphrasing; \nPrecis Writing; Notice; Poster making"
+      },
+      {
+        "title": "Unit 4 · Listening and Speaking Skills",
+        "content": "Listening and Hearing; Importance of listening skills; Features of effective \nspeech; Simple social exchanges; Dialogue practice; Making persuasive \narguments; Elocution"
+      },
+      {
+        "title": "Unit 5 · Study Skills",
+        "content": "Expanding vocabulary - learning new words, understanding meaning s, and \nusing them correctly \nResearch and using the library —finding relevant information; Using \ncatalogues, books, periodicals, bibliographies and indexes; Note -making; \nParaphrasing; Summarizing; Quoting; Making a references list; Answering \nexam questions; Understanding the question; Planning the answer; \nEvaluating the answer."
+      }
+    ]
+  },
+  {
+    "id": "course-4",
+    "semester": 1,
+    "title": "Spoken English",
+    "page": 21,
+    "units": [
+      {
+        "title": "Unit I · Working with Grammar",
+        "content": "Sentence construction; Types of sentences; Parts of speech; Auxiliary verbs; Singular \nand plural; Active and passive voice; Degrees of comparison; Subject-verb agreement; \nDeterminers; Punctuation; Common errors and usage"
+      },
+      {
+        "title": "Unit II · Vocabulary Building and Pronunciation",
+        "content": "Word formation; Synonyms and Antonyms; Homonyms; One -word substitutes; \nChanging one part of speech to another; Odd -one-out exercises; Idioms and phrases; \nJoining sentences; V owel and Consonant sounds; Word Stress; Sentence stress; \nIntonation; Practice in pronunciation"
+      },
+      {
+        "title": "Unit III · Conversational Skills",
+        "content": "Basics of conversation (Introductions, greetings, asking questions); Describing people, \nplaces, situations and events; Extempore speeches; Persuasive and descriptive \nspeeches; Speaking through narration; Narr ating stories; Describing characters and \nsituations of the story"
+      },
+      {
+        "title": "Unit IV · Group Communication",
+        "content": "Basics of group discussion; Assigning tasks to class groups; Appointing group leaders \nto communicate; Completion of tasks based on communication; Group cohesion \nthrough communication; Group presentations; Use of power point presentations"
+      },
+      {
+        "title": "Unit V · Listening Skills and Non-verbal Communication",
+        "content": "Importance of listening; Basics of listening; Barriers to listening; Listening for gist, \nstyle, and tone; V oice recording exercises; Body language; Importance of body \nlanguage in communication; Gestures, posture, eye contact, and facial expressions; \nEtiquette"
+      }
+    ]
+  },
+  {
+    "id": "course-5",
+    "semester": 1,
+    "title": "Understanding India",
+    "page": 24,
+    "units": []
+  },
+  {
+    "id": "course-6",
+    "semester": 1,
+    "title": "Environmental Studies",
+    "page": 24,
+    "units": []
+  },
+  {
+    "id": "course-7",
+    "semester": 1,
+    "title": "Modern Indian Languages",
+    "page": 24,
+    "units": []
+  },
+  {
+    "id": "course-8",
+    "semester": 2,
+    "title": "English Literature Ii",
+    "page": 25,
+    "units": [
+      {
+        "title": "Unit 1 · Poetry I",
+        "content": "William Blake: “The Lamb” \nP. B. Shelley: “Ode to the West Wind” \n Elizabeth Barrett Browning: “How do I love thee?” \nT.S. Eliot: Part I & II “The Waste Land”"
+      },
+      {
+        "title": "Unit 2 · Poetry II",
+        "content": "Philip Larkin: “Church Going” \nTed Hughes: “Hawk Roosting” \nSeamus Heaney: “Seeing Things”"
+      },
+      {
+        "title": "Unit 3 · Drama",
+        "content": "Bernard Shaw: Arms and the Man \nJohn Osborne: Look Back in Anger \nTom Stoppard: Rosencrantz and Guildenstern are Dead"
+      },
+      {
+        "title": "Unit 4 · Fiction",
+        "content": "Jane Austen: Pride and Prejudice \nD.H. Lawrence: Sons and Lovers \nVirginia Woolf: To the Lighthouse"
+      },
+      {
+        "title": "Unit 5 · Short Fiction",
+        "content": "H.G. Wells: “Empire of \nAnts”  \nGraham Greene: “The End of \nthe Party”  \nMartin Amis: “Heavy \nWater”"
+      }
+    ]
+  },
+  {
+    "id": "course-9",
+    "semester": 2,
+    "title": "Academic Writing Skills",
+    "page": 30,
+    "units": [
+      {
+        "title": "Unit I · Introduction",
+        "content": "The writing process; style and diction; pre -writing; elements of writing; mechanics of \nwriting; functional grammar; punctuation and spelling; vocabulary building;  idioms and \nphrases; common errors;  reading comprehension and note -making; paraphrasing and \nsummarizing; note-taking."
+      },
+      {
+        "title": "Unit II · Writing in the Classroom",
+        "content": "Effective sentences; cohesive writing; clarity and conciseness in writing; introduction to \ntechnical writing; modes of writing – description, narration, exposition and argument; \nessay and paragraph writing; types of essays and paragraphs; organizing paragraphs; \nintroductions and conclusions; organizing the main body; developing an argument; critical \nthinking skills; reference skills related to note taking, collating information and organizing \nit."
+      },
+      {
+        "title": "Unit III · Professional Writing",
+        "content": "Importance of writing; written vs. spoken language; formal and informal styles of writing; \nwriting at the workplace; letter writing; format and style; cover letters; business letters; job \napplications; writing e -mails – style and tone; effective resumes; chronological and \nfunctional resumes; types of reports and format of formal reports, short reports for \nnewspaper; memorandum and notice."
+      },
+      {
+        "title": "Unit IV · Research Writing",
+        "content": "Research proposal; writing a research paper;  writing an abstract; r esearch methods and \nmethodology; types of research – descriptive, analytical, quantitative, qualitative, \nconceptual, empirical, etc; p lanning the r esearch topic; d efining and formulating the \nresearch problem, importance of literature review, identifying a research gap; developing \na working hypothesis; using research databases, citation – MLA and APA styles; in -text \ncitations; footnotes and endnotes; compiling a bibliography; proof reading."
+      },
+      {
+        "title": "Unit V · Ethics in Writing",
+        "content": "Research ethics; plagiarism and other ethical issues; publication ethics; citation and \nacknowledgement; political correctness; inclusive language; best practices, setting \ninitiatives and guidelines; copyright and intellectual property rights; conflict of interest; \nopen access publications and initiatives."
+      }
+    ]
+  },
+  {
+    "id": "course-10",
+    "semester": 2,
+    "title": "Professional Communication In English",
+    "page": 37,
+    "units": [
+      {
+        "title": "Unit 1 · Basic Communication Skills",
+        "content": "Introduction; relevance of communication; communication process; types of \ncommunication; barriers to communication; overcoming barriers; frames of reference."
+      },
+      {
+        "title": "Unit 2 · Listening",
+        "content": "Types of listening; barriers to effective listening; listening and note taking; identifying \nimportant points; extracting salient points to summarise."
+      },
+      {
+        "title": "Unit 3 · Speaking",
+        "content": "Public speaking; Setting clear objectives; generating ideas; preparing the speech; \nseminars; purpose of seminars; making notes to speak from; presentations; structure of \npresentations; group discussions; types of group discussions and topics; group \ndynamics; interviews; types of interviews; basic interview structure"
+      },
+      {
+        "title": "Unit 4 · Reading",
+        "content": "Comprehension, skimming, scanning, intensive reading, extensive reading, \ndetermining vocabulary from word parts and context clues; identifying the central \nargument as well as details; inferring and identifying implied main ideas; reference and \nlibrary skills; critical reading and evaluating the text."
+      },
+      {
+        "title": "Unit 5 · Writing",
+        "content": "Functional grammar; spelling and punctuation: vocabulary; common errors;  letter \nwriting; format and style; cover letters; business letters; job applications; e -mails; \nresumes; report writing; note -making; description; narration; essay and paragraph \nwriting."
+      }
+    ]
+  },
+  {
+    "id": "course-11",
+    "semester": 2,
+    "title": "Functional English - I",
+    "page": 42,
+    "units": [
+      {
+        "title": "Unit 1",
+        "content": "MulkRaj Anand:   The Lost Child \nAbdul Kalam:    My Early days \nEssential English Grammar     Units 1 to 14"
+      },
+      {
+        "title": "Unit 2",
+        "content": "William Wordsworth:   The Affliction of Margaret  \nOscar Wilde:   The Model Millionaire  \nEssential English Grammar:     Units 15 to 33"
+      },
+      {
+        "title": "Unit 3",
+        "content": "A J Cronin:   The Two Gentlemen of Verona \nKamala Das:   Punishment in Kindergarten  \nEssential English Grammar:     Units 34 to 48"
+      },
+      {
+        "title": "Unit 4",
+        "content": "Larry Collins & Dominique Lapierre:   The Second Crucifixion  \nSylvia Plath:    Mirror \nEssential English Grammar:     Units 49 to 63"
+      },
+      {
+        "title": "Unit 5",
+        "content": "Group discussions; Listening Skills; Note-making   \nPrescribed Text References: \nPillai, Radhakrishna G and Geetha Rajeevan. Impressions-1: A Multi-skill \nCourse in \n  English. Cambridge University Press, 2010. \n Murphy, Raymond. Essential English Grammar. Cambridge University Press, \n2012."
+      }
+    ]
+  },
+  {
+    "id": "course-12",
+    "semester": 2,
+    "title": "Creative Writing In English",
+    "page": 47,
+    "units": [
+      {
+        "title": "Unit 1 · Introducing Creative Writing",
+        "content": "This unit covers finding inspiration, the importance of creativity and \nimagination, and building reading skills to enrich creative writing."
+      },
+      {
+        "title": "Unit 2 · Developing a Distinctive Writing Craft",
+        "content": "This unit analyzes literary devices, language varieties, grammar and syntax to \nhelp develop personal writing style and voice."
+      },
+      {
+        "title": "Unit 3 · Core Creative Writing Genres",
+        "content": "A) Poetry - This module explores poetic language, forms, techniques, and \nmodes, including practices like rhyme, free verse, dramatic monologues, and \nwriting verse for children. \nB) Fiction - This module examines crafting short stories and novels, using \nliterary and popular fiction, modeling, and writing fiction for young audiences. \nC) Drama - This module covers dramatic structure, characterization, theatrical \nelements, styles, and Indian playwrights. It also provides instruction on writing \nscreenplays and children's theater."
+      },
+      {
+        "title": "Unit 4 · Writing for Media",
+        "content": "This unit discusses adapting writing for different media like print, broadcast, \nonline, and advertising."
+      },
+      {
+        "title": "Unit 5 · Editing and Publishing",
+        "content": "This unit focuses on revising drafts, proofreading, editing, and preparing \nmanuscripts for publication."
+      }
+    ]
+  },
+  {
+    "id": "course-13",
+    "semester": 2,
+    "title": "Health and Well-Being, Yoga Education, Sports and Fitness",
+    "page": 51,
+    "units": []
+  },
+  {
+    "id": "course-14",
+    "semester": 2,
+    "title": "Digital Technologies",
+    "page": 51,
+    "units": []
+  },
+  {
+    "id": "course-15",
+    "semester": 3,
+    "title": "History Of English Literature",
+    "page": 52,
+    "units": [
+      {
+        "title": "Unit I",
+        "content": "Anglo Saxon Literature – 5th to 14th Century \nChaucer’s and Medieval Age 14th to 15th Century \nThe Renaissance and Reformation (1485-1660 CE) \nTudors and Elizabethan Age 16th to Early 17th Century \nEarly Tudor Period (1485-1558) \nElizabethan Period (1558-1603) \nJacobean Period (1603-1625) \nCaroline Age (1625-1649) \nPuritanism (1649-1660)"
+      },
+      {
+        "title": "Unit II",
+        "content": "The Age of Enlightenment (Neo classical period) (1660-1790 CE) \nRestoration Age 17th to 18th Century (1660-1700) \nThe Augustan Age (1700-1750) \nAge of Pope \nJohnson’s Age (1750-1790)"
+      },
+      {
+        "title": "Unit III",
+        "content": "Romantic Age from 19th Century (1790-1830) \nPoetry \nNovel  \nGothic Writings"
+      },
+      {
+        "title": "Unit IV",
+        "content": "Victorian Age and Early 19th Century (1832-1901)"
+      },
+      {
+        "title": "Unit V",
+        "content": "The Age of Hardy \nModernism (1914-1945)"
+      }
+    ]
+  },
+  {
+    "id": "course-16",
+    "semester": 3,
+    "title": "Literary Forms And Movements",
+    "page": 56,
+    "units": [
+      {
+        "title": "Unit I",
+        "content": "Tragedy \nComedy \nTragicomedy \nSatire"
+      },
+      {
+        "title": "Unit II",
+        "content": "Drama \nNovel \nShort Story  \nEssay"
+      },
+      {
+        "title": "Unit III",
+        "content": "One-Act Play \nBiography \nAutobiography \nMelodrama"
+      },
+      {
+        "title": "Unit IV",
+        "content": "Farce \nBallad \nMasque \nEpic"
+      },
+      {
+        "title": "Unit V",
+        "content": "Lyric \nSonnet \nElegy \nProsody \nOde"
+      }
+    ]
+  },
+  {
+    "id": "course-17",
+    "semester": 3,
+    "title": "Literature And Visual Media",
+    "page": 60,
+    "units": [
+      {
+        "title": "Unit 1 · Introduction to Visual Culture and Everyday Life",
+        "content": "Concept of Visual Culture Visual culture and everyday life \nDifference between visual culture, art \nhistory and cultural studies Post \nmodernism as a culture of pastiche \nand simulation \n                    Essays: \nJean Baudrillard : “Postmodern and Popular Culture Simulations” . \nRaymond Williams: “Culture,” “Art,” and “Democracy” \ndefinitions from Keywords: A Vocabulary \nof Culture and Society. \nRoland Barthes:  \n“The Photographic \nMessage”. Nicholas \nMirzoeff:“What is \nVisual Culture?”"
+      },
+      {
+        "title": "Unit 2 · Visualizing Gender, Race, Religion and Caste",
+        "content": "The notion of gender as cultural construction of \nfemininity and masculinity. Effects of globalisation \non popular culture. \nPerspectives of race and \nethnicity in visual media. \nContextualizing caste in \nvisual media. \nEssays: \nFrantz Fanon: “The Fact of Blackness” Richard Dyer: “White” \nFilms: \nVittorio De Sica: Bicycle Thieves \nWalter Salles: Motorcycle Diaries"
+      },
+      {
+        "title": "Unit 3 · Theoretical Approaches to Film",
+        "content": "Auteur theory Gender film theory Formalist film theory Marxist film theory \nPsychoanalytical film theory Structuralist film theory Genre studies \nEssays: \nAndre Bazin: “The Evolution of the Language of Cinema”. \nGilbert Harman: “Semiotics and the Cinema: Metz and Wollen”. \nFilms: \nCharlie Chaplin: City Lights \nSergei Eisenstein: Battleship Potemkin"
+      },
+      {
+        "title": "Unit 4 · Understanding Film as Genre Language of film and fiction Narratology in",
+        "content": "literature and cinema Film and Theatre; Intertextuality \nFilm and its interaction with other art forms \nAlternative Cinema like Queer Cinema, Subaltern Cinema, Documentary. \nEssays: \nStephen Neale: “Film Noir” \nS Theodore Baskaran: “Patriotic Cinema: An \nAspect of the Freedom Struggle” Sundar Sarukkai:\n “Reading Against the Reel” \nFilm: Akiro Kurosawa: Rashomon Robert Bresson: Pickpocket Jean-Luc \nGodard:  Breathless"
+      },
+      {
+        "title": "Unit 5 · Film as Text Language of films Discourse Analysis of films Examining the",
+        "content": "ideology \nEssays: \n“What is Wrong with Indian Films?” from Our films, Their films by Satyajit Ray. \n“Tamil Cultural Elites and Cinema: Outline of an Argument” by M. S. S. Pandian. \nIdeology of the Hindi Film: A Historical Construction by M. Madhava Prasad. \nFilms: \nSatyajit Ray: Pather Panchali \n                  Anand Patwardhan  Jai Bhim Comrade"
+      }
+    ]
+  },
+  {
+    "id": "course-18",
+    "semester": 3,
+    "title": "Content Writing",
+    "page": 67,
+    "units": [
+      {
+        "title": "Unit 1 · Fundamentals of Content Writing",
+        "content": "1. The Concept of Content Writing and its relevance  \n2. Role and Functions of Content Writers  \n3. Print and Web Content Writing  \n4. Scope and Types of Content Writing \n5. Principles and processes of content writing"
+      },
+      {
+        "title": "Unit 2 · Types of Content Writing",
+        "content": "1. The process of Content Writing – getting the brief, ideating, researching, \nstructuring, formatting  \n2. Editing and Proof-Reading—following company style sheet, grammar, copy flow, \nrestructuring, market research  \n3. Writing Styles - Non-fiction (Essays, Reports), Advertising, Newspapers   \n4. Writing blogs, case studies, white papers  \n5. Corporate Communications -- Writing for business-to-business (B2B), business-to-\nconsumer (B2C), press releases, and newsletters – focus on language, jargon, writing \nstyle, target audience, formal and informal language"
+      },
+      {
+        "title": "Unit 3",
+        "content": "A. Visual Content  \n1. Infographics- Importance and relevance  \n2. Images, Screenshots  \n3. Videos, Memes, GIFs, 30-degree videos  \n4. Product Demonstrations  \nB. Interactive Content    \n1. Quizzes  \n2. Polls  \n3. Interactive white papers \nC. Free Tools and Paid Tools"
+      },
+      {
+        "title": "Unit 4 · Tools of the Trade",
+        "content": "A. Social Media  \n1. Understanding the basics of social media  \n2. Understanding social media content writing  \n3. Understanding PR   \nB. Plagiarism laws in Content Writing  \n1. What is plagiarism, rules on plagiarism  \n2. How to write plagiarism-free copies"
+      },
+      {
+        "title": "Unit 5 · Copywriting",
+        "content": "A. Introduction to Copywriting  \n1. Definition, Types, Understanding Audience  \n2. Writing and Editing  \nB. Writing for Different Mediums \n1. Print Advertising \n2. Email Marketing \n3. Social Media Copy  \n4. Website Content"
+      }
+    ]
+  },
+  {
+    "id": "course-19",
+    "semester": 3,
+    "title": "Functional English Ii",
+    "page": 73,
+    "units": [
+      {
+        "title": "Unit 1",
+        "content": "O Henry:   After Twenty years \nMina Assadi:   A Ring to Me is \nBondage  \nJamaica Kincaid:   Girl \nEssential English Grammar:   Units 64 to 74"
+      },
+      {
+        "title": "Unit 2",
+        "content": "Raja Rao:   The Cow of the \nBarricades  \nAldous Huxley:   The Beauty Industry \nEssential English Grammar:   Units 75 to 83"
+      },
+      {
+        "title": "Unit 3",
+        "content": "Seamus Heaney:   Digging \nAmitav Ghosh   The Town by the Sea  \nSujata Bhatt:   A Different History \nEssential English Grammar:   Units 84 to 95"
+      },
+      {
+        "title": "Unit 4",
+        "content": "R.K. Narayan:   Engine Trouble \nErich Fromm:   Is Love an Art  \nEssential English Grammar:   Units 96 to 106"
+      },
+      {
+        "title": "Unit 5",
+        "content": "Understanding Communication;   Greeting and Introduction;  \nMaking Requests;    Understanding Telephone \nCommunication \nEssential English Grammar:   Units 107 to 114  \nPrescribed Texts: \nNayar, Nandini et al. Impressions-II: A Multi-skill Course in English. CU P, 2011. \nMurphy, Raymond. Essential English Grammar. Cambridge University Press, \n2012."
+      }
+    ]
+  },
+  {
+    "id": "course-20",
+    "semester": 3,
+    "title": "Functional Communicative Writing",
+    "page": 80,
+    "units": [
+      {
+        "title": "Unit I",
+        "content": "Types of writing/writing brief descriptions \nExpository, descriptive, narrative, and persuasive types of writing \nWriting messages \nDescriptions of objects, people, places, and situations \nNarrating events and stories"
+      },
+      {
+        "title": "Unit II",
+        "content": "Detailed writing \n Paragraph Writing \nPrecis writing \nBlog writing  \nPictorial writing"
+      },
+      {
+        "title": "Unit III",
+        "content": "Letter/email writing \nLetter Writing in email format \n Resume writing \n  Covering letter \n Writing applications"
+      },
+      {
+        "title": "Unit IV",
+        "content": "Newspaper articles/ report writing \nLetters to the editor \nWriting newspaper articles \nReport Writing"
+      },
+      {
+        "title": "Unit V",
+        "content": "Grammar and vocabulary \nPunctuation \nSynonyms \nAntonyms \nDirect and indirect speech \nCommon errors"
+      }
+    ]
+  },
+  {
+    "id": "course-21",
+    "semester": 4,
+    "title": "English Language Studies",
+    "page": 84,
+    "units": [
+      {
+        "title": "Unit 1 · Fundamental Concepts of Language",
+        "content": "What is language? Origin of language; Definition of Language; Four chief Theories; \nDesign features of Language, Artificial vs Natural Languages, Human vs Animal Languages, \nVerbal and Nonverbal Communication, Gestures and Sign Language; The Difference between \nLanguage and Communication, and Varieties of Language"
+      },
+      {
+        "title": "Unit 2 · Diachronic Approach to Language",
+        "content": "Diachronic, Descent of the English language, Indo-European, Anglo-Saxon and English in \nMiddle Ages, Growth of Vocabulary and Standard English"
+      },
+      {
+        "title": "Unit 3 · Synchronic Approach to Language",
+        "content": "Synchronic, Word-Sentence-Utterance, Subject –Predicate, Sentence structure, contiguity and \ncontexture, Agreement of Various Units of the Syntagmatic Structure, Addresser and \nAddressee Encounter"
+      },
+      {
+        "title": "Unit 4 · Aspects of language",
+        "content": "Object Language, Meta-language, Paradigmatic, Syntagmatic, Metaphor and Metonymy, and \nLiterary Devices, and Projections"
+      },
+      {
+        "title": "Unit 5 · Language and Meaning",
+        "content": "Definition of Semantics, Some Terms and Distinctions in Semantics, Theories of Semantics."
+      }
+    ]
+  },
+  {
+    "id": "course-22",
+    "semester": 4,
+    "title": "American Literature – I",
+    "page": 89,
+    "units": [
+      {
+        "title": "Unit 1 · Introduction",
+        "content": "Puritanism; American Romanticism; American Renaissance; Abolitionism ; \nSlavery; Civil War and its aftermath; Transcendentalism; American Realism."
+      },
+      {
+        "title": "Unit 2 · Poetry",
+        "content": "Anne Bradstreet: “Prologue” \nPhillis Wheatley: “A Hymn to the Evening”  \nGeorge Moses Horton: “On Liberty and \nSlavery” \nWalt Whitman: “Out of the Cradle Endlessly Rocking” \nEmily Dickinson: “Success is Counted Sweetest”"
+      },
+      {
+        "title": "Unit 3 · Prose",
+        "content": "Ralph Waldo Emerson: “Self Reliance”  \nHenry David Thoreau: “Civil Disobedience”"
+      },
+      {
+        "title": "Unit 4 · Novel",
+        "content": "Nathaniel Hawthorne: The Scarlet Letter \nMark Twain: The Adventures of Huckleberry Finn \nHenry James: The Turn of the Screw"
+      },
+      {
+        "title": "Unit 5 · Short Story",
+        "content": "Washington Irving: “The Legend of Sleepy \nHollow”  \nEdgar Allan Poe: “The Murders in the Rue \nMorgue” \nHerman Melville:  “Bartleby, the Scrivener” \nCharlotte Perkins Gilman: “The Yellow Wallpaper” \nKate Chopin: “The Story of an Hour”"
+      }
+    ]
+  },
+  {
+    "id": "course-23",
+    "semester": 4,
+    "title": "Indian Writing In English I",
+    "page": 95,
+    "units": [
+      {
+        "title": "Unit I · Brief Introduction of the Background of English Education in",
+        "content": "India  \nMacaulay’s Minute (1835) \nSri Aurobindo (1872-1950) Renaissance in India ( Essay Chapter-1) \nPoetry: \nHenry  Louise Vivian Derozio: (1809-1831) “The Harp of India”, “The Orphan \nGirl”. \nToru Dutt: ( 1856-77) “ Our Casuarina Tree”, “ Lakshman”. \nMichael Madhusudhan Dutt:( 1824-1873 ) The Captive Ladie \nRabindranath Tagore :(1861-1941) “ Leave this Chanting”, “Purity”. \nSorojini Naidu: ( 1879-1949) “Summar Woods”, “The Palanquin Bearers”. \nNizzim Ezekiel: (1924-2004) “Goodbye party to Miss Pushpa T S”, “Night of \nthe Scorpion”. \nKamala Das: (1934-2009) “ AnIntroduction”, “Someone Else Song”. \nJayantaMahapatra: (1928….) “ Freedom”, “Twilight”."
+      },
+      {
+        "title": "Unit II · Nationalism, Gandhism and Freedom Movement",
+        "content": "Mulk Raj Anand: (1950-2004) Two Leaves and a Bud (1937) \nR.K Narayan : ( 1906-2001) TheGuide (1958) \nRaja Rao: (1908-2006) Kanthapura.(1938)"
+      },
+      {
+        "title": "Unit III · Short Stories",
+        "content": "Shashi Despande: ( 1938….) Intrusion \nKhushwant Singh: (1915…..   ) The Agnostic \nRita NathKeshari: ( 1961…) The Transplanted Wife \nTemsulaAo: ( 1945…..     ) Laburnum for my Head"
+      },
+      {
+        "title": "Unit IV · Novels and Essays",
+        "content": "Anita Desai (1937…) The Village by the Sea (1982) \nNayantara Sahgal: (1927….)  Rich Like Us (1985) \nEasterine Kire: ( 1959….) Terrible Matriarchy (2007) \nAmitab Ghosh: ( 1956…..)   ‘Countdown’ (1999) \nArundhati Roy: ( 1961…..)  ‘The Greater Common Good’(1999)"
+      },
+      {
+        "title": "Unit V · Drama",
+        "content": "Manjula Padmanabam: ( 1953….)  ‘Harvest’ ( 1998) \nGirish Karnard: (1938….) ‘The Dreams of Tipu Sultan’ (2005 )"
+      }
+    ]
+  },
+  {
+    "id": "course-24",
+    "semester": 4,
+    "title": "Literature And Environment",
+    "page": 101,
+    "units": [
+      {
+        "title": "Unit 1 · Ecocriticism: Concepts, Genres, and Positions",
+        "content": "Pastoral, Wilderness, Dwelling, Apocalypse, Social Ecology, \nSpiritual Ecology, Scientific Conservation, Green Politics, \nEcofeminism, Deep Ecology, Bioregionalism, Tinai, \nEnvironmental Movements and Environmental Justice."
+      },
+      {
+        "title": "Unit 2 · Disaster Narratives",
+        "content": "Rachel Carson: Silent Spring \nTerry Tempest Williams: Refuge: An Unnatural History of Family and Place \nBarbara Kingsolver: Animal Dreams (Excerpts) Arif Anwar: The Storm"
+      },
+      {
+        "title": "Unit 3 · The Anthropocene",
+        "content": "Dipesh Chakraborty: “The Climate of History: Four Thesis” \nRob Nixon: Slow Violence and the \nEnvironmentalism of the Poor (Excerpt) Amitav Ghosh: The Gun \nIsland"
+      },
+      {
+        "title": "Unit 4 · Eco-cinema",
+        "content": "Chasing Ice (2012): Documentary, Dir. Jeff Orlowski \nGodavari (2006): Movie, Dir. Sekhar Kammula Snowpiercer (2013):  \nMovie, Dir. Bong Joon-ho Water Wives: Short film, Dir. Jaydeep Sarkar"
+      },
+      {
+        "title": "Unit 5 · Eco-Poetry",
+        "content": "William Wordsw “Composed Upon Westminster Bridge” Gary Snyder:\n “Mother Earth: Her Whales” \nMary Oliver: “Wild Geese” \nJoy Harjo: “Speaking Tree” \nMamang Dai: “Small Towns and the River” \nTinai Poems : Ainkurunooru 113, Ammuvanaar, Neithaltinai Kurunthokai 3, \nThevakulathar, Kurinji tinai"
+      }
+    ]
+  },
+  {
+    "id": "course-25",
+    "semester": 4,
+    "title": "Community Engagement",
+    "page": 106,
+    "units": []
+  },
+  {
+    "id": "course-26",
+    "semester": 4,
+    "title": "Modern Indian Languages",
+    "page": 107,
+    "units": []
+  },
+  {
+    "id": "course-27",
+    "semester": 5,
+    "title": "Literary Criticism – I",
+    "page": 108,
+    "units": [
+      {
+        "title": "Unit 1 · Classical Literary Criticism",
+        "content": "Aristotle, from Poetics how drama works—an early analysis  \nHorace, from Ars Poetica (119-133); How to Be a Good Poet"
+      },
+      {
+        "title": "Unit II · British Criticism",
+        "content": "John Dryden: An Essay on Dramatic Poesy  \nMatthew Arnold: The Study of Poetry  \nWordsworth: Poetry and Poetic Diction  \nT.S. Eliot: Tradition and Individual Talent"
+      },
+      {
+        "title": "Unit III · New Criticism and Russian Formalism",
+        "content": "Victor Shklovsky: Art as Technique \nCleanth Brooks The language of Paradox \nRoman Jakobson: “Two Aspects of Language”"
+      },
+      {
+        "title": "Unit IV · Structuralism and Post Structuralism",
+        "content": "Jonathan Culler: The Linguistics Foundation \nFerdinand de Sassure: Incest and Myth \nRoland Barthes: “Death of an Author”  \nFoucault: “What is an Author?”"
+      },
+      {
+        "title": "Unit V · Post Modernism and Post Colonialism",
+        "content": "Lyotard “What is Post Modernism” \nLinda Hutcheon “Historiographic Metafiction” \nHomi Bhaba “Interrogating Identity” (from the Book: Location of Culture)  \nBenedict Anderson(excerpts) from “Imagined Communities”"
+      }
+    ]
+  },
+  {
+    "id": "course-28",
+    "semester": 5,
+    "title": "Shakespeare",
+    "page": 112,
+    "units": [
+      {
+        "title": "Unit 1",
+        "content": "Drama, the Theatre and Stagecraft \nShakespeare and His Contemporaries \nThe Forms of Shakespeare Drama"
+      },
+      {
+        "title": "Unit 2 · The Tragedies",
+        "content": "Othello \nMacbeth \nHamlet \nCLO3 CLO3: Define a variety of Shakespearean dramatic forms, including Shakespearean \ntragedy, history, and comedy plays. \nCLO4 CLO4: Explain the roots of the Shakespearean sonnets in earlier sonnet traditions. \nCLO5 To apply knowledge and skills in the fields of English Language Studies to relevant \nprofessional contexts like teaching, research, content development, etc."
+      },
+      {
+        "title": "Unit 3 · The comedies",
+        "content": "A Midsummer Night's Dream \nAs You Like it"
+      },
+      {
+        "title": "Unit 4 · Sonnets (A select Study)",
+        "content": ""
+      },
+      {
+        "title": "Unit 5 · Shakespearean Criticism",
+        "content": "John Dover Wilson, The Fortunes of Falstaff \nWilson Knight, The Wheel of Fire \nA.C. Bradley, Shakespearean Tragedy"
+      }
+    ]
+  },
+  {
+    "id": "course-29",
+    "semester": 5,
+    "title": "Indian Writing in English II",
+    "page": 116,
+    "units": [
+      {
+        "title": "Unit 1 · History of Indian Writing in English",
+        "content": "K R Srinivas Iyengar  Indian Writing in English Sterling Publications \nM K Naik  A History of Indian English Literature Sahitya Akademi"
+      },
+      {
+        "title": "Unit 2 · Poetry",
+        "content": "Henry Louis Vivian Derozio:   “The Harp of India”  \nSarojini Naidu:   “Palanquin Bearers” \nRabindranath Tagore:  Songs 13 & 14 Gitanjali \nKamala Das:   “The Old Playhouse” \nJayanta Mahapatra:   “Twilight” \nNissim Ezekiel:   “Background, Casually” \nMamang Dai:   “Floating Island”"
+      },
+      {
+        "title": "Unit 3 · Fiction",
+        "content": "A. Mātavaiyā: Clarinda, A Historical Novel \nMulk Raj Anand: Coolie \nArundhati Roy: The God of Small Things \nTemsula Ao: “Laburnum for My Head”  \nHansda Sowvendra Shekhar: “The Adivasi Will Not Dance”"
+      },
+      {
+        "title": "Unit 4 · Drama",
+        "content": "Girish Karnad: Taledanda \nMahesh Dattani: Final Solutions \nManjula Padmanabhan Lights Out"
+      },
+      {
+        "title": "Unit 5 · Prose",
+        "content": "Macaulay:   “Minute on Education” (1835) \nSri Aurobindo:  “Renaissance in India” (Chapter I) \nDr B R Ambedkar:    “Castes in India: Their Mechanism, Genesis \nand Development”  \nJawaharlal Nehru:    “Religion, Philosophy and Science” from \nThe Discovery of India \n Amartya Sen:   “An Approach to Justice”"
+      }
+    ]
+  },
+  {
+    "id": "course-30",
+    "semester": 5,
+    "title": "Internship",
+    "page": 121,
+    "units": []
+  },
+  {
+    "id": "course-31",
+    "semester": 5,
+    "title": "New Literatures in English",
+    "page": 125,
+    "units": [
+      {
+        "title": "Unit 1",
+        "content": "Introduction to New Literatures  \nin English - Sri Lankan -Carribean-Australian-Latin American -Canadian-Japanese-Chinese-\nNew Zealand-African."
+      },
+      {
+        "title": "Unit 2",
+        "content": "Kenneth Slessor “Country Towns” (Non-Detailed). \nDavid Malouf “The Year of the Foxes” (Non-Detailed) \nMargaret Atwood “Journey to the Interior” (Detailed). \nClaire Harris “Framed” (Non-Detailed). \nA. D. Hope “Moschus Moschiferous: A Song for St. Cecilia’s Day” (Non-Detailed). \nDerek Walcott “Ruined House” (Detailed). \nDom Moraes “Sinbad” (Detailed). \nJorge Luis Borges “A Compass” (Detailed)."
+      },
+      {
+        "title": "Unit 3",
+        "content": "Fiction \nJose Saramago “Blindness”. \nRomesh Gunasekera “Reef”. \nChinua Achebe “Things Fall Apart”."
+      },
+      {
+        "title": "Unit 4",
+        "content": "Drama \nYukio Mishima “The Damask Drum.” \nJack Davis “No Sugar.”"
+      },
+      {
+        "title": "Unit 5",
+        "content": "Short Fiction \nGao Xingjian “The Temple.” \nKatherine Mansfield “A Suburban Fairytale.”"
+      }
+    ]
+  },
+  {
+    "id": "course-32",
+    "semester": 6,
+    "title": "Introduction To Linguistics",
+    "page": 129,
+    "units": [
+      {
+        "title": "Unit I",
+        "content": "Defining linguistics: Dimensions of Linguistics, Language and Linguistics, \nInterdisciplinary Fields of Linguistics, Language as a symbolic system: Defining \nsymbols--Vocal symbols consisting of signifier and signified."
+      },
+      {
+        "title": "Unit II",
+        "content": "Air stream mechanisms, Organs of Speech, Classification and Description of Speech \nSounds, C ardinal V owels, Active and passive articulators Voiced and voiceless \nsounds--Classification of sounds according to place of articulation and manner of \narticulation, Phonology, The Phoneme, Minimal Pairs, Allophones, Free V ariation, \nDistribution, and Supra-segmental features"
+      },
+      {
+        "title": "Unit III",
+        "content": "Phonemic transcription, Word Stress, Sentence Stress, Pitch and Intonation."
+      },
+      {
+        "title": "Unit IV",
+        "content": "Morph, Allomorph, Morpheme and Word. Morpheme a s A Meaningful Unit and as A \nGrammatical Unit. Types of Morphs, Sandhi, Word Formation Processes; Inflection, \nDerivation, Compound Formation, Reduplication Etc., Grammatical Categories and Parts \nof Speech."
+      },
+      {
+        "title": "Unit V",
+        "content": "Sentence Structure – Nature of Linguistic  Knowledge; Competence and Performance. \nSyntactic Categories – Lexical and Phrasal. Phrase Markers and Tree Diagrams. Generative \nGrammar, Definition of Semantics, Introduction to Diachronic and Synchronic V ariations \nin Languag"
+      }
+    ]
+  },
+  {
+    "id": "course-33",
+    "semester": 6,
+    "title": "Modern Poetry",
+    "page": 134,
+    "units": [
+      {
+        "title": "Unit I · Introduction",
+        "content": "The Closure of the Nineteenth Century  \nThe Advent of the Georgians and The War Poets \nImagist Movement \nThe Rise of Irish Poetry and Yeats \nEliot, Pound and British Modernism"
+      },
+      {
+        "title": "Unit II",
+        "content": "Georgian Poets  \nHillaire Belloc  “The South Country”  \nG.K Chesterton  “A Prayer in Darkness”  \nD.H. Lawrence “A Sane Revolution”  \nRupert Brooke  “The Soldier”  \nRobert Graves  “The God Called Poetry”"
+      },
+      {
+        "title": "Unit III",
+        "content": "War Poets \nSiegfried Loraine Sassoon   “The Poet as Hero”  \nWilfred Owen    “Disabled”  \nThomas Hardy    “The Children and Sir Nameless” \nW .H. Auden     “Refugee Blues” \nStephen Spender    “Ultima Ratio Regum”"
+      },
+      {
+        "title": "Unit IV",
+        "content": "Imagist Poets \nT.S. Eliot   “The Waste land” \nEzra Pound   “The Return”  \nC. D. Lewis  “An Expostulation”  \nTed Hughes   “The Hawk in the Rain”"
+      },
+      {
+        "title": "Unit V",
+        "content": "Later Poets \nW .B. Yeats   “The Second Coming” \nRudyard Kipling  “The Epitaphs of War”  \nPhilip Larkin  “Whitsun Wedding” \nRobert Bridges  “Melancholia” \nLouis MacNeice  “Prayer Before Birth”"
+      }
+    ]
+  },
+  {
+    "id": "course-34",
+    "semester": 6,
+    "title": "Modern Drama",
+    "page": 138,
+    "units": [
+      {
+        "title": "Unit I",
+        "content": "History of Post War Theatre \nIntroduction to Modern British, American and European \nDrama. Introduction to Epic Theatre, Theatre of the \nAbsurd, etc."
+      },
+      {
+        "title": "Unit II",
+        "content": "T.S.Eliot: Murder in the Cathedral \nSamuel Beckett: Waiting for Godot"
+      },
+      {
+        "title": "Unit III",
+        "content": "Bernard Shaw: Arms and the Man \nBertolt Brecht: The Caucasian Chalk Circle"
+      },
+      {
+        "title": "Unit IV",
+        "content": "John Osborne: Look Back in Anger \nArthur Miller: Death of a Salesman"
+      },
+      {
+        "title": "Unit V",
+        "content": "Oscar Wilde: The Importance of Being Earnest \nJ.M.Synge: Riders to the Sea \nReference Books: \nBentley, Eric. The Playwright as Thinker: A Study of Drama in Modern Times. Harcort, \nBrace & World, Inc. NY 1967. \nBentley, Eric. The Theory of Modern Stage: An Introduction to Modern Theatre and \nDrama. Kingsport Press. USA. 1968. \nCole, Toby, ed. Playwrights on Playwriting: The Meaning and Making of Modern \nDrama from Ibsen to Eliot. Hill & Hang. NY. n.d. \nLumley, Frederick. Trends in Twentieth Century Drama. Oxford Univ. Press. NY. 1960. \nStyan, J.L. Modern Drama in Theory and Practice I: Realism and Naturalism. Cambridge \nUniv. Press. 1981. \nStyan, J.L. Modern Drama in Theory and Practice II: Symbolism, Surrealism, and the \nAbsurd. Cambridge Univ. Press. 1981. \nStyan, J.L. Modern Drama in Theory and Practice III: Expressionism and Epic \nTheatre. Cambridge Univ. Press. 1981. \nStyan, J.L. The Elements of Drama. Cambridge. Univ. Press. 1967. Print. \nSzondi, Peter. Theory of Modern Drama. Univ. of Minneapolis. Minneapolis. \n1987. Williams, Raymond. Drama From Ibsen to Eliot. Chatto &Windus Ltd. \nLondon. 1954."
+      }
+    ]
+  },
+  {
+    "id": "course-35",
+    "semester": 6,
+    "title": "Modern Fiction",
+    "page": 142,
+    "units": [
+      {
+        "title": "Unit I · Sophistication in Narrative Technique",
+        "content": "Joseph Conrad – Lord Jim (1900)"
+      },
+      {
+        "title": "Unit II · Influence of Freudian Theories",
+        "content": "D.H.Lawrence – Sons and Lovers (1915)"
+      },
+      {
+        "title": "Unit III · Self Vs Society",
+        "content": "James Joyce – A Portrait of the Artist as a Young Man (1916)"
+      },
+      {
+        "title": "Unit IV · Feminist Voices",
+        "content": "Virginia Woolf – Mrs Dalloway (1925)"
+      },
+      {
+        "title": "Unit V · Antimodernist Trend",
+        "content": "Graham Greene – The Heart of the Matter (1948) \nWilliam Golding – Lord of the Flies (1954)"
+      }
+    ]
+  },
+  {
+    "id": "course-36",
+    "semester": 6,
+    "title": "Subaltern Literature",
+    "page": 146,
+    "units": [
+      {
+        "title": "Unit 1 · Subaltern Studies- Key terms",
+        "content": "Bailey Betik: “Subaltern Studies.”(2020)  \nDavid Ludde: “Introduction.” Reading Subaltern Studies: Critical History,  \nContested Meaning and the Globalization of South Asia (2002).  \nPaulo Freire: “Introduction” Pedagogy of the Oppressed  \nLéopold Sédar Senghor: “On Negritude”  \nAmbedkar B.R.: “Castes in India: Their Mechanism, Genesis and Development.”"
+      },
+      {
+        "title": "Unit 2 · Subaltern Historiography",
+        "content": "Antonio Gramsci: “History of Subaltern Classes: Methodological Criteria”  \nRanajit Guha: “Preface” to Subaltern Studies  \nDipesh Chakrabarty: “Subaltern Studies and Postcolonial Historiography”  \nE.P.Thompson: “History from Below”"
+      },
+      {
+        "title": "Unit 3 · Gender",
+        "content": "Mahasweta Devi: Draupadi  \nMeena Kandasamy: Miss Militancy  \nPoile Sengupta: Thus Spake Shoorpanakha, So Said Shakuni (Play)"
+      },
+      {
+        "title": "Unit 4 · Race and Caste",
+        "content": "Claude Mckay: Home to Harlem  \nPoomani: And Then  \nJoseph Macwan: The Stepchild: Angaliyat  \nT J Gnanavel Jai Bhim (Movie)"
+      },
+      {
+        "title": "Unit 5 · Ethnicity/Disability",
+        "content": "Liana Badr: The Eye of the Mirror (Translated by Samira Kawar)  \nR. Cheran: A Second Sunrise  \nShane Burcaw: Strangers Assume My Girlfriend Is My Nurse"
+      }
+    ]
+  },
+  {
+    "id": "course-37",
+    "semester": 6,
+    "title": "Indian Aesthetics",
+    "page": 151,
+    "units": [
+      {
+        "title": "Unit 1",
+        "content": "Brief introduction to the basic principles of Indian philosophy as related to the arts.  \nConcept of aesthetics from Vedic period – Chitra sutra- Shadanga."
+      },
+      {
+        "title": "Unit 2",
+        "content": "Natyashastra of Bharat Muni."
+      },
+      {
+        "title": "Unit 3",
+        "content": "Rasa theory, Shankuk, Bhattnayak, Bhattlollatt."
+      },
+      {
+        "title": "Unit 4",
+        "content": "Abinav Gupta and Anand V aradhana and Theories of Rasa."
+      },
+      {
+        "title": "Unit 5",
+        "content": "AK Coomarasamy, Ravindranath Tagore"
+      }
+    ]
+  },
+  {
+    "id": "course-38",
+    "semester": 7,
+    "title": "Literary Criticism II",
+    "page": 154,
+    "units": [
+      {
+        "title": "Unit I · Psychoanalytic Criticism",
+        "content": "Sigmund Freud  “Group Psychology and the Analysis of the Ego” \nJacques Lacan “The Mirror Stage as Formative of the Function of the I”"
+      },
+      {
+        "title": "Unit II · Feminism",
+        "content": "Elaine Showalter   “Feminist Literary Criticism in the Wilderness”  \nSimone De Beauvoir  “Myth and Reality”"
+      },
+      {
+        "title": "Unit III · Sociological/Marxist approach",
+        "content": "Raymond Williams   “Base and Superstructure” \nAntonio Gramsci   “Hegemony” \nLouis Althusser  “Ideology and Ideological State Apparatuses”"
+      },
+      {
+        "title": "Unit IV · New Criticism and Cultural Materialism",
+        "content": "Mikhail Bakhtin   “Discourse in the Novel” \nStephen Greenblatt  “The Cuircualtion of Social Energy”  \nAlan Sinfield   “Reading Dissidence”"
+      },
+      {
+        "title": "Unit V · Colonial, Post-colonial, and Cultural Studies",
+        "content": "NgugiwaThiong'o  “Decolonising the Mind” \nHomi K. Bhabha  “Signs Taken for Wonders” \nSpivak   “The Politics of Translation”"
+      }
+    ]
+  },
+  {
+    "id": "course-39",
+    "semester": 7,
+    "title": "American Literature II",
+    "page": 157,
+    "units": [
+      {
+        "title": "Unit 1 · Introduction",
+        "content": "The Lost Generation; Literary Regionalism; Harlem Renaissance; \nModernism; Avant Garde; Civil Rights Movement; Beat Movement; \nPostmodernism"
+      },
+      {
+        "title": "Unit 2 · Poetry",
+        "content": "Robert Frost:   “Mending Wall” \nE. E. Cummings:  “my sweet old etcetera” \nLangston Hughes:  “I Too” \nSylvia Plath:   “Mirror” \nRobert Penn Warren: “Evening Hawk” \nMaya Angelou : “Phenomenal Woman” \nAmiri Baraka:  “Somebody Blew Up America”"
+      },
+      {
+        "title": "Unit 3 · Drama",
+        "content": "Tennessee Williams:  A Streetcar Named Desire  \nArthur Miller:  The Death of a Salesman  \nLorraine Hansberry:  A Raisin in the Sun  \nEdward Albee:  The Sandbox"
+      },
+      {
+        "title": "Unit 4 · Novel",
+        "content": "Ernest Hemingway:  The Old Man and the Sea \nJohn Steinbeck:  The Grapes of Wrath \nAlice Walker:  The Color Purple"
+      },
+      {
+        "title": "Unit 5 · Short Story",
+        "content": "O. Henry:   “After Twenty Years” \nWilliam Faulkner:  “The Bear” \nF. Scott Fitzgerald:  “Winter Dreams” \nLouise Erdrich:  “Fleur”"
+      }
+    ]
+  },
+  {
+    "id": "course-40",
+    "semester": 7,
+    "title": "Translation: Theory and Practice",
+    "page": 162,
+    "units": [
+      {
+        "title": "Unit I · Introduction",
+        "content": "Thomas Babington Macaulay:   Minute on Indian Education \nYoung, Robert JC.    “Postcolonial Remains.” New \nLiterary History. \n       Christian, Barbara.    “The Race for Theory.” Cultural \nCritique."
+      },
+      {
+        "title": "Unit II · Poetry",
+        "content": "Derek Walcott:    ‘Ruins of a Great House’, \n‘The Sea is History’ \nLouise Bennett-Coverley:  ‘Colonization in Reverse’ \nWole Soyinka:    ‘Telephone Conversation’ \nKamau Brathwaite:   ‘Negus’ \nAllen Curnow:   ‘House and Land \nFaiz Ahmad Faiz:   ‘Nowhere No Trace Can I Discover’ \nDavid Diop:    ‘Africa’"
+      },
+      {
+        "title": "Unit III · Prose",
+        "content": "Achebe, Chinua.    “An Image of Africa.”  \nSpivak, GayatriChakravorty.  “Three Women’s Texts and a Critique of \nImperialism.”  \nNgugiwaThiong’o:   “Decolonising the Mind”"
+      },
+      {
+        "title": "Unit IV · Plays",
+        "content": "Girish Karnad:   Hayavadana \nGeorge Ryga:   The Ecstasy of Rita Joe \nDerek Walcott:   Dream on Monkey Mountain \nWole Soyinka:   Lion and the Jewel"
+      },
+      {
+        "title": "Unit V · Fiction",
+        "content": "Michael Ondaatje:  The English Patient (novel) \nJ.M Coetzee:   Waiting for the Barbarians (novel) \nNadine Gordimer:  Once Upon a Time (short story) \nChimamanda Adichie:  The American Embassy (short story)"
+      }
+    ]
+  },
+  {
+    "id": "course-41",
+    "semester": 7,
+    "title": "Postcolonial Literature",
+    "page": 166,
+    "units": [
+      {
+        "title": "Unit 1 · What is Postcolonial?",
+        "content": "Understanding the Postcolonial, Definitions and Scope, New Literatures in \nEnglish: African - Caribbean, South Asian -New Zealand - Australian-\nCanadian. \nKey Terms: Colonialism– Diaspora – Eurocentrism – Hegemony – Hybridity \n– Master and Meta Narratives – Mimicry – Nation – Self and Other –\nPostcolonialism– Race and Racism – Subaltern"
+      },
+      {
+        "title": "Unit 2 · Poetry",
+        "content": "Kamau Brathwaite:   “Columbe” (Carribean) \nDerek Walcott:   “Ruins of a Great House” (Carribean) \n Leopold Senghor:   “New York” (Africa) \nGabriel Okara:   “The Mystic Drum” (Africa) \nLee Tzu Pheng:   “My Country and My People ” \n(Singapore)  \nKishwar Naheed:   “The Grass is Like Me” (Pakistan)"
+      },
+      {
+        "title": "Unit 3 · Fiction",
+        "content": "Salman Rushdie: Midnight’s Children (India) \nBapsi Sidhwa: Ice-Candy Man (Pakistan) \nChimamanda Ngozi Adichie: Half of a Yellow Sun (Africa)"
+      },
+      {
+        "title": "Unit 4 · Drama",
+        "content": "Ama Ata Aidoo: Anowa (Africa) \nYvette Nolan: The Unplugging (Canada) \nJane Harrison Stolen (Australia)"
+      },
+      {
+        "title": "Unit 5 · Non-Fiction",
+        "content": "Edward Said: Introduction to Orientalism \nFrantz Fanon: Introduction to Black Skin White Masks \nGayatri Chakravorty Spivak: “Can the Subaltern Speak?”"
+      }
+    ]
+  },
+  {
+    "id": "course-42",
+    "semester": 7,
+    "title": "Gender Studies",
+    "page": 171,
+    "units": [
+      {
+        "title": "Unit 1 · Foundations of Gender and Queer Studies",
+        "content": "Introduction to Gender and Queer Studies: Key concepts and theoretical frameworks  \nIntersectionality: Understanding the complexities of multiple identities and oppressions \nHistorical Perspectives: Evolution of Gender and Queer studies as academic disciplines"
+      },
+      {
+        "title": "Unit 2 · Gender/Sex Roles & Stereotyping",
+        "content": "Judith Butler: Excerpts from Gender Trouble: Feminism and the \nSubversion of Identity (1990) \nPatricia Hill Collins: \"Black Feminist Thought: Knowledge, \nConsciousness, and the Politics of \nEmpowerment\" (1990). \n Alice Munro: “Boys and Girls” (1964)  \n Pan Nalin: Angry Indian Goddesses (2015)."
+      },
+      {
+        "title": "Unit 3 · Deconstructing Binaries: Non-normative Gender and Sexualities.",
+        "content": "Monique Witting: \"One is not Born a woman” (1993) \nAdrienne Rich: “Compulsory Heterosexuality \nand Lesbian Existence” (1993) Susan Stryker et al:\n “Introduction: Trans-, Trans, or \nTransgender (2008) Rituparno Ghosh: Chitrangada: The \nCrowning Wish (2012) \nKalki Subramaniam: We are not the Others (2021)"
+      },
+      {
+        "title": "Unit 4 · Gender and Media",
+        "content": "Laura Mulvey: “Visual Pleasure and Narrative Cinema” (1999). \nSteve Craig: Excerpts from Men, \nMasculinity, and the Media (2002). Jennifer Siebel \nNewsom: Miss Representation \n(2011), a documentary. \nRoxane Gay: “Feminism and Pop Culture”, from Bad Feminists \n(2014)"
+      },
+      {
+        "title": "Unit 5 · Masculinity studies",
+        "content": "Michael Kimmel: Masculinity as Homophobia: Fear, Shame and \nSilence” (1994). \nR.W. Connell: “The Men and the Boys\" (2005) \nJack Myers: Excerpts from The Future of Men: Masculinity in \nthe Twenty-First \nCentury (2016) \nKimberly Peirce: Boys Don't Cry (1999), a film."
+      }
+    ]
+  },
+  {
+    "id": "course-43",
+    "semester": 8,
+    "title": "Comparative Literary Studies",
+    "page": 178,
+    "units": [
+      {
+        "title": "Unit I",
+        "content": "Comparative Literature: Definition Scope and Method \nEmergence and Historical Development of the Discipline \nFrench and American School of thought   \nEuropean and Indian  \nComparative Literature as a Methodology  \nDifferences and Ethics of Plurality"
+      },
+      {
+        "title": "Unit II",
+        "content": "Weltliteratur, General Literature, National Literature \nMovements and Traditions \nTheory of Genres \nOral and Written \nAncient, Medieval and Modern"
+      },
+      {
+        "title": "Unit III",
+        "content": "Thematology \nMotifs, Myths and Archetypes  \nCross-cultural Literary relations \nInfluence \nAnalogy \nReception"
+      },
+      {
+        "title": "Unit IV",
+        "content": "History and Politics of Translation \nInterpretations of Culture \nProblems of Cultural Translation \nLiterature and Psychology/Sociology \nMutual Illumination of the Arts  \nMusic/Fine arts/Sculpture"
+      },
+      {
+        "title": "Unit V",
+        "content": "New Comparative Literature-Crisis \nComparative Methodology- Practice  \nShort Stories: \nChekhov:   “Vanka”,  \nWard No. 6”  \nMaupassant:   “The Prisoners”  \n                      “Two Friends” \nPoe:         “The Angel of the Odd”  \n                    “The Spectacles”  \nTagore:   “The Home-Coming”  \n               “The Wicked Postmaster”   \nBasheer:   “Mantra Charatu”  \n                “The Invaluable Moment” \nPerumal Murugan:  “Water Play”   \nPlays:  \nKalidasa:    Abhijnan Shakuntalam \nSopholces:    Oedipus Rex \nMoliere:    Tartuffe \nKomal Swaminathan:  Water! \nNovels: \nBankim Chandra Chattopadhyay:  Durgeshnandini  \nChandu Menon:    Indulekha \nRokeya Sakhawat Hossain:   Sultana’s Dream.  \nSalma:     The Hour Past Midnight \nJean Sasson:     The Princess"
+      }
+    ]
+  },
+  {
+    "id": "course-44",
+    "semester": 8,
+    "title": "Research Methodology",
+    "page": 183,
+    "units": [
+      {
+        "title": "Unit 1 · Research: Description, Types and Resources",
+        "content": "Major Methods: Archival; Auto/biography; Oral History; Visual; Discourse \nAnalysis; Ethnographic; Quantitative; Textual Analysis; Interviewing; Creative \nWriting; Digital  Humanities; Research Methods vs. Methodology; Types of \nResearch – Descriptive vs. Analytical, Applied vs. Fundamental, Quantitative vs. \nQualitative, Conceptual vs. Empirical."
+      },
+      {
+        "title": "Unit 2 · Identification of a Research Problem",
+        "content": "Planning the research area/topic: delimiting an area of study, defining and \nformulating the research problem, selecting the problem, importance of literature \nreview in defining a problem,  literature review-primary and secondary sources, \nreviews, research  databases, web  as a source, identifying research gap from  \nliterature and research database, development of working hypothesis."
+      },
+      {
+        "title": "Unit 3 · Research Writing",
+        "content": "Note-taking, Note-making, Summarizing and Paraphrasing, Writing Review of \nLiterature, Preparing Working Outline / Final Outline, Writing Synopsis, Writing \nResearch Proposal."
+      },
+      {
+        "title": "Unit 4 · Documenting and Referencing",
+        "content": "Documentation, List of Works Cited, Citing Periodical Print Publications, Web \nPublications, In- text Documentation: Citing Sources in the Text, Parenthetical \nDocumentation, Readability, Sample References, Plagiarism, Types of \nPlagiarism, How to Avoid Plagiarism."
+      },
+      {
+        "title": "Unit 5 · Formatting",
+        "content": "Formatting: Indentation, Margins, Font, Spacing, Heading and Title, Pagination, \netc."
+      }
+    ]
+  },
+  {
+    "id": "course-45",
+    "semester": 8,
+    "title": "Project Dissertation",
+    "page": 187,
+    "units": []
+  },
+  {
+    "id": "course-46",
+    "semester": 8,
+    "title": "Postmillenial Literary Trends",
+    "page": 188,
+    "units": [
+      {
+        "title": "Unit 1 · The New Aesthetics, Graphic Narratives and Digital Humanities",
+        "content": "Hillary Chute and Marianne DeKoven:  \n“Introduction: Graphic Narrative” Marjane Satrapi: Persepolis \nSusan Schreibman et al. “The Digital Humanities and Humanities Computing:  \n An Introduction” A Companion to Digital Humanities \nMichael Joyce: Afternoon"
+      },
+      {
+        "title": "Unit 2 · Trauma Studies and Memory Studies",
+        "content": "Michelle Balaev: “Trauma Studies” \nMaya Angelou: I Know Why the Caged Bird Sings \nMichael Rothberg: “Remembering Back: Cultural Memory, Colonial \nLegacies, and Postcolonial Studies” \nElie Wiesel: Night"
+      },
+      {
+        "title": "Unit 3 · Pandemic Studies and Climate Studies",
+        "content": "Giorgio Agamben:  “The Invention of an Epidemic” Albert Camus:  \n   The Plague \nScott Slovic: “The Story of Climate Change: Science, \nNarrative, and Social Action” Amitav Ghosh: The Hungry Tide"
+      },
+      {
+        "title": "Unit 4 · Asexuality Studies and Fat Studies",
+        "content": "Esther Rothblum: “What Is Fat Studies? Sarah Dessen: Keeping the Moon \nEla Przybylo: “Introducing Asexuality, \nUnthinking Compulsory Sexuality” Maia Kobabe: Gender Queer"
+      },
+      {
+        "title": "Unit 5 · Health Humanities and Posthuman Literature",
+        "content": "Paul Crawford: “Health humanities: the future of medical humanities?” \nStacy Alaimo: “Bodily Natures” Bodily Natures: \nScience, Environment, and the Material Self \nVirginia Woolf On Being Ill \nTony Davies “From Humanism to Antihumanism” Humanism  \nKazuo Ishiguro Never Let Me Go"
+      }
+    ]
+  },
+  {
+    "id": "course-47",
+    "semester": 8,
+    "title": "Regional Literatures",
+    "page": 193,
+    "units": [
+      {
+        "title": "Unit 1 · Introduction Introduction to Indian Literature Regionalism in Indian Literature",
+        "content": "Socio-Cultural and Literary background of Indian regional literatures. \nR.K. Gupta and Priyalakshmi Gupta: “Towards a Concept of Indian Literature” \nM.K. Naik: “Indian Pride and Indian Prejudice: Reflections on the Relationship between \nRegional Indian Literatures and Indian Writing in English. \nMSS Pandian “One Step outside Modernity: Caste, Identity Politics and Public Sphere” \nEconomic and Political Weekly, Vol. 37, No. 18 (May 4-10, 2002), pp. 1735-1741"
+      },
+      {
+        "title": "Unit 2 · Poetry",
+        "content": "Kazi Nazrul Islam: Bidrohi (Bengali) \nG.M. Muktibodh: The V oid (Hindi) \nAkhtar-ul-Iman: Compromise (Urdu) \nGopalakrishna Adiga: This Land of Ours Now (Kannada) \nNamdeo Dhasal: Stone Masons- My Father and Me \n(Marathi) \nSukirtharani: Portrait of My Village (Tamil)"
+      },
+      {
+        "title": "Unit 3 · Fiction",
+        "content": "Mahaswetha Devi: Bashai Tudu (Bengali) \nImayam: Beasts of Burden (Tamil) \nEasterine Kire: Rain Maiden and the Bear Man \n(Nagaland/English)"
+      },
+      {
+        "title": "Unit 4 · Drama",
+        "content": "Habib Tanvir : Charandas Chor (Hindi) \nK. A. Gunasekaran: Touch (Tamil) \nK. J. Baby: Nadugadhikai (Malayalam)"
+      },
+      {
+        "title": "Unit 5 · Life Writings",
+        "content": "A. Revathi: The Truth About Me (Tamil) \nDevaki Nilayamgode: Antarjanam (Malayalam) \nManoranjan Byapari: Interrogating My Chandal Life: An Autobiography (Bengali)"
+      }
+    ]
+  },
+  {
+    "id": "course-48",
+    "semester": 8,
+    "title": "Cultural Studies",
+    "page": 198,
+    "units": [
+      {
+        "title": "Unit 1 · Culture as a Concept",
+        "content": "Matthew Arnold:  Chapter I, II & III Culture and Anarchy \nF.R. Leavis: “Mass Civilization and Minority Culture” \nT S Eliot: Notes Towards the Definition of Culture \nRaymond Williams: “‘Culture’, Keywords” \nE.P. Thompson: “The Preface” The Making of the English Working Class"
+      },
+      {
+        "title": "Unit 2 · Cultural Studies",
+        "content": "Major Schools of Cultural Studies-Birmingham and Frankfurt \nJohn Storey (editor): “Introduction: The Study of Popular Culture \nand Cultural Studies” Cultural Theory and Popular Culture: A \nReader. \nStuart Hall: “Cultural Studies \nand its Theoretical Legacies” Simon During: “Introduction” The \nCultural Studies Reader"
+      },
+      {
+        "title": "Unit 3 · Culture and the Politics of Identity",
+        "content": "Aloysius G: “Ideology and Indian Historiography” “Nationalism \nas Ideology”       Nationalism without a Nation in India \nPartha Chatterjee: “Whose Imagined Community?” \nPrashant Ingole: “Intersecting Dalit and Cultural \nStudies: De-Brahmanising the Disciplinary Space”"
+      },
+      {
+        "title": "Unit 4 · Culture and Technology",
+        "content": "Raymond Williams: “Advertising: the magic system” Walter Benjamin: “The Work of Art \nin the Age of Technological Reproducibility” \nNicholas Mirzoeff: “Visualising Visuality” The Right to Look"
+      },
+      {
+        "title": "Unit 5 · Culture, Body and Sexuality",
+        "content": "Simi Linton: “What is Disability Studies?” \nTejaswini Niranjana: “Teaching Gender Studies as Cultural Studies” \nHerman Shugart: “Reinventing Privilege: The New (gay) Man in Contemporary Popular \nMedia.” Critical Studies in Media Communication, 67–91"
+      }
+    ]
+  }
+]
