@@ -27,6 +27,7 @@ const sizes=[
    try{
     await page.goto(base);await page.waitForFunction(()=>document.querySelector('#courseChoice').textContent.includes('English Literature'));
     assert(await page.locator('#homeView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('home');
+    assert(!/[↗→←]/.test(await page.locator('#sourceBtn').textContent()));assert(!/[↗→←]/.test(await page.locator('#openTopics').textContent()));
     if(size.mobile){
      const bounds=await page.locator('#semTabs').evaluate(el=>({parent:el.getBoundingClientRect().toJSON(),buttons:[...el.querySelectorAll('button')].map(b=>b.getBoundingClientRect().toJSON())}));
      assert.equal(bounds.buttons.length,6);
@@ -34,12 +35,25 @@ const sizes=[
     }
     await activate(page.locator('#semTabs [data-sem="3"]'));await activate(page.locator('#courseChoice'));
     await activate(page.locator('#choiceList button').filter({hasText:'Functional English Ii'}));
+    await Promise.all([page.waitForEvent('load'),activate(page.locator('#refreshApp'))]);
+    await page.waitForFunction(()=>document.querySelector('#courseChoice').textContent.includes('Functional English Ii'));
+    assert(await page.locator('#homeView').isVisible(),'refresh button retains the home screen and selected subject');
     await activate(page.locator('#unitChoice'));await activate(page.locator('#choiceList button').nth(1));
     assert(await page.locator('#topicsView').isVisible());assert(!(await page.locator('#homeView').isVisible()));await noHorizontalOverflow('topics');
     assert.equal(await page.locator('#preparedPicker [data-topic]').count(),3);
+    await page.reload();
+    await page.waitForFunction(()=>!document.querySelector('#topicsView').hidden);
+    assert.equal(await page.locator('#preparedPicker [data-topic]').count(),3,'refresh retains the selected unit and topics screen');
     await activate(page.locator('#preparedPicker [data-topic]').first());
     assert(await page.locator('#readingView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('reading');
     assert((await page.locator('#readingTitle').textContent()).includes('Cow'));
+    await page.evaluate(()=>window.scrollTo(0,900));
+    await page.waitForFunction(()=>{try{return JSON.parse(localStorage.getItem('ammu-navigation-v1')).scrollY>400}catch{return false}});
+    const originalScroll=await page.evaluate(()=>window.scrollY);
+    await page.evaluate(()=>{const saved=JSON.parse(localStorage.getItem('ammu-navigation-v1'));saved.topicIndex=999;localStorage.setItem('ammu-navigation-v1',JSON.stringify(saved))});
+    await page.reload();
+    await page.waitForFunction(()=>!document.querySelector('#readingView').hidden&&document.querySelector('#readingTitle').textContent.includes('Cow'));
+    await page.waitForFunction(y=>Math.abs(window.scrollY-y)<8,originalScroll);
     assert((await page.locator('#topicPosition').textContent()).includes('1 of 3'));
     assert(await page.locator('#previousTopic').isDisabled());
     await activate(page.locator('#nextTopic'));
@@ -69,10 +83,16 @@ const sizes=[
     assert(requests[0].messages[0].content.includes('Current note (may be abbreviated):'));
     const metrics=await page.locator('.chat-log').evaluate(log=>{const r=log.querySelector('[data-chat-reply="1"]');return {top:r.getBoundingClientRect().top-log.getBoundingClientRect().top}});
     assert(metrics.top>=-1&&metrics.top<30,JSON.stringify(metrics));
+    await page.reload();
+    await page.waitForFunction(()=>!document.querySelector('#chatPanel').hidden);
+    assert((await page.locator('#chatBody').textContent()).includes('brief explanation'),'refresh restores the open chat and recent conversation');
     await activate(page.locator('#closeChat'));assert(!(await page.locator('#chatPanel').isVisible()));
     assert(await page.locator('#openChat').isVisible());
     await activate(page.locator('#saveBtn'));await activate(page.locator('#mobileSaved'));
     assert((await page.locator('#materialBody').textContent()).includes('The Cow of the Barricades'));
+    await page.reload();
+    await page.waitForFunction(()=>document.querySelector('#readingTitle').textContent==='Saved materials');
+    assert((await page.locator('#materialBody').textContent()).includes('The Cow of the Barricades'),'refresh retains the Saved screen');
     await activate(page.locator('[data-saved]').first());assert(await page.locator('#openChat').isVisible());
     await activate(page.locator('#backToTopics'));assert(await page.locator('#topicsView').isVisible());
     await activate(page.locator('#preparedPicker [data-topic]').nth(1));await activate(page.locator('#openChat'));
