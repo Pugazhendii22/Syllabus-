@@ -197,3 +197,38 @@
  .intro-actions .surprise-btn,.intro-actions .install-btn{font-size:13px;padding:10px 12px}
  .install-long{display:none}.install-short{display:inline}
 }
+
+/* A quieter, easier-to-read assistant on phones. */
+header .top-actions{align-items:center}
+.refresh-app,.mobile-saved{align-self:center}
+.chat-panel-head{padding:14px 16px 12px;align-items:flex-start}
+.chat-panel-head h2{margin:0 0 4px;font-size:23px}
+.chat-panel-head p{font-size:13px;line-height:1.4}
+#chatBody{padding:12px 14px 14px}
+#chatBody .chat-memory-bar{gap:10px;margin:0 0 10px;color:#52788c;font-size:12px;line-height:1.4}
+.chat-memory-bar button{padding:8px 9px;white-space:nowrap}
+.chat-welcome{min-height:0;padding:20px 15px}
+.chat-welcome strong{font-size:17px;color:#245a77}
+.chat-welcome p{font-size:14px;margin:6px 0 0}
+#chatBody .chat-rich h4:first-child{margin-top:0}
+#chatBody .chat-rich p{line-height:1.6}
+#chatBody .chat-bubble.assistant{border-color:#dcecf4;background:#fff}
+.chat-form textarea{resize:none}
+@media(max-width:760px) and (min-height:501px){
+ .chat-widget.chat-open{left:0;right:0;bottom:0;align-items:stretch}
+ .chat-panel{width:100%;height:min(84vh,680px);height:min(84dvh,680px);max-height:calc(100dvh - 12px);border-radius:20px 20px 0 0}
+ #chatBody{padding-bottom:max(14px,env(safe-area-inset-bottom))}
+}
+@media(max-height:500px){
+ .chat-panel-head{padding:8px 12px}
+ .chat-panel-head h2{font-size:21px;margin:0 0 2px}
+ #chatBody{padding:8px 12px 10px}
+ #chatBody .chat-memory-bar{margin-bottom:5px;font-size:11px}
+ .chat-welcome{padding:8px}
+}
+
+.chat-head-actions{display:flex;align-items:center;gap:5px;flex:none}
+.chat-clear{min-width:49px;min-height:44px;border:0;border-radius:10px;background:transparent;color:#287393;font-size:13px;font-weight:700;padding:7px 8px}
+.chat-clear:disabled{color:#9bb5c2}
+.chat-clear:focus-visible{outline:3px solid #3499d2;outline-offset:2px}
+#chatBody .chat-memory-bar{display:block}

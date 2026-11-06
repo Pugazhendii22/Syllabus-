@@ -27,6 +27,9 @@ const sizes=[
    try{
     await page.goto(base);await page.waitForFunction(()=>document.querySelector('#courseChoice').textContent.includes('English Literature'));
     assert(await page.locator('#homeView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('home');
+    assert(await page.locator('#refreshApp').isVisible(),'refresh remains available on the home screen');
+    const refresh=await page.locator('#refreshApp').boundingBox(),savedButton=await page.locator('#mobileSaved').boundingBox();
+    assert(Math.abs((refresh.y+refresh.height/2)-(savedButton.y+savedButton.height/2))<2,'home header controls are vertically aligned');
     assert(!/[↗→←]/.test(await page.locator('#sourceBtn').textContent()));assert(!/[↗→←]/.test(await page.locator('#openTopics').textContent()));
     if(size.mobile){
      const bounds=await page.locator('#semTabs').evaluate(el=>({parent:el.getBoundingClientRect().toJSON(),buttons:[...el.querySelectorAll('button')].map(b=>b.getBoundingClientRect().toJSON())}));
@@ -40,12 +43,14 @@ const sizes=[
     assert(await page.locator('#homeView').isVisible(),'refresh button retains the home screen and selected subject');
     await activate(page.locator('#unitChoice'));await activate(page.locator('#choiceList button').nth(1));
     assert(await page.locator('#topicsView').isVisible());assert(!(await page.locator('#homeView').isVisible()));await noHorizontalOverflow('topics');
+    assert(!(await page.locator('#refreshApp').isVisible()),'refresh is not repeated on the topics screen');
     assert.equal(await page.locator('#preparedPicker [data-topic]').count(),3);
     await page.reload();
     await page.waitForFunction(()=>!document.querySelector('#topicsView').hidden);
     assert.equal(await page.locator('#preparedPicker [data-topic]').count(),3,'refresh retains the selected unit and topics screen');
     await activate(page.locator('#preparedPicker [data-topic]').first());
     assert(await page.locator('#readingView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('reading');
+    assert(!(await page.locator('#refreshApp').isVisible()),'refresh is not repeated in reading mode');
     assert((await page.locator('#readingTitle').textContent()).includes('Cow'));
     await page.evaluate(()=>window.scrollTo(0,900));
     await page.waitForFunction(()=>{try{return JSON.parse(localStorage.getItem('ammu-navigation-v1')).scrollY>400}catch{return false}});
@@ -65,6 +70,10 @@ const sizes=[
     const fab=await page.locator('#openChat').boundingBox();assert(fab.y>=0&&fab.y+fab.height<=size.height,'floating assistant stays within viewport');
     const before=await page.locator('#materialBody').textContent();await activate(page.locator('#openChat'));
     assert.equal(await page.locator('#materialBody').textContent(),before);await noHorizontalOverflow('chat');
+    assert((await page.locator('#chatContextLabel').textContent()).includes('Cow'),'chat identifies the current topic');
+    await page.locator('#chatInput').fill('A draft question');
+    await activate(page.locator('#closeChat'));await activate(page.locator('#openChat'));
+    assert.equal(await page.locator('#chatInput').inputValue(),'A draft question','closing chat retains an unsent draft');
     const panel=await page.locator('#chatPanel').boundingBox();
     for(const selector of ['#chatInput','.chat-send','#closeChat']){
      const box=await page.locator(selector).boundingBox();
