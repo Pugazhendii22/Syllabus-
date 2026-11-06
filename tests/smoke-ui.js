@@ -34,7 +34,7 @@ const courses=JSON.parse(fs.readFileSync('courses.json','utf8'));
 const notes=JSON.parse(fs.readFileSync('prepared-notes.json','utf8'));
 let requestBody, failAI=false;
 const fetch=async (path,options)=>{
- if(path==='/api/chat') { requestBody=JSON.parse(options.body); return failAI?{ok:false,status:503,json:async()=>({error:'Set AI_API_KEY in settings'})}:{ok:true,json:async()=>({text:'Practice lesson plan'})}; }
+ if(path==='/api/chat') { requestBody=JSON.parse(options.body); return failAI?{ok:false,status:503,json:async()=>({error:'Set AI_API_KEY in settings'})}:{ok:true,json:async()=>({text:'### A clear answer\n\n**Canterbury** is the destination.\n\n- First point\n- Second point'})}; }
  return {ok:true,json:async()=>path==='/courses.json'?courses:path==='/prepared-notes.json'?notes:{configured:false}};
 };
 const context=vm.createContext({document,localStorage,fetch,console,Date,setTimeout,window:{open(){},scrollTo(){}},navigator:{clipboard:{writeText:async()=>{}}},alert(){}});
@@ -56,6 +56,16 @@ setImmediate(async ()=>{
   const tableHtml=vm.runInContext('md("| Heading | Value |\\n| --- | --- |\\n| &lt;safe&gt; | example |")', context);
   assert(tableHtml.includes('<table') && tableHtml.includes('<th scope="col">Heading</th>'));
   assert(!tableHtml.includes('<safe>'),'table cells must escape input');
+  const rich = vm.runInContext('chatMarkdown('+JSON.stringify('### Example\n\n**Bold** and *italics*\n\n- first\n- second\n\n| Head | Meaning |\n| ---- | ---- |\n| item | first line\n- another detail |\n\n```\n<script>alert(1)</script>\n```')+')',context);
+  assert(rich.includes('<h4>Example</h4>')&&rich.includes('<strong>Bold</strong>')&&rich.includes('<em>italics</em>'));
+  assert(rich.includes('<ul><li>first</li><li>second</li></ul>')&&rich.includes('<table'));
+  assert(rich.includes('first line<br>- another detail'),'multiline table cells are readable');
+  assert(vm.runInContext('chatMarkdown('+JSON.stringify('Head | Meaning\n--- | ---\nA | B')+')',context).includes('<table'),'tables without outer pipes render');
+  assert(!rich.includes('<script>')&&rich.includes('&lt;script&gt;'),'model output is escaped');
+  const linkTest=vm.runInContext('chatMarkdown('+JSON.stringify('[bad](javascript:alert(1)) [good](https://example.com) <img src=x onerror=alert(1)>')+')',context);
+  assert(!linkTest.includes('href="javascript:')&&!linkTest.includes('<img '));
+  assert(linkTest.includes('href="https://example.com"'));
+
   semButtons.find(b=>b.dataset.sem==='3').onclick();
   el('#courseSelect').onchange({target:{value:'course-20'}});
   el('#unitSelect').onchange({target:{value:'4'}});
@@ -102,11 +112,15 @@ setImmediate(async ()=>{
   el('#chatInput').value='Explain this topic';
   await el('#chatForm').onsubmit({preventDefault(){}});
   assert(requestBody.messages.some(m=>m.content==='Explain this topic'),'Ask AI continues to work');
+  assert(el('#materialBody').innerHTML.includes('<h4>A clear answer</h4>')&&el('#materialBody').innerHTML.includes('<strong>Canterbury</strong>'));
+  assert(el('#materialBody').innerHTML.includes('data-copy-chat="1"'));
+  assert(requestBody.messages[0].content.includes('answer directly and briefly first'));
   failAI=true;el('#chatInput').value='Another question';
   await el('#chatForm').onsubmit({preventDefault(){}});
   assert(!el('#chatError').innerHTML.includes('Connection setup'));
   assert(!el('#chatError').innerHTML.includes('AI_API_KEY'));
-  assert(el('#chatError').innerHTML.includes('AI could not respond'));
+  assert(el('#chatError').textContent.includes('AI could not respond'));
+  assert.strictEqual(el('#chatInput').value,'Another question','failed question remains available for retry');
 
   el('#surpriseBtn').onclick(); assert(el('#surpriseDialog').open);
   el('#textLarger').onclick(); assert.strictEqual(storage['ammu-reading-size'],'19');
