@@ -107,6 +107,7 @@
     resetPull(false);
     if (event.touches.length !== 1 || window.scrollY > 0 || document.querySelector('dialog[open]')) return;
     const target = event.target;
+    if (target.closest && target.closest('#chatPanel')) return;
     if (target.closest && target.closest('button,input,textarea,select,[contenteditable="true"]')) return;
     if (nestedScroller(target)) return;
     start = {x:event.touches[0].clientX, y:event.touches[0].clientY};

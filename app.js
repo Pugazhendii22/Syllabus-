@@ -228,6 +228,35 @@ $('#previousTopic').onclick=()=>moveTopic(-1);$('#nextTopic').onclick=()=>moveTo
 $('#backToHome').onclick=()=>showView('home');$('#backToTopics').onclick=()=>{tab='notes';renderMaterial();showView('topics')};
 $('#openChat').onclick=()=>{if(!course)return;const panel=$('#chatPanel');panel.hidden=!panel.hidden;$('#chatWidget').classList.toggle('chat-open',!panel.hidden);$('#openChat').setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden){updateScreenLabels();renderChat();scrollChatToEnd();$('#chatHeading').focus?.({preventScroll:true})}saveNavigation()};
 $('#closeChat').onclick=()=>{$('#chatPanel').hidden=true;$('#chatWidget').classList.remove('chat-open');$('#openChat').setAttribute('aria-expanded','false');$('#openChat').focus?.();saveNavigation()};
+// Drag the chat sheet down from its header, or from the top of its conversation.
+// Never intercept controls, horizontal gestures or a conversation scrolled away from the top.
+(function enableChatSwipe(){
+ const panel=$('#chatPanel');let gesture=null;
+ function reset(){gesture=null;panel.classList.remove('is-dragging');panel.style.transform=''}
+ panel.addEventListener('touchstart',event=>{
+  reset();if(panel.hidden||event.touches.length!==1)return;
+  const target=event.target?.nodeType===1?event.target:event.target?.parentElement;
+  if(!target||target.closest('button,a,input,textarea,select,[contenteditable="true"]'))return;
+  const header=target.closest('.chat-panel-head,.chat-swipe-hint'),log=target.closest('.chat-log');
+  if(!header&&(!log||log.scrollTop>1))return;
+  gesture={x:event.touches[0].clientX,y:event.touches[0].clientY,dragging:false,distance:0};
+ },{passive:true});
+ panel.addEventListener('touchmove',event=>{
+  if(!gesture)return;if(event.touches.length!==1){reset();return}
+  const dx=event.touches[0].clientX-gesture.x,dy=event.touches[0].clientY-gesture.y;
+  if(!gesture.dragging&&(dy < -8 || (Math.abs(dx)>12&&Math.abs(dx)>Math.max(0,dy)))){reset();return}
+  if(!gesture.dragging&&dy>8&&dy>Math.abs(dx)*1.25){gesture.dragging=true;panel.classList.add('is-dragging')}
+  if(gesture.dragging){
+   gesture.distance=Math.max(0,dy);panel.style.transform='translateY('+Math.min(gesture.distance,220)+'px)';
+   if(event.cancelable)event.preventDefault();
+  }
+ },{passive:false});
+ panel.addEventListener('touchend',()=>{
+  const close=!!gesture&&gesture.dragging&&gesture.distance>=80&&!panel.hidden;
+  reset();if(close)$('#closeChat').onclick();
+ },{passive:true});
+ panel.addEventListener('touchcancel',reset,{passive:true});
+})();
 Promise.all([fetch('/courses.json').then(r=>r.json()),fetch('/prepared-notes.json').then(r=>r.json())]).then(([data,noteData])=>{
  courses=data;prepared=noteData;const remembered=readNavigation();
  const rememberedCourse=courses.find(c=>c.id===remembered?.courseId);

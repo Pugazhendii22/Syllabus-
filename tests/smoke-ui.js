@@ -11,6 +11,7 @@ class Element {
   querySelector(selector) { return el(this.selector+' '+selector); }
   getBoundingClientRect() { return {left:20,right:380,top:this.selector.startsWith('.chat-log [data-chat-reply=')?850:200,bottom:1000}; }
   setAttribute(name,value){ this[name]=value; }
+  addEventListener(name,handler){(this.handlers||(this.handlers={}))[name]=handler;}
   scrollIntoView() {} showModal(){this.open=true} close(){this.open=false} insertAdjacentHTML(_,html){this._html+=html}
 }
 function el(key){ if(!elements.has(key)) elements.set(key,new Element(key)); return elements.get(key); }

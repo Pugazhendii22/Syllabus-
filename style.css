@@ -232,3 +232,18 @@ header .top-actions{align-items:center}
 .chat-clear:disabled{color:#9bb5c2}
 .chat-clear:focus-visible{outline:3px solid #3499d2;outline-offset:2px}
 #chatBody .chat-memory-bar{display:block}
+
+/* A functional swipe area; the close button remains available to everyone. */
+.chat-swipe-hint{display:none}
+.chat-panel-head,.chat-swipe-hint{touch-action:none}
+.chat-panel{transition:transform .18s ease}
+.chat-panel.is-dragging{transition:none}
+@media(hover:none) and (pointer:coarse){
+ .chat-swipe-hint{display:block;text-align:center;flex:none;padding:7px 12px 3px;color:#527b90;font-size:12px;line-height:1.3}
+ .chat-panel-head{padding-top:7px}
+}
+@media(max-height:500px) and (hover:none) and (pointer:coarse){
+ .chat-swipe-hint{padding:3px 8px 0;font-size:11px}
+ .chat-panel-head{padding-top:4px}
+}
+@media(prefers-reduced-motion:reduce){.chat-panel{transition:none}}
