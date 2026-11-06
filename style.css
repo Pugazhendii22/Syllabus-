@@ -283,8 +283,10 @@ footer{display:block}
 /* Passing clouds are a background layer and never take up layout space. */
 .intro>div:first-child{position:relative;z-index:1}
 .home-cloud-layer{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.home-cloud{position:absolute;left:0;width:96px;height:auto;opacity:.48;animation:home-cloud-pass 28s linear infinite;will-change:transform}
-.cloud-one{top:3%;animation-delay:-10s}
-.cloud-two{top:51%;width:72px;opacity:.34;animation-duration:37s;animation-delay:-23s}
+.home-cloud{position:absolute;left:0;width:96px;height:auto;opacity:.48;animation:home-cloud-pass 36s linear infinite;will-change:transform}
+.cloud-one{top:3%;animation-delay:-7s}
+.cloud-two{top:48%;width:72px;opacity:.34;animation-duration:39s;animation-delay:-15s}
+.cloud-three{top:22%;width:64px;opacity:.36;animation-duration:33s;animation-delay:-19s}
+.cloud-four{top:62%;width:82px;opacity:.38;animation-duration:41s;animation-delay:-31s}
 @keyframes home-cloud-pass{from{transform:translateX(100vw)}to{transform:translateX(-120px)}}
-@media(prefers-reduced-motion:reduce){.home-cloud{animation:none;transform:none}.cloud-one{left:65%}.cloud-two{left:15%}}
+@media(prefers-reduced-motion:reduce){.home-cloud{animation:none;transform:none}.cloud-one{left:70%}.cloud-two{left:48%}.cloud-three{left:25%}.cloud-four{left:3%}}

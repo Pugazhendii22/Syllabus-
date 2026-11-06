@@ -29,12 +29,12 @@ const sizes=[
    try{
     await page.goto(base);await page.waitForFunction(()=>document.querySelector('#courseChoice').textContent.includes('English Literature'));
     assert(await page.locator('#homeView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('home');
-    assert.equal(await page.locator('.home-cloud').count(),2,'home has passing background clouds');
+    assert.equal(await page.locator('.home-cloud').count(),4,'home has passing background clouds');
     const cloudStyle=await page.locator('.home-cloud-layer').evaluate(el=>({position:getComputedStyle(el).position,events:getComputedStyle(el).pointerEvents,z:getComputedStyle(el).zIndex}));
     assert.deepStrictEqual(cloudStyle,{position:'absolute',events:'none',z:'0'},'clouds are behind content and occupy no layout space');
     assert.equal(await page.locator('.cloud-one').evaluate(el=>getComputedStyle(el).animationName),'home-cloud-pass','clouds move');
     await page.emulateMedia({reducedMotion:'reduce'});
-    assert.equal(await page.locator('.cloud-one').evaluate(el=>getComputedStyle(el).animationName),'none','cloud movement respects reduced motion');
+    assert((await page.locator('.home-cloud').evaluateAll(els=>els.map(el=>getComputedStyle(el).animationName))).every(name=>name==='none'),'all cloud movement respects reduced motion');
     await page.emulateMedia({reducedMotion:'no-preference'});
     await page.locator('#homeHeading').focus();
     const headingFocus=await page.locator('#homeHeading').evaluate(el=>({style:getComputedStyle(el).outlineStyle,width:getComputedStyle(el).outlineWidth,radius:getComputedStyle(el).borderRadius}));
