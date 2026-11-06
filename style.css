@@ -250,3 +250,7 @@ header .top-actions{align-items:center}
 
 /* A single, predictable focus rectangle rather than the browser's irregular auto ring. */
 #homeHeading:focus{outline:2px solid #3499d2;outline-offset:3px;border-radius:3px}
+
+/* Show the search focus on its rounded container, not as a box inside it. */
+.selection-card .search-wrap:focus-within{outline:3px solid #3499d2;outline-offset:2px}
+.selection-card .search-wrap input:focus-visible{outline:none}

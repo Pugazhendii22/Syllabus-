@@ -30,6 +30,9 @@ const sizes=[
     await page.locator('#homeHeading').focus();
     const headingFocus=await page.locator('#homeHeading').evaluate(el=>({style:getComputedStyle(el).outlineStyle,width:getComputedStyle(el).outlineWidth,radius:getComputedStyle(el).borderRadius}));
     assert.deepStrictEqual(headingFocus,{style:'solid',width:'2px',radius:'3px'},'home heading uses a consistent rectangular focus outline');
+    await page.locator('#search').focus();
+    const searchFocus=await page.locator('#search').evaluate(el=>({input:getComputedStyle(el).outlineStyle,wrapper:getComputedStyle(el.parentElement).outlineStyle,width:getComputedStyle(el.parentElement).outlineWidth,radius:getComputedStyle(el.parentElement).borderRadius}));
+    assert.deepStrictEqual(searchFocus,{input:'none',wrapper:'solid',width:'3px',radius:'12px'},'search focus is visible on its rounded container');
     assert(await page.locator('#refreshApp').isVisible(),'refresh remains available on the home screen');
     const refresh=await page.locator('#refreshApp').boundingBox(),savedButton=await page.locator('#mobileSaved').boundingBox();
     assert(Math.abs((refresh.y+refresh.height/2)-(savedButton.y+savedButton.height/2))<2,'home header controls are vertically aligned');
