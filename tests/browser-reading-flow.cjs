@@ -36,6 +36,8 @@ const sizes=[
     const searchFocus=await page.locator('#search').evaluate(el=>({input:getComputedStyle(el).outlineStyle,wrapper:getComputedStyle(el.parentElement).outlineStyle,width:getComputedStyle(el.parentElement).outlineWidth,radius:getComputedStyle(el.parentElement).borderRadius}));
     assert.deepStrictEqual(searchFocus,{input:'none',wrapper:'solid',width:'3px',radius:'12px'},'search focus is visible on its rounded container');
     assert(await page.locator('#refreshApp').isVisible(),'refresh remains available on the home screen');
+    assert(await page.locator('footer #sourceBtn').isVisible() && await page.locator('footer #progressInfo').isVisible(),'PDF and section count are in the home footer');
+    assert.equal(await page.locator('.selection-card #sourceBtn, .selection-card #progressInfo').count(),0,'secondary items are not in the selection card');
     const refresh=await page.locator('#refreshApp').boundingBox(),savedButton=await page.locator('#mobileSaved').boundingBox();
     assert(Math.abs((refresh.y+refresh.height/2)-(savedButton.y+savedButton.height/2))<2,'home header controls are vertically aligned');
     if(size.width<=480){
@@ -54,8 +56,12 @@ const sizes=[
     await Promise.all([page.waitForEvent('load'),activate(page.locator('#refreshApp'))]);
     await page.waitForFunction(()=>document.querySelector('#courseChoice').textContent.includes('Functional English Ii'));
     assert(await page.locator('#homeView').isVisible(),'refresh button retains the home screen and selected subject');
+    await page.evaluate(()=>{window.__openedPdf='';window.open=url=>{window.__openedPdf=url}});await activate(page.locator('#sourceBtn'));
+    const selectedPage=await page.evaluate(async()=>{const c=await (await fetch('/courses.json')).json();return c.find(x=>x.title.toLowerCase()==='functional english ii').page});
+    assert((await page.evaluate(()=>window.__openedPdf)).endsWith('#page='+selectedPage),'footer PDF opens at selected subject page');
     await activate(page.locator('#unitChoice'));await activate(page.locator('#choiceList button').nth(1));
     assert(await page.locator('#topicsView').isVisible());assert(!(await page.locator('#homeView').isVisible()));await noHorizontalOverflow('topics');
+    assert(!(await page.locator('#homeFooterDetails').isVisible()),'home footer details are hidden on other screens');
     assert(!(await page.locator('#refreshApp').isVisible()),'refresh is not repeated on the topics screen');
     assert.equal(await page.locator('#preparedPicker [data-topic]').count(),3);
     await page.reload();
