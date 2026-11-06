@@ -1,5 +1,5 @@
 // Only cache the public app shell and prepared notes, never API responses or private user data.
-const CACHE = 'ammu-study-shell-v7';
+const CACHE = 'ammu-study-shell-v8';
 const SHELL = ['/', '/style.css?v=6', '/app.js?v=8', '/pwa.js?v=2', '/courses.json', '/prepared-notes.json', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png', '/icons/apple-touch-icon.png', '/icons/favicon.png'];
 const paths = new Set(SHELL.map(p => new URL(p, self.location.origin).pathname));
 self.addEventListener('install', event => {
