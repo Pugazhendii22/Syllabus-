@@ -152,6 +152,10 @@ setImmediate(async ()=>{
 
   el('#surpriseBtn').onclick(); assert(el('#surpriseDialog').open);
   el('#textLarger').onclick(); assert.strictEqual(storage['ammu-reading-size'],'19');
+  const indexHtml = fs.readFileSync('index.html', 'utf8');
+  assert(indexHtml.includes('sky-cloud-1') && indexHtml.includes('sky-cloud-glide'), 'header has dynamic sky clouds');
+  const styleCss = fs.readFileSync('style.css', 'utf8');
+  assert(styleCss.includes('skyFloatHero') && styleCss.includes('skyCruiseAcross'), 'styles define cloud movements');
   console.log('PASS: startup, topic selection, backdrop dismissal, close button, picker selection, surprise and reading size (fake DOM)');
  } catch(err) { console.error(err);process.exitCode=1; }
 });
