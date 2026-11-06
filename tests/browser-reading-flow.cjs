@@ -38,6 +38,11 @@ const sizes=[
     assert(await page.locator('#refreshApp').isVisible(),'refresh remains available on the home screen');
     const refresh=await page.locator('#refreshApp').boundingBox(),savedButton=await page.locator('#mobileSaved').boundingBox();
     assert(Math.abs((refresh.y+refresh.height/2)-(savedButton.y+savedButton.height/2))<2,'home header controls are vertically aligned');
+    if(size.width<=480){
+     const icon=await page.locator('#refreshApp .refresh-icon').boundingBox();
+     assert(Math.abs(refresh.width-refresh.height)<0.1,'mobile refresh button is circular');
+     assert(Math.abs((icon.x+icon.width/2)-(refresh.x+refresh.width/2))<0.5 && Math.abs((icon.y+icon.height/2)-(refresh.y+refresh.height/2))<0.5,'refresh icon is centred inside its button');
+    }
     assert(!/[↗→←]/.test(await page.locator('#sourceBtn').textContent()));assert(!/[↗→←]/.test(await page.locator('#openTopics').textContent()));
     if(size.mobile){
      const bounds=await page.locator('#semTabs').evaluate(el=>({parent:el.getBoundingClientRect().toJSON(),buttons:[...el.querySelectorAll('button')].map(b=>b.getBoundingClientRect().toJSON())}));

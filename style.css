@@ -259,3 +259,6 @@ header .top-actions{align-items:center}
 @media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
  .sidebar{display:none}
 }
+
+/* A truly circular refresh button with a centred icon on narrow phones. */
+@media(max-width:480px){.refresh-app{appearance:none;flex:0 0 44px;width:44px;height:44px;padding:0;border-radius:50%;align-items:center;justify-content:center}}
