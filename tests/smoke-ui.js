@@ -38,6 +38,13 @@ setImmediate(()=>{
  try {
   assert(el('#progressInfo').textContent.includes(`${Object.keys(notes).length} of ${courses.reduce((sum,c)=>sum+c.units.length,0)}`));
   assert(el('#preparedPicker').innerHTML.includes('Choose notes to read'));
+  const home=fs.readFileSync('index.html','utf8');
+  assert(!home.includes('A note from us'));
+  assert(!home.includes('Notes are study drafts and may not yet cover every topic'));
+  assert(!el('#progressInfo').textContent.includes('Many topics are still unfinished'));
+  assert(!el('#materialMeta').textContent.includes('REVIEW BEFORE TEACHING'));
+  assert(!Object.values(notes).flat().some(n=>n.text.split('\n').some(line=>line.startsWith('Teaching draft:'))));
+
   const tableHtml=vm.runInContext('md("| Heading | Value |\\n| --- | --- |\\n| &lt;safe&gt; | example |")', context);
   assert(tableHtml.includes('<table') && tableHtml.includes('<th scope="col">Heading</th>'));
   assert(!tableHtml.includes('<safe>'),'table cells must escape input');
