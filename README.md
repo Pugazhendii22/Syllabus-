@@ -17,7 +17,7 @@ To refresh, go to the top of the page and pull down until â€œRelease to refreshâ
 
 After a successful online visit and service-worker installation, the app shell and currently prepared notes can be used offline on supported browsers. External references and optional AI need the internet; browser storage may be cleared or evicted. Updates download when online and can require closing and reopening the app. Real iOS/Android install and offline behaviour has not been independently tested.
 
-**Vercel:** This is a static deployment by default. `server.py` is not automatically run on Vercel, so `/api/status` and `/api/chat` are absent unless a separate server-side API is deployed and configured. Prepared notes do not need an API. Never put AI keys in client-side code or version control.
+**Vercel:** `server.py` is not run on Vercel. Instead, the serverless functions `api/status.js` and `api/chat.js` provide `/api/status` and `/api/chat` with the same behaviour. In the Vercel project go to Settings, Environment Variables, add `AI_API_KEY`, `AI_MODEL` and `AI_BASE_URL` (an OpenAI-compatible HTTPS base such as `https://api.openai.com/v1`), then redeploy. Keys stay on the server. The functions accept same-origin requests only and apply a small best-effort rate limit; set a spending cap with your AI provider as well, because the site is public. Prepared notes do not need an API.
 
 ## Current content and limitations
 
