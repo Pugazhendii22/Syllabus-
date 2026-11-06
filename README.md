@@ -9,6 +9,14 @@ python server.py
 
 Open http://localhost:8000 on the same machine. Choose a semester, subject and unit, then tap one of the visible buttons under **Choose notes to read**. Reading size, saved notes and bookmarks are stored in the current browser on that device; they do not sync.
 
+## Install on a phone
+
+On iPhone or iPad, open the deployed HTTPS site in Safari, tap **Share → Add to Home Screen → Add** (leave “Open as Web App” on if shown). On Android, use the app’s Add to home screen button or the browser menu. If an older shortcut shows the wrong icon, remove that shortcut and add it again after the updated site is deployed. Removing a shortcut can remove its separate browser storage: keep a copy of saved material first. Different browser and installed-app storage may not sync.
+
+After a successful online visit and service-worker installation, the app shell and currently prepared notes can be used offline on supported browsers. External references and optional AI need the internet; browser storage may be cleared or evicted. Updates download when online and can require closing and reopening the app. Real iOS/Android install and offline behaviour has not been independently tested.
+
+**Vercel:** This is a static deployment by default. `server.py` is not automatically run on Vercel, so `/api/status` and `/api/chat` are absent unless a separate server-side API is deployed and configured. Prepared notes do not need an API. Never put AI keys in client-side code or version control.
+
 ## Current content and limitations
 
 As of this update, `prepared-notes.json` contains **292 note selections across 124 of 199 syllabus navigation sections**, including **30 explicitly preliminary selections**. This is an availability count, not a measure of complete coverage. Many topics and later semesters remain unfinished. Eight courses have no unit details extracted and must be checked against the source PDF.
@@ -33,4 +41,4 @@ The server appends `/chat/completions` to the HTTPS base URL. Provider availabil
 
 The existing `prepared-notes.json` is the canonical accumulated dataset. **Do not run `create_notes.py` by itself:** it overwrites the file and erases later additions. Subsequent `add_*.py` and `expand_visual_media.py` scripts add or replace specific unit entries; rerunning them can overwrite manual changes to those units. Newest additions are `add_functional_ii.py`, `add_functional_writing.py` `add_language_studies.py`, `add_american_literature.py`, `add_american_fiction.py`, `add_indian_poetry_start.py`, `add_indian_unit1.py` `add_indian_novels.py`, `add_indian_remaining.py`, `add_environment.py`, `add_criticism_i.py`, `add_shakespeare.py`, `add_indian_ii.py`, `add_internship.py` `add_new_literatures.py` and `add_linguistics.py`.
 
-Automated checks have included JavaScript syntax, JSON parsing, fake-DOM interaction tests and HTTP responses. Testing in a real mobile browser and assistive-technology accessibility testing have not yet been performed.
+Automated checks have included JavaScript syntax, JSON parsing, fake-DOM interaction tests, simulated PWA/service-worker tests and HTTP responses. Testing in a real mobile browser and assistive-technology accessibility testing have not yet been performed.

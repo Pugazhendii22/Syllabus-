@@ -8,6 +8,7 @@ class Element {
   set innerHTML(value) { this._html=value; }
   get innerHTML() { return this._html; }
   querySelectorAll(selector) { return dynamic(this._html,selector); }
+  setAttribute(name,value){ this[name]=value; }
   scrollIntoView() {} showModal(){this.open=true} close(){this.open=false} insertAdjacentHTML(_,html){this._html+=html}
 }
 function el(key){ if(!elements.has(key)) elements.set(key,new Element(key)); return elements.get(key); }
