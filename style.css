@@ -279,3 +279,7 @@ footer{display:block}
 .footer-progress{margin-top:2px}
 .footer-credit{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}
 @media(max-width:760px){.footer-credit{display:block}.footer-credit a{margin-top:8px}}
+
+/* A quiet cloud in the welcome area, kept clear of the heading and controls. */
+.home-cloud{display:block;width:76px;height:auto;margin:6px 0 0 auto;pointer-events:none}
+@media(max-width:360px){.home-cloud{width:64px}}

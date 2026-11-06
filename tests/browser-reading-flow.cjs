@@ -29,6 +29,10 @@ const sizes=[
    try{
     await page.goto(base);await page.waitForFunction(()=>document.querySelector('#courseChoice').textContent.includes('English Literature'));
     assert(await page.locator('#homeView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('home');
+    const cloud=page.locator('.home-cloud');assert(await cloud.isVisible(),'home cloud is visible');
+    const cloudBounds=await cloud.boundingBox(), actionsBounds=await page.locator('.intro-actions').boundingBox();
+    assert(cloudBounds.x>=0 && cloudBounds.x+cloudBounds.width<=size.width,'cloud fits within the viewport');
+    assert(cloudBounds.y>=actionsBounds.y+actionsBounds.height,'cloud does not overlap the welcome text or buttons');
     await page.locator('#homeHeading').focus();
     const headingFocus=await page.locator('#homeHeading').evaluate(el=>({style:getComputedStyle(el).outlineStyle,width:getComputedStyle(el).outlineWidth,radius:getComputedStyle(el).borderRadius}));
     assert.deepStrictEqual(headingFocus,{style:'solid',width:'2px',radius:'3px'},'home heading uses a consistent rectangular focus outline');
@@ -61,6 +65,7 @@ const sizes=[
     assert((await page.evaluate(()=>window.__openedPdf)).endsWith('#page='+selectedPage),'footer PDF opens at selected subject page');
     await activate(page.locator('#unitChoice'));await activate(page.locator('#choiceList button').nth(1));
     assert(await page.locator('#topicsView').isVisible());assert(!(await page.locator('#homeView').isVisible()));await noHorizontalOverflow('topics');
+    assert(!(await page.locator('.home-cloud').isVisible()),'cloud stays on home only');
     assert(!(await page.locator('#homeFooterDetails').isVisible()),'home footer details are hidden on other screens');
     assert(!(await page.locator('#refreshApp').isVisible()),'refresh is not repeated on the topics screen');
     assert.equal(await page.locator('#preparedPicker [data-topic]').count(),3);
