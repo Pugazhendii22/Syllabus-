@@ -46,4 +46,20 @@ assert 'outside the specified lines' in get('course-1:1','milton-paradise-ix')['
 assert get('course-19:1','grammar-75–83').get('status') == 'preliminary'
 assert 'translation and any excerpt' in get('course-19:0','assadi-ring')['text']
 assert 'do not establish' in get('course-19:0','grammar-64–74')['text']
-print('PASS: target syllabus keys, fields, unique IDs, preliminary labels and audit content; two detailed lesson batches')
+# Complete reading explanations must appear before the shorter teaching notes.
+full_readings = {
+    'course-1:0': ['chaucer-prologue', 'spenser-epithalamion', 'sonnet-116', 'sonnet-130'],
+    'course-1:1': ['donne-valediction', 'milton-paradise-ix', 'pope-lock-canto1'],
+    'course-19:0': ['o-henry-twenty', 'assadi-ring', 'kincaid-girl'],
+    'course-19:1': ['raja-cow', 'huxley-beauty'],
+}
+for key, ids in full_readings.items():
+    for ident in ids:
+        text = get(key, ident)['text']
+        first_heading = next(line for line in text.splitlines() if line.startswith('## '))
+        assert first_heading.startswith('## Full '), (key, ident)
+        assert len(text) > 6000, (key, ident)
+assert 'after line 732' in get('course-1:1', 'milton-paradise-ix')['text']
+assert 'not a verified copy' in get('course-19:0', 'assadi-ring')['text']
+assert 'names Gandhi and the Master separately' in get('course-19:1', 'raja-cow')['text']
+print('PASS: syllabus keys, note IDs, status, prior audits and front-loaded full reading explanations')
