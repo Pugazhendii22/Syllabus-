@@ -267,3 +267,6 @@ header .top-actions{align-items:center}
 .brand-home{border:0;background:transparent;cursor:pointer;text-align:left}
 .mobile-brand.brand-home{padding:0}
 .brand-home:focus-visible{outline:3px solid #3499d2;outline-offset:3px;border-radius:3px}
+
+/* Screen headings still receive programmatic focus for assistive technology. */
+#topicsHeading:focus,#readingTitle:focus,#chatHeading:focus{outline:none}

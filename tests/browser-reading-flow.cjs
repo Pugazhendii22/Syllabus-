@@ -61,6 +61,7 @@ const sizes=[
     await page.reload();
     await page.waitForFunction(()=>!document.querySelector('#topicsView').hidden);
     assert.equal(await page.locator('#preparedPicker [data-topic]').count(),3,'refresh retains the selected unit and topics screen');
+    assert.equal(await page.locator('#topicsHeading').evaluate(el=>{el.focus({preventScroll:true});return getComputedStyle(el).outlineStyle}),'none','topics heading has no focus outline after refresh');
     await activate(page.locator('#preparedPicker [data-topic]').first());
     assert(await page.locator('#readingView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('reading');
     if(size.mobile && size.width>size.height && size.height<=500)assert(!(await page.locator('.sidebar').isVisible()),'sidebar is hidden in phone landscape reading mode');
@@ -75,6 +76,7 @@ const sizes=[
     await page.waitForFunction(()=>!document.querySelector('#readingView').hidden&&document.querySelector('#readingTitle').textContent.includes('Cow'));
     // Mobile layout and browser scroll anchoring can shift the position slightly during reload.
     await page.waitForFunction(y=>Math.abs(window.scrollY-y)<100,originalScroll);
+    assert.equal(await page.locator('#readingTitle').evaluate(el=>{el.focus({preventScroll:true});return getComputedStyle(el).outlineStyle}),'none','reading heading has no focus outline after refresh');
     assert((await page.locator('#topicPosition').textContent()).includes('1 of 3'));
     assert(await page.locator('#previousTopic').isDisabled());
     await activate(page.locator('#nextTopic'));
@@ -87,6 +89,7 @@ const sizes=[
     const before=await page.locator('#materialBody').textContent();await activate(page.locator('#openChat'));
     assert.equal(await page.locator('#materialBody').textContent(),before);await noHorizontalOverflow('chat');
     assert((await page.locator('#chatContextLabel').textContent()).includes('Cow'),'chat identifies the current topic');
+    assert.equal(await page.locator('#chatHeading').evaluate(el=>{el.focus({preventScroll:true});return getComputedStyle(el).outlineStyle}),'none','chat heading has no focus outline');
     await page.locator('#chatInput').fill('A draft question');
     await activate(page.locator('#closeChat'));await activate(page.locator('#openChat'));
     assert.equal(await page.locator('#chatInput').inputValue(),'A draft question','closing chat retains an unsent draft');
@@ -118,6 +121,7 @@ const sizes=[
     await page.reload();
     await page.waitForFunction(()=>document.querySelector('#readingTitle').textContent==='Saved materials');
     assert((await page.locator('#materialBody').textContent()).includes('The Cow of the Barricades'),'refresh retains the Saved screen');
+    assert.equal(await page.locator('#readingTitle').evaluate(el=>{el.focus({preventScroll:true});return getComputedStyle(el).outlineStyle}),'none','saved heading has no focus outline after refresh');
     await activate(page.locator('[data-saved]').first());assert(await page.locator('#openChat').isVisible());
     await activate(page.locator('#backToTopics'));assert(await page.locator('#topicsView').isVisible());
     await activate(page.locator('#preparedPicker [data-topic]').nth(1));await activate(page.locator('#openChat'));
@@ -129,6 +133,8 @@ const sizes=[
     assert.equal(await page.locator('.chat-rich').count(),0,'clear chat removes visible history');
     assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ammu-chat-history-v1'))['course-19:1']),undefined,'clear chat removes saved history');
     await activate(page.locator('#closeChat'));await page.goBack();assert(await page.locator('#topicsView').isVisible());
+    await page.keyboard.press('Tab');await page.locator('#backToHome').focus();
+    assert.notEqual(await page.locator('#backToHome').evaluate(el=>getComputedStyle(el).outlineStyle),'none','keyboard focus remains visible on controls');
     await activate(page.locator('#brandHome'));assert(await page.locator('#homeView').isVisible(),'top Ammu name returns home from topics');
     assert((await page.locator('#courseChoice').textContent()).includes('Functional English Ii'),'returning home retains the selected subject');
     await activate(page.locator('#openTopics'));await activate(page.locator('#preparedPicker [data-topic]').first());
