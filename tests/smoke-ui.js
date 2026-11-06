@@ -43,7 +43,7 @@ vm.runInContext(fs.readFileSync('app.js','utf8'),context);
 setImmediate(async ()=>{
  try {
   assert(el('#progressInfo').textContent.includes(`${Object.keys(notes).length} of ${courses.reduce((sum,c)=>sum+c.units.length,0)}`));
-  assert(el('#preparedPicker').innerHTML.includes('Choose notes to read'));
+  assert(el('#preparedPicker').innerHTML.includes('Available topics'));
   const home=fs.readFileSync('index.html','utf8');
   assert(!home.includes('A note from us'));
   assert(!home.includes('id="setupDialog"')&&!home.includes('Connection instructions'));

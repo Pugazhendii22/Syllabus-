@@ -27,6 +27,11 @@ const sizes=[
    try{
     await page.goto(base);await page.waitForFunction(()=>document.querySelector('#courseChoice').textContent.includes('English Literature'));
     assert(await page.locator('#homeView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('home');
+    if(size.mobile){
+     const bounds=await page.locator('#semTabs').evaluate(el=>({parent:el.getBoundingClientRect().toJSON(),buttons:[...el.querySelectorAll('button')].map(b=>b.getBoundingClientRect().toJSON())}));
+     assert.equal(bounds.buttons.length,6);
+     assert(bounds.buttons.every(b=>b.left>=bounds.parent.left-1&&b.right<=bounds.parent.right+1),'all semesters are visible without horizontal scrolling');
+    }
     await activate(page.locator('#semTabs [data-sem="3"]'));await activate(page.locator('#courseChoice'));
     await activate(page.locator('#choiceList button').filter({hasText:'Functional English Ii'}));
     await activate(page.locator('#unitChoice'));await activate(page.locator('#choiceList button').nth(1));
@@ -34,6 +39,13 @@ const sizes=[
     assert.equal(await page.locator('#preparedPicker [data-topic]').count(),3);
     await activate(page.locator('#preparedPicker [data-topic]').first());
     assert(await page.locator('#readingView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('reading');
+    assert((await page.locator('#readingTitle').textContent()).includes('Cow'));
+    assert((await page.locator('#topicPosition').textContent()).includes('1 of 3'));
+    assert(await page.locator('#previousTopic').isDisabled());
+    await activate(page.locator('#nextTopic'));
+    assert((await page.locator('#readingTitle').textContent()).includes('Beauty Industry'));
+    assert((await page.locator('#topicPosition').textContent()).includes('2 of 3'));
+    await activate(page.locator('#previousTopic'));
     assert((await page.locator('#readingTitle').textContent()).includes('Cow'));
     assert(await page.locator('#openChat').isVisible());
     const fab=await page.locator('#openChat').boundingBox();assert(fab.y>=0&&fab.y+fab.height<=size.height,'floating assistant stays within viewport');
