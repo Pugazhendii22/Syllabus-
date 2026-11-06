@@ -65,39 +65,6 @@
 
 .chat-memory-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;color:#54798e;font-size:12px;line-height:1.4}
 .chat-memory-bar span{max-width:32em}.chat-memory-bar button{flex:none;border:1px solid #cde5f1;border-radius:9px;background:#fff;color:#34799a;font-size:12px;font-weight:700;padding:8px 10px;min-height:38px}.chat-memory-bar button:disabled{opacity:.45;cursor:default}.chat-memory-bar button:focus-visible{outline:3px solid #3499d2;outline-offset:2px}
-/* Dynamic sky clouds for Ammu's header */
-.intro{min-height:148px}
-.intro>div:first-child{position:relative;z-index:2}
-.intro-sky{position:absolute;inset:-12px -8px -12px -8px;pointer-events:none;overflow:hidden;border-radius:24px;z-index:1}
-.sky-cloud{position:absolute;pointer-events:none;user-select:none;will-change:transform}
-.cloud-svg{display:block;width:100%;height:100%}
-.sky-cloud-1{right:36px;top:16px;width:136px;height:79px;color:#b9e3f8;fill:currentColor;opacity:.98;animation:skyFloatHero 8.5s ease-in-out infinite}
-.sky-cloud-2{right:205px;top:8px;width:96px;height:56px;color:#c4e7fa;fill:currentColor;opacity:.88;animation:skyWanderTop 14s ease-in-out infinite -4s}
-.sky-cloud-3{right:370px;top:4px;width:72px;height:42px;color:#d1eefc;fill:currentColor;opacity:.78;animation:skyFloatWhisper 17s ease-in-out infinite -8s}
-.sky-cloud-4{right:160px;top:76px;width:82px;height:48px;color:#bce4f8;fill:currentColor;opacity:.92;animation:skyFloatCompanion 10.5s ease-in-out infinite -2.5s}
-.sky-cloud-5{right:10px;top:90px;width:58px;height:34px;color:#cae8fa;fill:currentColor;opacity:.82;animation:skyFloatBreeze 7.5s ease-in-out infinite -5s}
-.sky-cloud-glide{right:-100px;top:18px;width:86px;height:50px;color:#c0e5f9;fill:currentColor;animation:skyCruiseAcross 30s linear infinite -10s}
-
-@keyframes skyFloatHero{0%,100%{transform:translate3d(0,0,0) rotate(0deg)}25%{transform:translate3d(-15px,-10px,0) rotate(-1.5deg)}60%{transform:translate3d(12px,-5px,0) rotate(1deg)}85%{transform:translate3d(-5px,4px,0) rotate(-.5deg)}}
-@keyframes skyWanderTop{0%,100%{transform:translate3d(0,0,0)}35%{transform:translate3d(-38px,-9px,0)}70%{transform:translate3d(26px,5px,0)}}
-@keyframes skyFloatWhisper{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(38px,-7px,0)}}
-@keyframes skyFloatCompanion{0%,100%{transform:translate3d(0,0,0)}40%{transform:translate3d(15px,-12px,0)}75%{transform:translate3d(-12px,6px,0)}}
-@keyframes skyFloatBreeze{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-18px,-8px,0)}}
-@keyframes skyCruiseAcross{0%{transform:translate3d(60px,0,0);opacity:0}6%{opacity:.8}88%{opacity:.8}100%{transform:translate3d(-920px,-14px,0);opacity:0}}
-
-@media(max-width:760px){
-.intro{min-height:0}
-.intro-sky{inset:-6px -4px -6px -4px}
-.sky-cloud-1{right:10px;top:8px;width:82px;height:48px}
-.sky-cloud-2{right:95px;top:4px;width:60px;height:35px}
-.sky-cloud-3{right:160px;top:8px;width:46px;height:27px;opacity:.6}
-.sky-cloud-4{right:68px;top:52px;width:50px;height:29px}
-.sky-cloud-5,.sky-cloud-glide{display:none}
-}
-@media(prefers-reduced-motion:reduce){
-.sky-cloud{animation:none!important}
-}
-
 /* Three calm screens: choose a unit, choose a topic, then read. */
 [hidden]{display:none!important}
 .home-next{display:flex;justify-content:flex-end;margin:18px 0 0}
@@ -110,9 +77,6 @@
 .screen-heading p,.reading-context{color:#5e8399;font-size:15px;line-height:1.5;margin:0}
 .topics-screen .prepared-picker{padding:24px}
 .topics-screen .topic-buttons{margin-top:18px}
-.unit-details{margin-top:20px;background:#fff;border:1px solid #d7eaf5;border-radius:16px;padding:16px 20px;color:#28688a}
-.unit-details>summary{cursor:pointer;font-weight:700;min-height:32px}
-.unit-details .unit-card{margin-top:14px}
 .reading-screen{max-width:900px}
 .reading-context{margin:13px 0 20px}
 .reading-screen .materials{min-height:0;box-shadow:0 14px 42px #306d8b0b}
@@ -145,3 +109,9 @@
  .chat-panel{width:calc(100vw - 24px);max-height:calc(100dvh - 88px)}
  #chatBody .chat-log{height:min(40dvh,340px);min-height:100px}
 }
+
+/* Clear text controls in place of decorative imagery. */
+.save-note{min-width:70px;min-height:44px;border:1px solid #cee7f3;border-radius:11px;background:#fff;color:#27799e;font-weight:700;padding:8px 12px}
+.save-note[aria-pressed="true"]{background:#e6f5fd;border-color:#83c8e7;color:#165879}
+.chat-bubble.assistant{max-width:100%}
+.save-note:focus-visible{outline:3px solid #3499d2;outline-offset:2px}

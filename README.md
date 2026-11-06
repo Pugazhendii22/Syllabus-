@@ -7,7 +7,7 @@ cd teaching-studio
 python server.py
 ```
 
-Open http://localhost:8000 on the same machine. Choose a semester, subject and unit, then explore the unit’s topics. Selecting a topic opens reading mode; use the floating **Ask AI** button to ask about the current reading. Back buttons and the browser’s back control move between screens. Tap outside a subject or unit picker to close it without changing your selection. Reading size, saved notes and bookmarks are stored in the current browser on that device; they do not sync. The extra AI-plan tab and its controls have been removed, but previously saved plans are not deleted and can still be opened from Saved.
+Open http://localhost:8000 on the same machine. Choose a semester, subject and unit, then explore the unit’s topics. Selecting a topic opens reading mode; use the floating **Ask AI** button to ask about the current reading. Back buttons and the browser’s back control move between screens. Tap outside a subject or unit picker to close it without changing your selection. Reading size, saved notes and bookmarks are stored in the current browser on that device; they do not sync. The extra AI-plan tab, its controls, the optional note-generation controls and the redundant syllabus-details panel have been removed. Previously saved plans and generated material are not deleted and can still be opened from Saved.
 
 ## Install on a phone
 
@@ -37,7 +37,7 @@ The syllabus navigator was heuristically extracted from the original 202-page PD
 
 ## Optional AI
 
-The authored notes work without AI or a key. The optional AI tools require a real OpenAI-compatible provider and server-side configuration:
+The authored notes work without AI or a key. Ask AI requires a real OpenAI-compatible provider and server-side configuration:
 
 ```sh
 AI_API_KEY='your-key' AI_MODEL='your-model' AI_BASE_URL='https://your-provider.example/v1' python server.py

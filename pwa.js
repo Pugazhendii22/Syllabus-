@@ -30,7 +30,7 @@
 
   const reloadOnce = () => { if (!didReload) { didReload = true; window.location.reload(); } };
   function hasUnsentText() {
-    return ['#topicInput','#chatInput'].some(id => { const input=$(id); return input && input.value && input.value.trim(); }) || !!window.ammuHasChatDrafts?.();
+    return ['#chatInput'].some(id => { const input=$(id); return input && input.value && input.value.trim(); }) || !!window.ammuHasChatDrafts?.();
   }
   let start = null, armed = false, refreshing = false, hideTimer = null;
   function setPullDistance(distance) {

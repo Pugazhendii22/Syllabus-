@@ -118,6 +118,8 @@ setImmediate(async ()=>{
   el('#chatPanel').hidden=true;el('#openChat').onclick();
   assert.strictEqual(el('#chatPanel').hidden,false,'floating assistant opens');
   assert.strictEqual(el('#materialBody').innerHTML,readingBefore,'opening assistant preserves the note');
+  vm.runInContext('busy=true;renderMaterial();busy=false',context);
+  assert.strictEqual(el('#materialBody').innerHTML,readingBefore,'note remains readable while AI is busy');
   el('.chat-log').scrollHeight=2000;
   el('#chatInput').value='Explain this topic';
   await el('#chatForm').onsubmit({preventDefault(){}});
@@ -126,6 +128,7 @@ setImmediate(async ()=>{
   assert(el('#chatBody').innerHTML.includes('data-copy-chat="1"'));
   assert(requestBody.messages[0].content.includes('one to three sentences'));
   assert(requestBody.messages[0].content.includes('meaning of a word or phrase'));
+  assert(requestBody.messages[0].content.includes('Do not use emojis or decorative symbols'));
   const currentNote=notes[vm.runInContext('key()',context)][0];
   assert(requestBody.messages[0].content.includes(currentNote.title),'AI receives the selected topic');
   assert(requestBody.messages[0].content.includes(currentNote.text.slice(0,100)),'AI receives the reading note');
@@ -166,9 +169,9 @@ setImmediate(async ()=>{
   el('#surpriseBtn').onclick(); assert(el('#surpriseDialog').open);
   el('#textLarger').onclick(); assert.strictEqual(storage['ammu-reading-size'],'19');
   const indexHtml = fs.readFileSync('index.html', 'utf8');
-  assert(indexHtml.includes('sky-cloud-1') && indexHtml.includes('sky-cloud-glide'), 'header has dynamic sky clouds');
-  const styleCss = fs.readFileSync('style.css', 'utf8');
-  assert(styleCss.includes('skyFloatHero') && styleCss.includes('skyCruiseAcross'), 'styles define cloud movements');
+  assert(!indexHtml.includes('unit-details')&&!indexHtml.includes('generateNotes'),'unneeded final sections removed');
+  assert(!indexHtml.includes('sky-cloud')&&!indexHtml.includes('heart-icon'),'decorative imagery removed');
+  assert(indexHtml.includes('id="sourceBtn"')&&indexHtml.includes('id="chatWidget"'),'source and AI remain available');
   console.log('PASS: startup, topic selection, backdrop dismissal, close button, picker selection, surprise and reading size (fake DOM)');
  } catch(err) { console.error(err);process.exitCode=1; }
 });
