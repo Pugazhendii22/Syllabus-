@@ -17,18 +17,19 @@ function dynamic(html,sel) {
   const m=sel.match(/^\[data-(sem|topic|choice|saved)\]$/); if(!m)return [];
   return [...html.matchAll(new RegExp('data-'+m[1]+'="(\\d+)"','g'))].map(x=>{const node=new Element(); node.dataset[m[1]]=x[1]; return node;});
 }
-let topicButtons=[], semButtons=[];
+let topicButtons=[], semButtons=[], savedButtons=[];
 const document={
   documentElement:el('root'),
   querySelector:s=>el(s),
   querySelectorAll:s=>{
     if(s==='[data-topic]') { topicButtons=dynamic(el('#preparedPicker').innerHTML,s); return topicButtons; }
     if(s==='[data-sem]') { semButtons=dynamic(el('#semTabs').innerHTML+el('#semesterNav').innerHTML,s); return semButtons; }
-    if(s==='.material-tabs button')return ['notes','plan','chat'].map(t=>{let e=new Element();e.dataset.tab=t;return e});
+    if(s==='[data-saved]'){savedButtons=dynamic(el('#materialBody').innerHTML,s);return savedButtons;}
+    if(s==='.material-tabs button')return ['notes','chat'].map(t=>{let e=new Element();e.dataset.tab=t;return e});
     return [];
   }
 };
-const storage={'marginalia-saved':JSON.stringify([{courseId:'course-39',unitIndex:0,title:'Old semester 7 note',unit:'Unit 1',tab:'notes',key:'course-39:0'},{courseId:'course-1',unitIndex:0,title:'Semester 1 note',unit:'Unit 1',tab:'notes',key:'course-1:0'}])}; const localStorage={getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v}};
+const storage={'marginalia-materials':JSON.stringify({'course-1:0':{plan:'A previously saved lesson plan'}}),'marginalia-saved':JSON.stringify([{courseId:'course-39',unitIndex:0,title:'Old semester 7 note',unit:'Unit 1',tab:'notes',key:'course-39:0'},{courseId:'course-1',unitIndex:0,title:'Semester 1 note',unit:'Unit 1',tab:'notes',key:'course-1:0'},{courseId:'course-1',unitIndex:0,title:'Previous plan',unit:'Unit 1',tab:'plan',key:'course-1:0'}])}; const localStorage={getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v}};
 const courses=JSON.parse(fs.readFileSync('courses.json','utf8'));
 const notes=JSON.parse(fs.readFileSync('prepared-notes.json','utf8'));
 let requestBody, failAI=false;
@@ -45,8 +46,8 @@ setImmediate(async ()=>{
   const home=fs.readFileSync('index.html','utf8');
   assert(!home.includes('A note from us'));
   assert(!home.includes('id="setupDialog"')&&!home.includes('Connection instructions'));
-  const durationMarkup=home.match(/<button type="button" id="durationChoice"[\s\S]*?<\/button>/)[0];
-  assert(!durationMarkup.includes('⌄'),'duration button must not add an extra chevron');
+  assert(!home.includes('data-tab="plan"')&&!home.includes('id="generatePlan"')&&!home.includes('id="durationChoice"'));
+  assert(home.includes('data-tab="notes"')&&home.includes('data-tab="chat"'));
   assert(!home.includes('Notes are study drafts and may not yet cover every topic'));
   assert(!el('#progressInfo').textContent.includes('Many topics are still unfinished'));
   assert(!el('#materialMeta').textContent.includes('REVIEW BEFORE TEACHING'));
@@ -67,8 +68,12 @@ setImmediate(async ()=>{
   el('#savedNav').onclick();
   assert(!el('#materialBody').innerHTML.includes('Old semester 7 note'),'removed-course bookmark hidden');
   assert(el('#materialBody').innerHTML.includes('Semester 1 note'));
-  assert.strictEqual(el('#savedCount').textContent,1);
-  assert.strictEqual(JSON.parse(storage['marginalia-saved']).length,2,'older local data preserved');
+  assert.strictEqual(el('#savedCount').textContent,2);
+  assert.strictEqual(JSON.parse(storage['marginalia-saved']).length,3,'older local data preserved');
+  assert(el('#materialBody').innerHTML.includes('Previous plan'));
+  savedButtons[1].onclick();
+  assert(el('#materialBody').innerHTML.includes('A previously saved lesson plan'),'saved plan remains readable');
+  assert(JSON.parse(storage['marginalia-materials'])['course-1:0'].plan,'saved plan data stays intact');
   el('#search').value='American Literature II'; el('#search').oninput();
   assert.strictEqual(el('#courseChoice').textContent,'No matching subjects');
   el('#search').value='';
@@ -82,8 +87,8 @@ setImmediate(async ()=>{
   topicButtons[1].onclick();
   assert(el('#materialMeta').textContent.includes('PRELIMINARY'));
   assert(el('#materialBody').innerHTML.includes('attribution'));
-  // The same picker is used for subjects, units and durations.
-  for(const opener of ['#courseChoice','#unitChoice','#durationChoice']) {
+  // The same picker is used for subjects and units.
+  for(const opener of ['#courseChoice','#unitChoice']) {
    el(opener).onclick(); const dialog=el('#choiceDialog'); assert(dialog.open);
    dialog.onclick({target:dialog,clientX:100,clientY:300}); assert(dialog.open,'inside padding must not close');
    dialog.onclick({target:el('#choiceList'),clientX:100,clientY:300}); assert(dialog.open,'inside content must not close');
@@ -93,20 +98,15 @@ setImmediate(async ()=>{
   assert(!el('#choiceDialog').open,'selection closes picker');
   assert.strictEqual(el('#unitSelect').value,'1','selection still changes unit');
   el('#unitChoice').onclick(); el('#closeChoice').onclick(); assert(!el('#choiceDialog').open,'close button still works');
-  el('#duration').value='50 minutes';
-  el('#durationChoice').onclick(); assert(el('#choiceList').innerHTML.includes('30 minutes'));
-  el('#choiceList').childrenForTest[1].onclick();
-  assert.strictEqual(el('#duration').value,'30 minutes');
-  assert.strictEqual(el('#durationChoice').textContent,'30 minutes');
-  assert.strictEqual(el('#durationChoice')['aria-label'],'Class length: 30 minutes');
-  assert(!el('#choiceDialog').open,'duration selection closes picker');
-  await el('#generatePlan').onclick();
-  assert(requestBody.messages.some(m=>m.content.includes('30 minutes')),'selected duration reaches the AI request');
-  failAI=true;
-  await el('#generatePlan').onclick();
-  assert(!el('#materialBody').innerHTML.includes('Connection setup'));
-  assert(!el('#materialBody').innerHTML.includes('AI_API_KEY'));
-  assert(el('#materialBody').innerHTML.includes('AI could not respond'));
+  vm.runInContext("tab='chat';renderMaterial()",context);
+  el('#chatInput').value='Explain this topic';
+  await el('#chatForm').onsubmit({preventDefault(){}});
+  assert(requestBody.messages.some(m=>m.content==='Explain this topic'),'Ask AI continues to work');
+  failAI=true;el('#chatInput').value='Another question';
+  await el('#chatForm').onsubmit({preventDefault(){}});
+  assert(!el('#chatError').innerHTML.includes('Connection setup'));
+  assert(!el('#chatError').innerHTML.includes('AI_API_KEY'));
+  assert(el('#chatError').innerHTML.includes('AI could not respond'));
 
   el('#surpriseBtn').onclick(); assert(el('#surpriseDialog').open);
   el('#textLarger').onclick(); assert.strictEqual(storage['ammu-reading-size'],'19');

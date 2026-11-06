@@ -7,7 +7,7 @@ cd teaching-studio
 python server.py
 ```
 
-Open http://localhost:8000 on the same machine. Choose a semester, subject and unit, then tap one of the visible buttons under **Choose notes to read**. Tap outside a subject, unit or class-length picker to close it without changing your selection. Reading size, saved notes and bookmarks are stored in the current browser on that device; they do not sync.
+Open http://localhost:8000 on the same machine. Choose a semester, subject and unit, then tap one of the visible buttons under **Choose notes to read**. Tap outside a subject or unit picker to close it without changing your selection. Reading size, saved notes and bookmarks are stored in the current browser on that device; they do not sync. The extra AI-plan tab and its controls have been removed, but previously saved plans are not deleted and can still be opened from Saved.
 
 ## Install on a phone
 
