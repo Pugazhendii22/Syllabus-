@@ -254,3 +254,8 @@ header .top-actions{align-items:center}
 /* Show the search focus on its rounded container, not as a box inside it. */
 .selection-card .search-wrap:focus-within{outline:3px solid #3499d2;outline-offset:2px}
 .selection-card .search-wrap input:focus-visible{outline:none}
+
+/* Keep the desktop sidebar off short, touch-based landscape screens. */
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+ .sidebar{display:none}
+}
