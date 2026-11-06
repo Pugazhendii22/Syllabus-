@@ -280,6 +280,11 @@ footer{display:block}
 .footer-credit{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}
 @media(max-width:760px){.footer-credit{display:block}.footer-credit a{margin-top:8px}}
 
-/* A quiet cloud in the welcome area, kept clear of the heading and controls. */
-.home-cloud{display:block;width:76px;height:auto;margin:6px 0 0 auto;pointer-events:none}
-@media(max-width:360px){.home-cloud{width:64px}}
+/* Passing clouds are a background layer and never take up layout space. */
+.intro>div:first-child{position:relative;z-index:1}
+.home-cloud-layer{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.home-cloud{position:absolute;left:0;width:96px;height:auto;opacity:.48;animation:home-cloud-pass 28s linear infinite;will-change:transform}
+.cloud-one{top:3%;animation-delay:-10s}
+.cloud-two{top:51%;width:72px;opacity:.34;animation-duration:37s;animation-delay:-23s}
+@keyframes home-cloud-pass{from{transform:translateX(100vw)}to{transform:translateX(-120px)}}
+@media(prefers-reduced-motion:reduce){.home-cloud{animation:none;transform:none}.cloud-one{left:65%}.cloud-two{left:15%}}
