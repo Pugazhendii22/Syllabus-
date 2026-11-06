@@ -35,7 +35,8 @@ const assert=require('assert'),fs=require('fs'),vm=require('vm');
  const worker={state:'installing',handlers:{},addEventListener(n,f){this.handlers[n]=f},postMessage:m=>posted.push(m.type)};
  registration.installing=worker;registration.handlers.updatefound();registration.waiting=worker;worker.state='installed';worker.handlers.statechange();assert(!node('#updateNotice').hidden,'new worker shows notice');
  node('#laterUpdate').handlers.click();assert(node('#updateNotice').hidden);dh.visibilitychange();assert(!node('#updateNotice').hidden);
- node('#topicInput').value='unsent';confirmed=false;node('#reloadUpdate').handlers.click();assert.strictEqual(asked,1);assert.strictEqual(posted.length,0);assert.strictEqual(reloads,0);
+ node('#topicInput').value='';window.ammuHasChatDrafts=()=>true;confirmed=false;node('#reloadUpdate').handlers.click();assert.strictEqual(asked,1,'drafts from another unit still trigger refresh confirmation');assert.strictEqual(posted.length,0);
+ window.ammuHasChatDrafts=()=>false;node('#topicInput').value='unsent';node('#reloadUpdate').handlers.click();assert.strictEqual(asked,2);assert.strictEqual(posted.length,0);assert.strictEqual(reloads,0);
  confirmed=true;node('#reloadUpdate').handlers.click();assert.deepStrictEqual(posted,['SKIP_WAITING']);assert.strictEqual(reloads,0);sh.controllerchange();sh.controllerchange();assert.strictEqual(reloads,1,'reload once after activation');
  // Separate runtime to check touch thresholds, cancellation and nested content.
  function pullRuntime(){

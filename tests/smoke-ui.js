@@ -5,7 +5,7 @@ const vm = require('vm');
 const elements = new Map();
 class Element {
   constructor(selector='') { this.selector=selector; this._html=''; this.textContent=''; this.value=''; this.dataset={}; this.style={setProperty(){}}; this.classList={toggle(){},add(){},remove(){}}; }
-  set innerHTML(value) { this._html=value; if(this.selector==='#materialBody') el('.chat-log').scrollTop=0; }
+  set innerHTML(value) { this._html=value; if(this.selector==='#chatBody') el('.chat-log').scrollTop=0; }
   get innerHTML() { return this._html; }
   querySelectorAll(selector) { this.childrenForTest=dynamic(this._html,selector); return this.childrenForTest; }
   querySelector(selector) { return el(this.selector+' '+selector); }
@@ -109,17 +109,28 @@ setImmediate(async ()=>{
   assert(!el('#choiceDialog').open,'selection closes picker');
   assert.strictEqual(el('#unitSelect').value,'1','selection still changes unit');
   el('#unitChoice').onclick(); el('#closeChoice').onclick(); assert(!el('#choiceDialog').open,'close button still works');
-  vm.runInContext("tab='chat';renderMaterial()",context);
+  assert.strictEqual(el('#topicsView').hidden,false,'choosing unit opens topics screen');
+  assert.strictEqual(el('#homeView').hidden,true);
+  topicButtons[0].onclick();
+  assert.strictEqual(el('#readingView').hidden,false,'selecting topic opens reading mode');
+  assert.strictEqual(el('#topicsView').hidden,true);
+  const readingBefore=el('#materialBody').innerHTML;
+  el('#chatPanel').hidden=true;el('#openChat').onclick();
+  assert.strictEqual(el('#chatPanel').hidden,false,'floating assistant opens');
+  assert.strictEqual(el('#materialBody').innerHTML,readingBefore,'opening assistant preserves the note');
   el('.chat-log').scrollHeight=2000;
   el('#chatInput').value='Explain this topic';
   await el('#chatForm').onsubmit({preventDefault(){}});
   assert(requestBody.messages.some(m=>m.content==='Explain this topic'),'Ask AI continues to work');
-  assert(el('#materialBody').innerHTML.includes('<h4>A clear answer</h4>')&&el('#materialBody').innerHTML.includes('<strong>Canterbury</strong>'));
-  assert(el('#materialBody').innerHTML.includes('data-copy-chat="1"'));
+  assert(el('#chatBody').innerHTML.includes('<h4>A clear answer</h4>')&&el('#chatBody').innerHTML.includes('<strong>Canterbury</strong>'));
+  assert(el('#chatBody').innerHTML.includes('data-copy-chat="1"'));
   assert(requestBody.messages[0].content.includes('one to three sentences'));
   assert(requestBody.messages[0].content.includes('meaning of a word or phrase'));
+  const currentNote=notes[vm.runInContext('key()',context)][0];
+  assert(requestBody.messages[0].content.includes(currentNote.title),'AI receives the selected topic');
+  assert(requestBody.messages[0].content.includes(currentNote.text.slice(0,100)),'AI receives the reading note');
   assert(requestBody.messages[0].content.includes('detailed explanation when the user requests one'));
-  assert(el('#materialBody').innerHTML.includes('data-chat-reply="1"'));
+  assert(el('#chatBody').innerHTML.includes('data-chat-reply="1"'));
   assert.strictEqual(el('.chat-log').scrollTop,646,'new replies start at the top rather than the end');
   failAI=true;el('#chatInput').value='Another question';
   await el('#chatForm').onsubmit({preventDefault(){}});
@@ -139,13 +150,15 @@ setImmediate(async ()=>{
   await new Promise(resolve=>setImmediate(resolve));
   assert.strictEqual(vm.runInContext('chats['+JSON.stringify(chatKey)+'].length',reloaded),4,'history survives reload');
   vm.runInContext("course=courses.find(c=>c.id==='course-27');sem=5;unit=1;tab='chat';renderMaterial()",reloaded);
-  assert(el('#materialBody').innerHTML.includes('What did you just say?'),'saved messages appear after reload');
+  assert(el('#chatBody').innerHTML.includes('What did you just say?'),'saved messages appear after reload');
   el('#unitSelect').onchange({target:{value:'2'}});
-  assert(!el('#materialBody').innerHTML.includes('What did you just say?'),'other units have separate chats');
+  vm.runInContext('renderChat()',reloaded);
+  assert(!el('#chatBody').innerHTML.includes('What did you just say?'),'other units have separate chats');
   el('#unitSelect').onchange({target:{value:'1'}});
+  vm.runInContext('renderChat()',reloaded);
   el('#clearChat').onclick();
   assert(!JSON.parse(storage['ammu-chat-history-v1'])[chatKey],'clear removes saved history for this unit');
-  assert(!el('#materialBody').innerHTML.includes('What did you just say?'),'clear removes visible history');
+  assert(!el('#chatBody').innerHTML.includes('What did you just say?'),'clear removes visible history');
   const capped=vm.runInContext('chatContext({role:"system",content:"context"},Array.from({length:20},()=>({role:"user",content:"x".repeat(12000)})))',reloaded);
   assert(JSON.stringify({messages:capped}).length<=56000,'long history stays under API request limit');
 
