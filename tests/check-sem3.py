@@ -23,4 +23,27 @@ assert 'separately named Mahatma' in get('course-19:1','raja-cow')['text']
 assert '30.' in get('course-2:2','reading-skills')['text']
 assert '20.' in get('course-2:3','writing-skills')['text']
 assert '| Type | Direct speech | Possible indirect form |' in get('course-20:4','func-writing-5')['text']
-print('PASS: target syllabus keys, fields, unique IDs, preliminary labels and audit content')
+# The first substantial lesson batch spans all four of Ammu's current subjects.
+lesson_batch = {
+    'course-1:0': ['chaucer-prologue', 'spenser-epithalamion', 'sonnet-116', 'sonnet-130'],
+    'course-2:0': ['communication-basics', 'comm-practice-1'],
+    'course-19:0': ['o-henry-twenty', 'assadi-ring', 'kincaid-girl', 'grammar-64–74'],
+    'course-20:0': ['func-writing-1', 'writing-workshop-types'],
+}
+for key, ids in lesson_batch.items():
+    for ident in ids:
+        assert len(get(key, ident)['text']) > 3500, (key, ident)
+second_batch = {
+    'course-1:1': ['donne-valediction', 'milton-paradise-ix', 'pope-lock-canto1'],
+    'course-2:1': ['listening-speaking', 'comm-practice-2'],
+    'course-19:1': ['raja-cow', 'huxley-beauty', 'grammar-75–83'],
+    'course-20:1': ['func-writing-2', 'writing-workshop-precis'],
+}
+for key, ids in second_batch.items():
+    for ident in ids:
+        assert len(get(key, ident)['text']) > 3200, (key, ident)
+assert 'outside the specified lines' in get('course-1:1','milton-paradise-ix')['text']
+assert get('course-19:1','grammar-75–83').get('status') == 'preliminary'
+assert 'translation and any excerpt' in get('course-19:0','assadi-ring')['text']
+assert 'do not establish' in get('course-19:0','grammar-64–74')['text']
+print('PASS: target syllabus keys, fields, unique IDs, preliminary labels and audit content; two detailed lesson batches')
