@@ -5,10 +5,11 @@ const vm = require('vm');
 const elements = new Map();
 class Element {
   constructor(selector='') { this.selector=selector; this._html=''; this.textContent=''; this.value=''; this.dataset={}; this.style={setProperty(){}}; this.classList={toggle(){},add(){},remove(){}}; }
-  set innerHTML(value) { this._html=value; }
+  set innerHTML(value) { this._html=value; if(this.selector==='#materialBody') el('.chat-log').scrollTop=0; }
   get innerHTML() { return this._html; }
   querySelectorAll(selector) { this.childrenForTest=dynamic(this._html,selector); return this.childrenForTest; }
-  getBoundingClientRect() { return {left:20,right:380,top:200,bottom:700}; }
+  querySelector(selector) { return el(this.selector+' '+selector); }
+  getBoundingClientRect() { return {left:20,right:380,top:this.selector.startsWith('.chat-log [data-chat-reply=')?850:200,bottom:1000}; }
   setAttribute(name,value){ this[name]=value; }
   scrollIntoView() {} showModal(){this.open=true} close(){this.open=false} insertAdjacentHTML(_,html){this._html+=html}
 }
@@ -109,12 +110,17 @@ setImmediate(async ()=>{
   assert.strictEqual(el('#unitSelect').value,'1','selection still changes unit');
   el('#unitChoice').onclick(); el('#closeChoice').onclick(); assert(!el('#choiceDialog').open,'close button still works');
   vm.runInContext("tab='chat';renderMaterial()",context);
+  el('.chat-log').scrollHeight=2000;
   el('#chatInput').value='Explain this topic';
   await el('#chatForm').onsubmit({preventDefault(){}});
   assert(requestBody.messages.some(m=>m.content==='Explain this topic'),'Ask AI continues to work');
   assert(el('#materialBody').innerHTML.includes('<h4>A clear answer</h4>')&&el('#materialBody').innerHTML.includes('<strong>Canterbury</strong>'));
   assert(el('#materialBody').innerHTML.includes('data-copy-chat="1"'));
-  assert(requestBody.messages[0].content.includes('answer directly and briefly first'));
+  assert(requestBody.messages[0].content.includes('one to three sentences'));
+  assert(requestBody.messages[0].content.includes('meaning of a word or phrase'));
+  assert(requestBody.messages[0].content.includes('detailed explanation when the user requests one'));
+  assert(el('#materialBody').innerHTML.includes('data-chat-reply="1"'));
+  assert.strictEqual(el('.chat-log').scrollTop,646,'new replies start at the top rather than the end');
   failAI=true;el('#chatInput').value='Another question';
   await el('#chatForm').onsubmit({preventDefault(){}});
   assert(!el('#chatError').innerHTML.includes('Connection setup'));
