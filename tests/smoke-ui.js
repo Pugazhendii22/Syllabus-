@@ -37,7 +37,7 @@ const fetch=async (path,options)=>{
  if(path==='/api/chat') { requestBody=JSON.parse(options.body); return failAI?{ok:false,status:503,json:async()=>({error:'Set AI_API_KEY in settings'})}:{ok:true,json:async()=>({text:'### A clear answer\n\n**Canterbury** is the destination.\n\n- First point\n- Second point'})}; }
  return {ok:true,json:async()=>path==='/courses.json'?courses:path==='/prepared-notes.json'?notes:{configured:false}};
 };
-const context=vm.createContext({document,localStorage,fetch,console,Date,setTimeout,window:{open(){},scrollTo(){}},navigator:{clipboard:{writeText:async()=>{}}},alert(){}});
+const context=vm.createContext({document,localStorage,fetch,console,Date,setTimeout,window:{open(){},scrollTo(){}},navigator:{clipboard:{writeText:async()=>{}}},alert(){},confirm(){return true}});
 vm.runInContext(fs.readFileSync('app.js','utf8'),context);
 setImmediate(async ()=>{
  try {
@@ -121,6 +121,28 @@ setImmediate(async ()=>{
   assert(!el('#chatError').innerHTML.includes('AI_API_KEY'));
   assert(el('#chatError').textContent.includes('AI could not respond'));
   assert.strictEqual(el('#chatInput').value,'Another question','failed question remains available for retry');
+  assert(!JSON.stringify(JSON.parse(storage['ammu-chat-history-v1'])).includes('Another question'),'failed messages are not saved');
+  failAI=false;el('#chatInput').value='What did you just say?';
+  await el('#chatForm').onsubmit({preventDefault(){}});
+  assert(requestBody.messages.some(m=>m.role==='user'&&m.content==='Explain this topic'),'follow-up request includes earlier question');
+  assert(requestBody.messages.some(m=>m.role==='assistant'&&m.content.includes('Canterbury')),'follow-up request includes earlier answer');
+  const chatKey=vm.runInContext('key()',context), savedChats=JSON.parse(storage['ammu-chat-history-v1']);
+  assert.strictEqual(savedChats[chatKey].length,4,'conversation is saved on this device');
+  const reloaded=vm.createContext({document,localStorage,fetch,console,Date,setTimeout,window:{open(){},scrollTo(){}},navigator:{clipboard:{writeText:async()=>{}}},alert(){},confirm(){return true}});
+  vm.runInContext(fs.readFileSync('app.js','utf8'),reloaded);
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.strictEqual(vm.runInContext('chats['+JSON.stringify(chatKey)+'].length',reloaded),4,'history survives reload');
+  vm.runInContext("course=courses.find(c=>c.id==='course-27');sem=5;unit=1;tab='chat';renderMaterial()",reloaded);
+  assert(el('#materialBody').innerHTML.includes('What did you just say?'),'saved messages appear after reload');
+  el('#unitSelect').onchange({target:{value:'2'}});
+  assert(!el('#materialBody').innerHTML.includes('What did you just say?'),'other units have separate chats');
+  el('#unitSelect').onchange({target:{value:'1'}});
+  el('#clearChat').onclick();
+  assert(!JSON.parse(storage['ammu-chat-history-v1'])[chatKey],'clear removes saved history for this unit');
+  assert(!el('#materialBody').innerHTML.includes('What did you just say?'),'clear removes visible history');
+  const capped=vm.runInContext('chatContext({role:"system",content:"context"},Array.from({length:20},()=>({role:"user",content:"x".repeat(12000)})))',reloaded);
+  assert(JSON.stringify({messages:capped}).length<=56000,'long history stays under API request limit');
+
 
   el('#surpriseBtn').onclick(); assert(el('#surpriseDialog').open);
   el('#textLarger').onclick(); assert.strictEqual(storage['ammu-reading-size'],'19');

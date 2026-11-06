@@ -62,3 +62,6 @@
 .chat-send{min-width:70px;min-height:44px;border:0;border-radius:11px;padding:9px 13px;background:#2374a1;color:#fff;font-size:14px;font-weight:700;cursor:pointer}.chat-send:disabled{opacity:.55;cursor:wait}
 .chat-error{margin-top:10px;padding:11px 13px;border-radius:10px;background:#fff4f0;color:#945449;font-size:14px;line-height:1.45}
 @media(max-width:760px){.chat-log{height:min(55vh,510px);min-height:220px}.chat-bubble{font-size:var(--reading-size);padding:12px}.chat-avatar{width:29px;height:29px}.chat-bubble{max-width:calc(100% - 38px)}.chat-bubble.user{max-width:90%}}
+
+.chat-memory-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;color:#54798e;font-size:12px;line-height:1.4}
+.chat-memory-bar span{max-width:32em}.chat-memory-bar button{flex:none;border:1px solid #cde5f1;border-radius:9px;background:#fff;color:#34799a;font-size:12px;font-weight:700;padding:8px 10px;min-height:38px}.chat-memory-bar button:disabled{opacity:.45;cursor:default}.chat-memory-bar button:focus-visible{outline:3px solid #3499d2;outline-offset:2px}

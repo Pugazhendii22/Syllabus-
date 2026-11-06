@@ -1,6 +1,34 @@
 const $=s=>document.querySelector(s), pdf='https://www.pondiuni.edu.in/wp-content/uploads/2024/03/SyllabusNEP-B.A.HonorsEnglish2023-24.pdf';
 let courses=[],prepared={},topicIndex=0,sem=1,course=null,unit=0,tab='notes',busy=false, chats={},chatDrafts={},materials={},saved=[];
 try{materials=JSON.parse(localStorage.getItem('marginalia-materials')||'{}');saved=JSON.parse(localStorage.getItem('marginalia-saved')||'[]')}catch{}
+// Conversations are private to this browser/device, not a shared account.
+const CHAT_STORAGE='ammu-chat-history-v1', CHAT_MAX_MESSAGES=20, CHAT_STORAGE_BUDGET=900000;
+let chatMemoryAvailable=true;
+try{
+ const stored=JSON.parse(localStorage.getItem(CHAT_STORAGE)||'{}');
+ if(stored&&typeof stored==='object'&&!Array.isArray(stored))for(const [k,messages] of Object.entries(stored)){
+  if(/^course-\d+:\d+$/.test(k)&&Array.isArray(messages))chats[k]=messages.filter(m=>m&&(m.role==='user'||m.role==='assistant')&&typeof m.content==='string').slice(-CHAT_MAX_MESSAGES).map(m=>({role:m.role,content:m.content.slice(0,12000)}));
+ }
+}catch{chatMemoryAvailable=false}
+let chatRecency=Object.keys(chats);
+function saveChats(recentKey){
+ try{
+  const snapshot=Object.create(null), keys=chatRecency.filter(k=>k!==recentKey).concat(recentKey);
+  for(const k of keys){
+   const list=(chats[k]||[]).slice(-CHAT_MAX_MESSAGES).map(m=>({role:m.role,content:m.content.length>12000?m.content.slice(0,11950)+'\n\n[Response shortened in saved history.]':m.content}));
+   if(list.length)snapshot[k]=list;
+  }
+  const ordered=Object.keys(snapshot);
+  while(ordered.length>30||JSON.stringify(snapshot).length>CHAT_STORAGE_BUDGET){if(ordered.length<=1)break;delete snapshot[ordered.shift()]}
+  localStorage.setItem(CHAT_STORAGE,JSON.stringify(snapshot));chatRecency=Object.keys(snapshot);chatMemoryAvailable=true;
+ }catch{chatMemoryAvailable=false}
+}
+function chatContext(system,messages){
+ const history=messages.slice(-CHAT_MAX_MESSAGES).map(m=>({role:m.role,content:m.content.slice(0,12000)}));
+ while(history.length>1&&JSON.stringify({messages:[system,...history]}).length>56000)history.shift();
+ return [system,...history];
+}
+
 const sample=`# William Shakespeare: Sonnet 116
 A teaching example · Semester 1, Unit 1
 
@@ -96,9 +124,10 @@ function renderMaterial(){
   const items=messages.map((m,i)=>m.role==='user'
    ?`<div class="chat-row user"><div class="chat-bubble user"><span class="chat-role">You</span><div class="chat-user-text">${escapeHtml(m.content)}</div></div></div>`
    :`<div class="chat-row assistant"><div class="chat-avatar" aria-hidden="true">✦</div><div class="chat-bubble assistant"><div class="chat-bubble-head"><span class="chat-role">Teaching assistant</span><button type="button" class="chat-copy" data-copy-chat="${i}" aria-label="Copy assistant reply">Copy</button></div><div class="chat-rich">${chatMarkdown(m.content)}</div></div></div>`).join('');
-  $('#materialBody').innerHTML=`<div class="chat-log" role="log" aria-label="Conversation" aria-live="polite">${items||'<div class="chat-welcome"><div class="chat-welcome-mark" aria-hidden="true">✦</div><strong>Here to help you prepare</strong><p>Ask a question about this unit, a text, or your next class.</p></div>'}${busy?'<div class="chat-row assistant"><div class="chat-avatar" aria-hidden="true">✦</div><div class="chat-thinking" role="status">Thinking<span aria-hidden="true">...</span></div></div>':''}</div><form class="chat-form" id="chatForm"><label class="visually-hidden" for="chatInput">Your question</label><textarea id="chatInput" rows="1" placeholder="Ask about this unit..." aria-label="Your question" ${busy?'disabled':''}></textarea><button class="chat-send" type="submit" ${busy?'disabled':''} aria-label="Send question">Send <span aria-hidden="true">↗</span></button></form><div id="chatError" aria-live="polite"></div>`;
+  $('#materialBody').innerHTML=`<div class="chat-memory-bar"><span>${chatMemoryAvailable?'Recent messages for this unit are saved on this device and sent with follow-up questions. Older messages may be removed.':'Chat memory is unavailable on this device; messages may disappear when you close the app.'}</span><button type="button" id="clearChat" ${busy||!messages.length?'disabled':''}>Clear chat</button></div><div class="chat-log" role="log" aria-label="Conversation" aria-live="polite">${items||'<div class="chat-welcome"><div class="chat-welcome-mark" aria-hidden="true">✦</div><strong>Here to help you prepare</strong><p>Ask a question about this unit, a text, or your next class.</p></div>'}${busy?'<div class="chat-row assistant"><div class="chat-avatar" aria-hidden="true">✦</div><div class="chat-thinking" role="status">Thinking<span aria-hidden="true">...</span></div></div>':''}</div><form class="chat-form" id="chatForm"><label class="visually-hidden" for="chatInput">Your question</label><textarea id="chatInput" rows="1" maxlength="10000" placeholder="Ask about this unit..." aria-label="Your question" ${busy?'disabled':''}></textarea><button class="chat-send" type="submit" ${busy?'disabled':''} aria-label="Send question">Send <span aria-hidden="true">↗</span></button></form><div id="chatError" aria-live="polite"></div>`;
   const input=$('#chatInput'),chatKey=key();input.value=chatDrafts[chatKey]||'';input.oninput=()=>{chatDrafts[chatKey]=input.value};
   $('#chatForm').onsubmit=sendChat;
+  $('#clearChat').onclick=()=>{if(busy||!messages.length)return;if(!confirm('Clear the saved conversation for this unit?'))return;delete chats[chatKey];delete chatDrafts[chatKey];saveChats(chatKey);renderMaterial()};
   document.querySelectorAll('[data-copy-chat]').forEach(b=>b.onclick=async()=>{const message=messages[Number(b.dataset.copyChat)];if(!message)return;try{await navigator.clipboard.writeText(message.content);b.textContent='Copied';window.setTimeout(()=>{b.textContent='Copy'},1800)}catch{alert('Clipboard access is unavailable in this browser.')}});
   $('#materialMeta').textContent='AI ASSISTANT';$('#copyBtn').style.visibility='hidden';return;
  }
@@ -113,8 +142,9 @@ async function sendChat(e){
  const input=$('#chatInput').value.trim();if(!input)return;
  const k=key();chats[k]=chats[k]||[];chats[k].push({role:'user',content:input});chatDrafts[k]='';busy=true;renderMaterial();scrollChatToEnd();
  try{
-  const answer=await api([{role:'system',content:systemPrompt()+' For a simple question, answer directly and briefly first; give a little context only when helpful. Expand only when the user asks. Use short paragraphs or simple lists; avoid large tables unless requested. Use markdown for clarity. Do not invent sources or conflate historical figures and institutions.'},...chats[k].slice(-20)]);
-  chats[k].push({role:'assistant',content:answer});busy=false;renderMaterial();if(tab==='chat'&&key()===k)scrollChatToEnd();
+  const system={role:'system',content:systemPrompt()+' For a simple question, answer directly and briefly first; give a little context only when helpful. Expand only when the user asks. Use short paragraphs or simple lists; avoid large tables unless requested. Use markdown for clarity. Do not invent sources or conflate historical figures and institutions.'};
+  const answer=await api(chatContext(system,chats[k]));
+  chats[k].push({role:'assistant',content:answer});chats[k]=chats[k].slice(-CHAT_MAX_MESSAGES);saveChats(k);busy=false;renderMaterial();if(tab==='chat'&&key()===k)scrollChatToEnd();
  }catch(err){
   chats[k].pop();chatDrafts[k]=input;busy=false;renderMaterial();if(tab==='chat'&&key()===k){$('#chatError').textContent=err.message;$('#chatError').className='chat-error';}
  }
