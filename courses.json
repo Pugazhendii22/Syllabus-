@@ -669,7 +669,24 @@
     "semester": 5,
     "title": "Internship",
     "page": 121,
-    "units": []
+    "units": [
+      {
+        "title": "Internship A · Identification",
+        "content": "Course content A: Define career goals; identify prospective employers conducive to meeting career goals. The course description describes outreach teaching of basic communication and writing to working adults in neighbouring coastal and rural communities."
+      },
+      {
+        "title": "Internship B · Application",
+        "content": "Course content B: Job application and follow-up; interviewing."
+      },
+      {
+        "title": "Internship C · Enrollment",
+        "content": "Course content C: Fill out the Internship Registration Form; obtain approvals from the major faculty advisor and internship coordinator; the internship office facilitates course enrollment. The syllabus says the student cannot self-enroll."
+      },
+      {
+        "title": "Internship D · Requirements",
+        "content": "Course content D: Complete required work hours; submit written reports and a self-assessment; facilitate employer evaluation; meet due dates. The printed syllabus specifies a minimum of 80 work hours per credit hour and references Blackboard; confirm current institutional instructions."
+      }
+    ]
   },
   {
     "id": "course-31",
