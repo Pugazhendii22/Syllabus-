@@ -62,4 +62,20 @@ for key, ids in full_readings.items():
 assert 'after line 732' in get('course-1:1', 'milton-paradise-ix')['text']
 assert 'not a verified copy' in get('course-19:0', 'assadi-ring')['text']
 assert 'names Gandhi and the Master separately' in get('course-19:1', 'raja-cow')['text']
-print('PASS: syllabus keys, note IDs, status, prior audits and front-loaded full reading explanations')
+university_refs = {
+    ('course-1:0','chaucer-prologue'): 'chaucer.fas.harvard.edu',
+    ('course-1:0','spenser-epithalamion'): 'quod.lib.umich.edu',
+    ('course-1:0','sonnet-116'): 'mason.gmu.edu',
+    ('course-1:0','sonnet-130'): 'mason.gmu.edu',
+    ('course-1:1','donne-valediction'): 'writing.upenn.edu',
+    ('course-1:1','milton-paradise-ix'): 'milton.host.dartmouth.edu',
+    ('course-1:1','pope-lock-canto1'): 'anthology.lib.virginia.edu',
+    ('course-19:0','o-henry-twenty'): 'etc.usf.edu',
+    ('course-19:0','kincaid-girl'): 'academicworks.cuny.edu',
+}
+for (key, ident), domain in university_refs.items():
+    entry = get(key, ident)
+    assert domain in entry['source'] and '## University reference' in entry['text']
+assert 'transcription gives the hour as ten' in get('course-1:1','pope-lock-canto1')['text']
+assert 'critical interpretation, not the primary text' in get('course-19:0','kincaid-girl')['text']
+print('PASS: syllabus keys, note IDs, status, source selection and reading explanations')
