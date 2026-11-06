@@ -262,3 +262,8 @@ header .top-actions{align-items:center}
 
 /* A truly circular refresh button with a centred icon on narrow phones. */
 @media(max-width:480px){.refresh-app{appearance:none;flex:0 0 44px;width:44px;height:44px;padding:0;border-radius:50%;align-items:center;justify-content:center}}
+
+/* The Ammu name is a home navigation control, without changing its appearance. */
+.brand-home{border:0;background:transparent;cursor:pointer;text-align:left}
+.mobile-brand.brand-home{padding:0}
+.brand-home:focus-visible{outline:3px solid #3499d2;outline-offset:3px;border-radius:3px}

@@ -129,6 +129,16 @@ const sizes=[
     assert.equal(await page.locator('.chat-rich').count(),0,'clear chat removes visible history');
     assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ammu-chat-history-v1'))['course-19:1']),undefined,'clear chat removes saved history');
     await activate(page.locator('#closeChat'));await page.goBack();assert(await page.locator('#topicsView').isVisible());
+    await activate(page.locator('#brandHome'));assert(await page.locator('#homeView').isVisible(),'top Ammu name returns home from topics');
+    assert((await page.locator('#courseChoice').textContent()).includes('Functional English Ii'),'returning home retains the selected subject');
+    await activate(page.locator('#openTopics'));await activate(page.locator('#preparedPicker [data-topic]').first());
+    await activate(page.locator('#openChat'));await page.locator('#chatInput').fill('Keep this draft');await activate(page.locator('#closeChat'));
+    await activate(page.locator('#brandHome'));assert(await page.locator('#homeView').isVisible(),'top Ammu name returns home from reading');
+    await activate(page.locator('#openTopics'));await activate(page.locator('#preparedPicker [data-topic]').first());await activate(page.locator('#openChat'));
+    assert.equal(await page.locator('#chatInput').inputValue(),'Keep this draft','returning home retains the unsent chat draft');
+    await activate(page.locator('#closeChat'));await activate(page.locator('#mobileSaved'));await activate(page.locator('#brandHome'));
+    assert(await page.locator('#homeView').isVisible(),'top Ammu name returns home from saved materials');
+    if(!size.mobile){await activate(page.locator('#openTopics'));await activate(page.locator('#sidebarHome'));assert(await page.locator('#homeView').isVisible(),'desktop sidebar Ammu name returns home');}
     assert.deepStrictEqual(errors,[]);console.log('PASS',size.name,`${size.width}x${size.height}`,'navigation, reading, saved, chat and viewport');
    }catch(error){
     fs.mkdirSync('test-results',{recursive:true});const path=`test-results/${size.name}.png`;
