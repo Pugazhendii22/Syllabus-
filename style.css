@@ -247,3 +247,6 @@ header .top-actions{align-items:center}
  .chat-panel-head{padding-top:4px}
 }
 @media(prefers-reduced-motion:reduce){.chat-panel{transition:none}}
+
+/* A single, predictable focus rectangle rather than the browser's irregular auto ring. */
+#homeHeading:focus{outline:2px solid #3499d2;outline-offset:3px;border-radius:3px}

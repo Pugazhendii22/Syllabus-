@@ -27,6 +27,9 @@ const sizes=[
    try{
     await page.goto(base);await page.waitForFunction(()=>document.querySelector('#courseChoice').textContent.includes('English Literature'));
     assert(await page.locator('#homeView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('home');
+    await page.locator('#homeHeading').focus();
+    const headingFocus=await page.locator('#homeHeading').evaluate(el=>({style:getComputedStyle(el).outlineStyle,width:getComputedStyle(el).outlineWidth,radius:getComputedStyle(el).borderRadius}));
+    assert.deepStrictEqual(headingFocus,{style:'solid',width:'2px',radius:'3px'},'home heading uses a consistent rectangular focus outline');
     assert(await page.locator('#refreshApp').isVisible(),'refresh remains available on the home screen');
     const refresh=await page.locator('#refreshApp').boundingBox(),savedButton=await page.locator('#mobileSaved').boundingBox();
     assert(Math.abs((refresh.y+refresh.height/2)-(savedButton.y+savedButton.height/2))<2,'home header controls are vertically aligned');
