@@ -1,0 +1,13 @@
+{
+  "name": "ammu-study-space",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mobile UI checks for Ammu's study space",
+  "scripts": {
+    "test": "node tests/smoke-ui.js && node tests/smoke-pwa.js && python3 tests/check-sem3.py",
+    "test:mobile": "node tests/run-mobile.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.65.0"
+  }
+}

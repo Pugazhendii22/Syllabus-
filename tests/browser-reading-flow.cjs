@@ -1,47 +1,82 @@
-// Optional browser integration test: run server.py and install Playwright Chromium first. AI responses are mocked.
+// Automated Chromium phone emulation; AI responses are mocked. This is not a physical-device test.
 const {chromium}=require('playwright');
 const assert=require('assert');
+const fs=require('fs');
+const base=process.env.AMMU_TEST_URL || 'http://127.0.0.1:8000';
+const sizes=[
+ {name:'small-phone',width:320,height:568,mobile:true},
+ {name:'android-phone',width:360,height:640,mobile:true},
+ {name:'phone',width:390,height:844,mobile:true},
+ {name:'large-phone',width:430,height:932,mobile:true},
+ {name:'phone-landscape',width:568,height:320,mobile:true},
+ {name:'desktop',width:1440,height:900,mobile:false}
+];
 (async()=>{
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
- for(const size of [{width:390,height:844},{width:1440,height:900}]){
-  const context=await browser.newContext({viewport:size,deviceScaleFactor:1,serviceWorkers:'block'}), page=await context.newPage();
-  let errors=[];page.on('pageerror',e=>errors.push(e.message));let requests=[];
-  await page.route('**/api/chat',async route=>{requests.push(route.request().postDataJSON());await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({text:'### Answer\n\nA **brief explanation**.\n\n'+('A longer explanation for reading. '.repeat(120))})})});
-  await page.goto('http://127.0.0.1:8000/');await page.locator('#courseChoice').waitFor();
-  await page.waitForFunction(()=>document.querySelector('#courseChoice').textContent.includes('English Literature'));
-  assert(await page.locator('#homeView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));
-  await page.locator('#semTabs [data-sem="3"]').click();await page.locator('#courseChoice').click();
-  await page.locator('#choiceList button').filter({hasText:'Functional English Ii'}).click();
-  await page.locator('#unitChoice').click();await page.locator('#choiceList button').nth(1).click();
-  assert(await page.locator('#topicsView').isVisible());assert(!(await page.locator('#homeView').isVisible()));
-  assert.equal(await page.locator('#preparedPicker [data-topic]').count(),3);
-  await page.locator('#preparedPicker [data-topic]').first().click();
-  assert(await page.locator('#readingView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));
-  assert((await page.locator('#readingTitle').textContent()).includes('Cow'));
-  assert(await page.locator('#openChat').isVisible());
-  const fab=await page.locator('#openChat').boundingBox();assert(fab.y>=0&&fab.y+fab.height<=size.height,'floating assistant stays within viewport');
-  const before=await page.locator('#materialBody').textContent();await page.locator('#openChat').click();
-  assert.equal(await page.locator('#materialBody').textContent(),before);
-  await page.locator('#chatInput').fill('Explain this topic');await page.locator('.chat-send').click();
-  await page.locator('.chat-rich strong').waitFor();
-  assert(requests[0].messages[0].content.includes('Raja Rao · The Cow of the Barricades'));
-  assert(requests[0].messages[0].content.includes('Current note (may be abbreviated):'));
-  const metrics=await page.locator('.chat-log').evaluate(log=>{const r=log.querySelector('[data-chat-reply="1"]');return {top:r.getBoundingClientRect().top-log.getBoundingClientRect().top, scrollTop:log.scrollTop, scrollHeight:log.scrollHeight,clientHeight:log.clientHeight}});
-  assert(metrics.top>=-1&&metrics.top<30,JSON.stringify(metrics));
-  const overflow=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,view:window.innerWidth}));assert(overflow.doc<=overflow.view,JSON.stringify(overflow));
-  await page.locator('#closeChat').click();assert(!(await page.locator('#chatPanel').isVisible()));
-  await page.locator('#saveBtn').click();await page.locator('#mobileSaved').click();assert((await page.locator('#materialBody').textContent()).includes('The Cow of the Barricades'));
-  await page.locator('[data-saved]').first().click();assert(await page.locator('#openChat').isVisible());
-  await page.locator('#backToTopics').click();assert(await page.locator('#topicsView').isVisible());
-  await page.locator('#preparedPicker [data-topic]').nth(1).click();await page.locator('#openChat').click();await page.locator('#chatInput').fill('And this one?');await page.locator('.chat-send').click();await page.waitForFunction(()=>document.querySelectorAll('.chat-rich').length>=2);
-  assert(requests[1].messages[0].content.includes('Aldous Huxley · The Beauty Industry'),'topic context updates after changing topic');
-  assert(requests[1].messages.some(m=>m.content==='Explain this topic'),'unit chat retains memory');
-  page.once('dialog',dialog=>dialog.accept());await page.locator('#clearChat').click();
-  assert.equal(await page.locator('.chat-rich').count(),0,'clear chat removes visible history');
-  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ammu-chat-history-v1'))['course-19:1']),undefined,'clear chat removes saved history');
-  await page.locator('#closeChat').click();await page.goBack();assert(await page.locator('#topicsView').isVisible());
-  assert.deepStrictEqual(errors,[]); console.log('PASS browser',size.width,'navigation, reading, saved, topic-aware mocked AI, memory and scroll');
-  await context.close();
- }
- await browser.close();
-})().catch(e=>{console.error(e);process.exit(1)});
+ try{
+  for(const size of sizes){
+   const context=await browser.newContext({viewport:{width:size.width,height:size.height},deviceScaleFactor:1,isMobile:size.mobile,hasTouch:size.mobile,serviceWorkers:'block'});
+   const page=await context.newPage(), errors=[], requests=[];
+   const activate=locator=>size.mobile?locator.tap():locator.click();
+   page.on('pageerror',error=>errors.push(error.message));
+   await page.route('**/api/chat',async route=>{requests.push(route.request().postDataJSON());await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({text:'### Answer\n\nA **brief explanation**.\n\n'+('A longer explanation for reading. '.repeat(120))})})});
+   const noHorizontalOverflow=async stage=>{
+    const dimensions=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,view:window.innerWidth}));
+    assert(dimensions.doc<=dimensions.view,`${stage} overflows horizontally: ${JSON.stringify(dimensions)}`);
+   };
+   try{
+    await page.goto(base);await page.waitForFunction(()=>document.querySelector('#courseChoice').textContent.includes('English Literature'));
+    assert(await page.locator('#homeView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('home');
+    await activate(page.locator('#semTabs [data-sem="3"]'));await activate(page.locator('#courseChoice'));
+    await activate(page.locator('#choiceList button').filter({hasText:'Functional English Ii'}));
+    await activate(page.locator('#unitChoice'));await activate(page.locator('#choiceList button').nth(1));
+    assert(await page.locator('#topicsView').isVisible());assert(!(await page.locator('#homeView').isVisible()));await noHorizontalOverflow('topics');
+    assert.equal(await page.locator('#preparedPicker [data-topic]').count(),3);
+    await activate(page.locator('#preparedPicker [data-topic]').first());
+    assert(await page.locator('#readingView').isVisible());assert(!(await page.locator('#topicsView').isVisible()));await noHorizontalOverflow('reading');
+    assert((await page.locator('#readingTitle').textContent()).includes('Cow'));
+    assert(await page.locator('#openChat').isVisible());
+    const fab=await page.locator('#openChat').boundingBox();assert(fab.y>=0&&fab.y+fab.height<=size.height,'floating assistant stays within viewport');
+    const before=await page.locator('#materialBody').textContent();await activate(page.locator('#openChat'));
+    assert.equal(await page.locator('#materialBody').textContent(),before);await noHorizontalOverflow('chat');
+    const panel=await page.locator('#chatPanel').boundingBox();
+    for(const selector of ['#chatInput','.chat-send','#closeChat']){
+     const box=await page.locator(selector).boundingBox();
+     assert(box&&box.x>=panel.x-1&&box.y>=panel.y-1&&box.x+box.width<=panel.x+panel.width+1&&box.y+box.height<=panel.y+panel.height+1,`${selector} must fit inside the chat panel: ${JSON.stringify({box,panel})}`);
+    }
+    assert((await page.locator('.chat-log').boundingBox()).height>=64,'conversation area remains readable');
+    if(size.mobile){
+     for(const selector of ['#chatInput','.chat-send','#closeChat','#clearChat']){
+      const box=await page.locator(selector).boundingBox();
+      assert(box.height>=44&&box.width>=44,`${selector} should have a comfortable touch target: ${JSON.stringify(box)}`);
+     }
+    }
+    await page.locator('#chatInput').fill('Explain this topic');await activate(page.locator('.chat-send'));
+    await page.locator('.chat-rich strong').waitFor();
+    assert(requests[0].messages[0].content.includes('Raja Rao · The Cow of the Barricades'));
+    assert(requests[0].messages[0].content.includes('Current note (may be abbreviated):'));
+    const metrics=await page.locator('.chat-log').evaluate(log=>{const r=log.querySelector('[data-chat-reply="1"]');return {top:r.getBoundingClientRect().top-log.getBoundingClientRect().top}});
+    assert(metrics.top>=-1&&metrics.top<30,JSON.stringify(metrics));
+    await activate(page.locator('#closeChat'));assert(!(await page.locator('#chatPanel').isVisible()));
+    assert(await page.locator('#openChat').isVisible());
+    await activate(page.locator('#saveBtn'));await activate(page.locator('#mobileSaved'));
+    assert((await page.locator('#materialBody').textContent()).includes('The Cow of the Barricades'));
+    await activate(page.locator('[data-saved]').first());assert(await page.locator('#openChat').isVisible());
+    await activate(page.locator('#backToTopics'));assert(await page.locator('#topicsView').isVisible());
+    await activate(page.locator('#preparedPicker [data-topic]').nth(1));await activate(page.locator('#openChat'));
+    await page.locator('#chatInput').fill('And this one?');await activate(page.locator('.chat-send'));
+    await page.waitForFunction(()=>document.querySelectorAll('.chat-rich').length>=2);
+    assert(requests[1].messages[0].content.includes('Aldous Huxley · The Beauty Industry'),'topic context updates');
+    assert(requests[1].messages.some(m=>m.content==='Explain this topic'),'unit chat retains memory');
+    page.once('dialog',dialog=>dialog.accept());await activate(page.locator('#clearChat'));
+    assert.equal(await page.locator('.chat-rich').count(),0,'clear chat removes visible history');
+    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ammu-chat-history-v1'))['course-19:1']),undefined,'clear chat removes saved history');
+    await activate(page.locator('#closeChat'));await page.goBack();assert(await page.locator('#topicsView').isVisible());
+    assert.deepStrictEqual(errors,[]);console.log('PASS',size.name,`${size.width}x${size.height}`,'navigation, reading, saved, chat and viewport');
+   }catch(error){
+    fs.mkdirSync('test-results',{recursive:true});const path=`test-results/${size.name}.png`;
+    await page.screenshot({path,fullPage:true}).catch(()=>{});console.error('Failure screenshot:',path);throw error;
+   }finally{await context.close()}
+  }
+ }finally{await browser.close()}
+})().catch(error=>{console.error(error);process.exitCode=1});

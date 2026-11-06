@@ -115,3 +115,25 @@
 .save-note[aria-pressed="true"]{background:#e6f5fd;border-color:#83c8e7;color:#165879}
 .chat-bubble.assistant{max-width:100%}
 .save-note:focus-visible{outline:3px solid #3499d2;outline-offset:2px}
+
+/* Keep the full chat usable on small phones and in landscape. */
+.chat-widget.chat-open .chat-fab{display:none}
+.chat-panel{max-height:min(88vh,720px);max-height:min(88dvh,720px)}
+.chat-panel-head{flex:none}
+#chatBody{flex:1;overflow:hidden}
+#chatBody .chat-log{flex:1 1 auto;min-height:0}
+@media(max-width:760px){.chat-panel{max-height:calc(100dvh - 24px)}#chatBody .chat-log{min-height:0}}
+@media(max-height:500px){
+ .chat-widget.chat-open{top:max(8px,env(safe-area-inset-top));right:max(8px,env(safe-area-inset-right));bottom:max(8px,env(safe-area-inset-bottom));left:max(8px,env(safe-area-inset-left));align-items:stretch}
+ .chat-panel{width:100%;height:100%;max-height:none;border-radius:14px}
+ .chat-panel-head{padding:8px 12px}.chat-panel-head .eyebrow{display:none}
+ .chat-panel-head h2{font-size:21px;margin:2px 0}.chat-panel-head p{font-size:12px}
+ .chat-close{width:36px;height:36px}
+ #chatBody{padding:8px 12px 10px}.chat-memory-bar{margin-bottom:5px}
+ .chat-form{margin-top:5px}.chat-welcome{min-height:0;padding:8px}
+}
+/* Comfortable touch targets for the mobile reading and chat controls. */
+.mobile-saved,.surprise-btn,.reading-controls button,.chat-memory-bar button,.chat-copy,.material-footer button{min-height:44px}
+.chat-copy{min-width:44px}
+@media(max-height:500px){.chat-close{width:44px;height:44px}}
+.chat-close{width:44px;height:44px}

@@ -45,6 +45,18 @@ AI_API_KEY='your-key' AI_MODEL='your-model' AI_BASE_URL='https://your-provider.e
 
 The server appends `/chat/completions` to the HTTPS base URL. Provider availability, free quotas and prices vary. Restart after changing configuration; do not share or commit keys. The simple server is for trusted local/private use, not public deployment without authentication, rate limiting and further security. AI output must be checked.
 
+## Mobile UI testing (developers)
+
+The application remains dependency-free at runtime. To install and run the optional Playwright mobile UI tester:
+
+```sh
+npm ci
+npx playwright install chromium --only-shell
+npm run test:mobile
+```
+
+On Linux, Playwright may also require `npx playwright install-deps chromium`. The command starts its own local preview server, tests five phone-sized and landscape viewports plus desktop, and stops the server when finished. It checks navigation, touch-target sizes, chat layout, saved notes, memory and topic-aware requests; AI responses are mocked, not live. On failure it saves a screenshot under `test-results/`. These are Chromium device emulations, not real iPhone Safari, Android or physical-device tests. Run `npm test` for the other simulated checks.
+
 ## Developer notes
 
 The existing `prepared-notes.json` is the canonical accumulated dataset. **Do not run `create_notes.py` by itself:** it overwrites the file and erases later additions. Subsequent `add_*.py` and `expand_visual_media.py` scripts add or replace specific unit entries; rerunning them can overwrite manual changes to those units. The targeted `fix_sem3_notes.py` applies this audit and is safe to rerun; do not rerun older scripts over its edits. Earlier additions include `add_functional_ii.py`, `add_functional_writing.py` `add_language_studies.py`, `add_american_literature.py`, `add_american_fiction.py`, `add_indian_poetry_start.py`, `add_indian_unit1.py` `add_indian_novels.py`, `add_indian_remaining.py`, `add_environment.py`, `add_criticism_i.py`, `add_shakespeare.py`, `add_indian_ii.py`, `add_internship.py` `add_new_literatures.py` `add_linguistics.py` `add_modern_poetry.py` `add_modern_drama.py` `add_modern_fiction.py` `add_subaltern_literature.py` and `add_indian_aesthetics.py`.
