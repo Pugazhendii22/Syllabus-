@@ -5,6 +5,7 @@ ms=list(pat.finditer(s)); sem=1; courses=[]
 for i,m in enumerate(ms):
     before=s[:m.start()]; sems=re.findall(r'(?im)^\s*SEMESTER\s+([1-8])\s*$',before)
     if sems: sem=int(sems[-1])
+    if sem > 6: continue  # The app intentionally covers semesters 1–6 only.
     title=m.group(1).strip(); end=ms[i+1].start() if i+1<len(ms) else len(s)
     part=s[m.end():end]; part=re.split(r'(?im)^\s*SEMESTER\s+[1-8]\s*$',part)[0]
     if not title:

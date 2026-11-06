@@ -28,7 +28,7 @@ const document={
     return [];
   }
 };
-const storage={}; const localStorage={getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v}};
+const storage={'marginalia-saved':JSON.stringify([{courseId:'course-39',unitIndex:0,title:'Old semester 7 note',unit:'Unit 1',tab:'notes',key:'course-39:0'},{courseId:'course-1',unitIndex:0,title:'Semester 1 note',unit:'Unit 1',tab:'notes',key:'course-1:0'}])}; const localStorage={getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v}};
 const courses=JSON.parse(fs.readFileSync('courses.json','utf8'));
 const notes=JSON.parse(fs.readFileSync('prepared-notes.json','utf8'));
 const fetch=async path=>({ok:true,json:async()=>path==='/courses.json'?courses:path==='/prepared-notes.json'?notes:{configured:false}});
@@ -38,6 +38,18 @@ setImmediate(()=>{
  try {
   assert(el('#progressInfo').textContent.includes(`${Object.keys(notes).length} of ${courses.reduce((sum,c)=>sum+c.units.length,0)}`));
   assert(el('#preparedPicker').innerHTML.includes('Choose notes to read'));
+  assert(courses.every(c=>c.semester>=1&&c.semester<=6));
+  assert(semButtons.some(b=>b.dataset.sem==='6'));
+  assert(!semButtons.some(b=>+b.dataset.sem>6),'no semester 7 or 8 buttons');
+  assert(!Object.keys(notes).some(k=>!courses.some(c=>k.startsWith(c.id+':'))),'all notes belong to retained courses');
+  el('#savedNav').onclick();
+  assert(!el('#materialBody').innerHTML.includes('Old semester 7 note'),'removed-course bookmark hidden');
+  assert(el('#materialBody').innerHTML.includes('Semester 1 note'));
+  assert.strictEqual(el('#savedCount').textContent,1);
+  assert.strictEqual(JSON.parse(storage['marginalia-saved']).length,2,'older local data preserved');
+  el('#search').value='American Literature II'; el('#search').oninput();
+  assert.strictEqual(el('#courseChoice').textContent,'No matching subjects');
+  el('#search').value='';
   semButtons.find(b=>b.dataset.sem==='5').onclick();
   el('#courseSelect').onchange({target:{value:'course-27'}});
   assert(el('#courseChoice').textContent.includes('Literary Criticism'));
