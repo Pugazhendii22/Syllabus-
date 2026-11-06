@@ -47,6 +47,14 @@ function openChoice(kind){
  dialog.showModal();
 }
 $('#courseChoice').onclick=()=>openChoice('course');$('#unitChoice').onclick=()=>{if(course?.units.length)openChoice('unit')};$('#durationChoice').onclick=()=>openChoice('duration');$('#closeChoice').onclick=()=>$('#choiceDialog').close();
+// A modal backdrop reports the dialog as its click target. Check the tap's
+// coordinates as well so taps on the sheet's own padding do not dismiss it.
+$('#choiceDialog').onclick=event=>{
+ const dialog=$('#choiceDialog');
+ if(event.target!==dialog)return;
+ const box=dialog.getBoundingClientRect();
+ if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)dialog.close();
+};
 $('#mobileSaved').onclick=()=>$('#savedNav').onclick();
 let readingSize=18;try{let n=+localStorage.getItem('ammu-reading-size');if(n>=16&&n<=26)readingSize=n}catch{}
 function setReadingSize(){document.documentElement.style.setProperty('--reading-size',readingSize+'px');try{localStorage.setItem('ammu-reading-size',String(readingSize))}catch{}}

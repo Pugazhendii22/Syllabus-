@@ -7,7 +7,8 @@ class Element {
   constructor(selector='') { this.selector=selector; this._html=''; this.textContent=''; this.value=''; this.dataset={}; this.style={setProperty(){}}; this.classList={toggle(){},add(){},remove(){}}; }
   set innerHTML(value) { this._html=value; }
   get innerHTML() { return this._html; }
-  querySelectorAll(selector) { return dynamic(this._html,selector); }
+  querySelectorAll(selector) { this.childrenForTest=dynamic(this._html,selector); return this.childrenForTest; }
+  getBoundingClientRect() { return {left:20,right:380,top:200,bottom:700}; }
   setAttribute(name,value){ this[name]=value; }
   scrollIntoView() {} showModal(){this.open=true} close(){this.open=false} insertAdjacentHTML(_,html){this._html+=html}
 }
@@ -47,8 +48,19 @@ setImmediate(()=>{
   topicButtons[1].onclick();
   assert(el('#materialMeta').textContent.includes('PRELIMINARY'));
   assert(el('#materialBody').innerHTML.includes('attribution'));
+  // The same picker is used for subjects, units and durations.
+  for(const opener of ['#courseChoice','#unitChoice','#durationChoice']) {
+   el(opener).onclick(); const dialog=el('#choiceDialog'); assert(dialog.open);
+   dialog.onclick({target:dialog,clientX:100,clientY:300}); assert(dialog.open,'inside padding must not close');
+   dialog.onclick({target:el('#choiceList'),clientX:100,clientY:300}); assert(dialog.open,'inside content must not close');
+   dialog.onclick({target:dialog,clientX:100,clientY:100}); assert(!dialog.open,'backdrop must close');
+  }
+  el('#unitChoice').onclick(); el('#choiceList').childrenForTest[1].onclick();
+  assert(!el('#choiceDialog').open,'selection closes picker');
+  assert.strictEqual(el('#unitSelect').value,'1','selection still changes unit');
+  el('#unitChoice').onclick(); el('#closeChoice').onclick(); assert(!el('#choiceDialog').open,'close button still works');
   el('#surpriseBtn').onclick(); assert(el('#surpriseDialog').open);
   el('#textLarger').onclick(); assert.strictEqual(storage['ammu-reading-size'],'19');
-  console.log('PASS: startup, Semester 5 subject/unit selection, preliminary badge, topic action, surprise and reading size (fake DOM)');
+  console.log('PASS: startup, topic selection, backdrop dismissal, close button, picker selection, surprise and reading size (fake DOM)');
  } catch(err) { console.error(err);process.exitCode=1; }
 });

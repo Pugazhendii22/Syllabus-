@@ -7,7 +7,7 @@ cd teaching-studio
 python server.py
 ```
 
-Open http://localhost:8000 on the same machine. Choose a semester, subject and unit, then tap one of the visible buttons under **Choose notes to read**. Reading size, saved notes and bookmarks are stored in the current browser on that device; they do not sync.
+Open http://localhost:8000 on the same machine. Choose a semester, subject and unit, then tap one of the visible buttons under **Choose notes to read**. Tap outside a subject, unit or class-length picker to close it without changing your selection. Reading size, saved notes and bookmarks are stored in the current browser on that device; they do not sync.
 
 ## Install on a phone
 
