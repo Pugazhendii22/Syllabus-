@@ -38,6 +38,14 @@ setImmediate(()=>{
  try {
   assert(el('#progressInfo').textContent.includes(`${Object.keys(notes).length} of ${courses.reduce((sum,c)=>sum+c.units.length,0)}`));
   assert(el('#preparedPicker').innerHTML.includes('Choose notes to read'));
+  const tableHtml=vm.runInContext('md("| Heading | Value |\\n| --- | --- |\\n| &lt;safe&gt; | example |")', context);
+  assert(tableHtml.includes('<table') && tableHtml.includes('<th scope="col">Heading</th>'));
+  assert(!tableHtml.includes('<safe>'),'table cells must escape input');
+  semButtons.find(b=>b.dataset.sem==='3').onclick();
+  el('#courseSelect').onchange({target:{value:'course-20'}});
+  el('#unitSelect').onchange({target:{value:'4'}});
+  assert(el('#materialBody').innerHTML.includes('<table class="note-table">'),'reported-speech tables render');
+  semButtons.find(b=>b.dataset.sem==='1').onclick();
   assert(courses.every(c=>c.semester>=1&&c.semester<=6));
   assert(semButtons.some(b=>b.dataset.sem==='6'));
   assert(!semButtons.some(b=>+b.dataset.sem>6),'no semester 7 or 8 buttons');
