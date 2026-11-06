@@ -31,15 +31,22 @@ const document={
 const storage={'marginalia-saved':JSON.stringify([{courseId:'course-39',unitIndex:0,title:'Old semester 7 note',unit:'Unit 1',tab:'notes',key:'course-39:0'},{courseId:'course-1',unitIndex:0,title:'Semester 1 note',unit:'Unit 1',tab:'notes',key:'course-1:0'}])}; const localStorage={getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v}};
 const courses=JSON.parse(fs.readFileSync('courses.json','utf8'));
 const notes=JSON.parse(fs.readFileSync('prepared-notes.json','utf8'));
-const fetch=async path=>({ok:true,json:async()=>path==='/courses.json'?courses:path==='/prepared-notes.json'?notes:{configured:false}});
+let requestBody, failAI=false;
+const fetch=async (path,options)=>{
+ if(path==='/api/chat') { requestBody=JSON.parse(options.body); return failAI?{ok:false,status:503,json:async()=>({error:'Set AI_API_KEY in settings'})}:{ok:true,json:async()=>({text:'Practice lesson plan'})}; }
+ return {ok:true,json:async()=>path==='/courses.json'?courses:path==='/prepared-notes.json'?notes:{configured:false}};
+};
 const context=vm.createContext({document,localStorage,fetch,console,Date,setTimeout,window:{open(){},scrollTo(){}},navigator:{clipboard:{writeText:async()=>{}}},alert(){}});
 vm.runInContext(fs.readFileSync('app.js','utf8'),context);
-setImmediate(()=>{
+setImmediate(async ()=>{
  try {
   assert(el('#progressInfo').textContent.includes(`${Object.keys(notes).length} of ${courses.reduce((sum,c)=>sum+c.units.length,0)}`));
   assert(el('#preparedPicker').innerHTML.includes('Choose notes to read'));
   const home=fs.readFileSync('index.html','utf8');
   assert(!home.includes('A note from us'));
+  assert(!home.includes('id="setupDialog"')&&!home.includes('Connection instructions'));
+  const durationMarkup=home.match(/<button type="button" id="durationChoice"[\s\S]*?<\/button>/)[0];
+  assert(!durationMarkup.includes('⌄'),'duration button must not add an extra chevron');
   assert(!home.includes('Notes are study drafts and may not yet cover every topic'));
   assert(!el('#progressInfo').textContent.includes('Many topics are still unfinished'));
   assert(!el('#materialMeta').textContent.includes('REVIEW BEFORE TEACHING'));
@@ -86,6 +93,21 @@ setImmediate(()=>{
   assert(!el('#choiceDialog').open,'selection closes picker');
   assert.strictEqual(el('#unitSelect').value,'1','selection still changes unit');
   el('#unitChoice').onclick(); el('#closeChoice').onclick(); assert(!el('#choiceDialog').open,'close button still works');
+  el('#duration').value='50 minutes';
+  el('#durationChoice').onclick(); assert(el('#choiceList').innerHTML.includes('30 minutes'));
+  el('#choiceList').childrenForTest[1].onclick();
+  assert.strictEqual(el('#duration').value,'30 minutes');
+  assert.strictEqual(el('#durationChoice').textContent,'30 minutes');
+  assert.strictEqual(el('#durationChoice')['aria-label'],'Class length: 30 minutes');
+  assert(!el('#choiceDialog').open,'duration selection closes picker');
+  await el('#generatePlan').onclick();
+  assert(requestBody.messages.some(m=>m.content.includes('30 minutes')),'selected duration reaches the AI request');
+  failAI=true;
+  await el('#generatePlan').onclick();
+  assert(!el('#materialBody').innerHTML.includes('Connection setup'));
+  assert(!el('#materialBody').innerHTML.includes('AI_API_KEY'));
+  assert(el('#materialBody').innerHTML.includes('AI could not respond'));
+
   el('#surpriseBtn').onclick(); assert(el('#surpriseDialog').open);
   el('#textLarger').onclick(); assert.strictEqual(storage['ammu-reading-size'],'19');
   console.log('PASS: startup, topic selection, backdrop dismissal, close button, picker selection, surprise and reading size (fake DOM)');
