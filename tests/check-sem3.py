@@ -91,4 +91,23 @@ for i, (ident, topics) in spoken_coverage.items():
     assert len(text) > 4500 and 'practice' in text.casefold(), ident
     for topic in topics:
         assert topic.casefold() in text.casefold(), (ident, topic)
-print('PASS: syllabus keys, note IDs, status, source selection, reading explanations and Spoken English coverage')
+# Functional Communicative Writing: detailed topic notes in all five syllabus units.
+writing_topics = {
+    0: ['writing-topic-types','writing-topic-messages','writing-topic-descriptions','writing-topic-narrating'],
+    1: ['writing-topic-paragraph','writing-topic-precis','writing-topic-blog','writing-topic-pictorial'],
+    2: ['writing-topic-email','writing-topic-resume','writing-topic-cover','writing-topic-applications'],
+    3: ['writing-topic-editor','writing-topic-news','writing-topic-report'],
+    4: ['writing-topic-punctuation','writing-topic-synonyms','writing-topic-reported','writing-topic-errors'],
+}
+for unit, ids in writing_topics.items():
+    selections = notes[f'course-20:{unit}']
+    assert [x['id'] for x in selections[-len(ids):]] == ids
+    for ident in ids:
+        entry = get(f'course-20:{unit}', ident)
+        text = entry['text'].casefold()
+        assert len(text) > 2600 and 'practice' in text and ('example' in text or 'model' in text), ident
+        assert 'purdue.edu' in entry['source'] or 'unc.edu' in entry['source'], ident
+precis = get('course-20:1','writing-topic-precis')['text']
+assert 'one-third' in precis and 'not universally required to be past' in precis
+assert 'supported by textual evidence' in precis
+print('PASS: syllabus keys, IDs, source selection, reading explanations and detailed writing-topic coverage')
