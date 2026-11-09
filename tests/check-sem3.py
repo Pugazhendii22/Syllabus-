@@ -5,7 +5,7 @@ p=Path(__file__).resolve().parent.parent
 notes=json.loads((p/'prepared-notes.json').read_text(encoding='utf-8'))
 courses=json.loads((p/'courses.json').read_text(encoding='utf-8'))
 for course in courses:
-    if course['id'] in {'course-1','course-2','course-19','course-20'}:
+    if course['id'] in {'course-1','course-2','course-4','course-19','course-20'}:
         for i in range(len(course['units'])):
             assert f"{course['id']}:{i}" in notes
 for key, selections in notes.items():
@@ -78,4 +78,17 @@ for (key, ident), domain in university_refs.items():
     assert domain in entry['source'] and '## University reference' in entry['text']
 assert 'transcription gives the hour as ten' in get('course-1:1','pope-lock-canto1')['text']
 assert 'critical interpretation, not the primary text' in get('course-19:0','kincaid-girl')['text']
-print('PASS: syllabus keys, note IDs, status, source selection and reading explanations')
+# Spoken English follows Ammu's five-unit syllabus and gives examples and practice.
+spoken_coverage = {
+    0: ('spoken-grammar', ['Sentence construction', 'Types of sentences', 'Parts of speech', 'Auxiliary verbs', 'Singular and plural', 'Active and passive', 'Degrees of comparison', 'Subject–verb agreement', 'Determiners', 'Punctuation and common errors']),
+    1: ('spoken-vocab', ['Word formation', 'Synonyms and antonyms', 'Homonyms and one-word substitutes', 'Changing parts of speech', 'Odd one out, idioms and phrases', 'Joining sentences', 'Vowel and consonant sounds', 'Word stress', 'Sentence stress and intonation', 'Pronunciation practice']),
+    2: ('spoken-conversation', ['introductions, greetings and questions', 'Describing people', 'Describing places, situations and events', 'Extempore speech', 'Persuasive and descriptive speeches', 'narrating stories', 'Describing characters and situations']),
+    3: ('spoken-group', ['Basics of group discussion', 'Assigning tasks', 'Appointing group leaders', 'Completing communication-based tasks', 'Group cohesion', 'Group presentations', 'PowerPoint']),
+    4: ('spoken-listening', ['Importance of listening', 'Basics of listening', 'Barriers and responses', 'gist, style and tone', 'Voice recording exercises', 'Body language', 'Gestures, posture, eye contact and facial expressions', 'Etiquette']),
+}
+for i, (ident, topics) in spoken_coverage.items():
+    text = get(f'course-4:{i}', ident)['text']
+    assert len(text) > 4500 and 'practice' in text.casefold(), ident
+    for topic in topics:
+        assert topic.casefold() in text.casefold(), (ident, topic)
+print('PASS: syllabus keys, note IDs, status, source selection, reading explanations and Spoken English coverage')
