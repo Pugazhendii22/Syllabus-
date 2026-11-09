@@ -290,3 +290,14 @@ footer{display:block}
 .cloud-four{top:62%;width:82px;opacity:.38;animation-duration:41s;animation-delay:-31s}
 @keyframes home-cloud-pass{from{transform:translateX(100vw)}to{transform:translateX(-120px)}}
 @media(prefers-reduced-motion:reduce){.home-cloud{animation:none;transform:none}.cloud-one{left:70%}.cloud-two{left:48%}.cloud-three{left:25%}.cloud-four{left:3%}}
+
+/* Download choices for the shared Spoken English document. */
+.download-entry{margin:0 0 16px}.download-entry[hidden]{display:none}
+.download-notes-button{min-height:48px;padding:12px 16px;border:1px solid #a8d7ec;border-radius:12px;background:#eaf7fe;color:#205f81;font-size:15px;font-weight:700;text-align:left}
+.download-notes-button:focus-visible,.download-confirm:focus-visible,.download-select:focus-visible{outline:3px solid #3499d2;outline-offset:2px}
+.download-dialog p{line-height:1.5;margin:14px 0 18px}
+.download-label{display:block;margin:16px 0 7px;color:#315d77;font-size:14px;font-weight:700}
+.download-select{display:block;width:100%;min-height:50px;padding:10px 12px;border:1px solid #b9dded;border-radius:12px;background:#fff;color:#214e69;font-size:16px}
+.download-confirm{display:flex;align-items:center;justify-content:center;margin-top:22px;min-height:50px;padding:12px 16px;border-radius:12px;background:#216f9c;color:#fff;text-decoration:none;font-weight:700}
+.download-confirm:hover{background:#185a80}
+@media(max-width:480px){.download-notes-button{width:100%;text-align:center}.download-dialog{max-height:85dvh}}

@@ -4,7 +4,7 @@
   "private": true,
   "description": "Mobile UI checks for Ammu's study space",
   "scripts": {
-    "test": "node tests/smoke-ui.js && node tests/smoke-pwa.js && python3 tests/check-sem3.py",
+    "test": "node tests/smoke-ui.js && node tests/smoke-pwa.js && python3 tests/check-sem3.py && python3 tests/check-spoken-downloads.py",
     "test:mobile": "node tests/run-mobile.cjs"
   },
   "devDependencies": {

@@ -95,6 +95,8 @@ function readNavigation(){try{const value=JSON.parse(localStorage.getItem(NAV_ST
 function updateScreenLabels(){
  if(!course)return;
  const u=course.units[unit],note=preparedNote(),subject=course.title+' · '+(u?.title||'Course overview');
+ $('#downloadSpokenTopics').hidden=course.id!=='course-4';
+ $('#downloadSpokenReading').hidden=course.id!=='course-4'||view!=='reading';
  $('#topicsContext').textContent=subject;
  $('#readingContext').textContent='Semester '+sem+'  /  '+subject;
  $('#readingTitle').textContent=tab==='plan'?'Saved lesson plan':note?.title||'Your reading nook';
@@ -299,6 +301,26 @@ $('#choiceDialog').onclick=event=>{
  if(event.target!==dialog)return;
  const box=dialog.getBoundingClientRect();
  if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)dialog.close();
+};
+// Download the user's original Spoken English document: the current unit or all units.
+function updateSpokenDownload(){
+ const scope=$('#downloadScope').value,format=$('#downloadFormat').value;
+ if(!['all','1','2','3','4','5'].includes(scope)||!['pdf','docx'].includes(format))return;
+ const base='/notes/spoken-english/';
+ const path=scope==='all'?(format==='pdf'?'Spoken_English_Notes.pdf':'downloads/Spoken-English-All-Units.docx'):`downloads/Spoken-English-Unit-${scope}.${format}`;
+ const link=$('#downloadFile');link.href=base+path;link.download=scope==='all'?`Spoken-English-All-Units.${format}`:`Spoken-English-Unit-${scope}.${format}`;
+ link.textContent=`Download ${format==='pdf'?'PDF':'Word'}`;
+}
+function openSpokenDownloads(){
+ if(course?.id!=='course-4')return;
+ $('#downloadScope').value=String(unit+1);$('#downloadFormat').value='pdf';updateSpokenDownload();$('#downloadDialog').showModal();
+}
+$('#openDownloadsTopics').onclick=openSpokenDownloads;$('#openDownloadsReading').onclick=openSpokenDownloads;
+$('#downloadScope').onchange=updateSpokenDownload;$('#downloadFormat').onchange=updateSpokenDownload;
+$('#closeDownload').onclick=()=>$('#downloadDialog').close();
+$('#downloadDialog').onclick=event=>{
+ const dialog=$('#downloadDialog');if(event.target!==dialog)return;
+ const box=dialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)dialog.close();
 };
 $('#mobileSaved').onclick=()=>$('#savedNav').onclick();
 let readingSize=18;try{let n=+localStorage.getItem('ammu-reading-size');if(n>=16&&n<=26)readingSize=n}catch{}

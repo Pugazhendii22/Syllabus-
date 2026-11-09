@@ -17,7 +17,12 @@ const assert=require('assert'),fs=require('fs'),vm=require('vm');
  online=false;listeners.fetch({request:request('/prepared-notes.json'),respondWith:p=>response=p});assert.strictEqual(await (await response).text(),'fresh notes');
  listeners.fetch({request:request('/', 'navigate'),respondWith:p=>response=p});assert.strictEqual((await response).status,200);
  let intercepted=false;listeners.fetch({request:request('/api/status'),respondWith:()=>intercepted=true});assert(!intercepted,'API must never be cached');
- let pdfIntercepted=false;listeners.fetch({request:request('/notes/spoken-english/Spoken_English_Notes.pdf','navigate'),respondWith:()=>pdfIntercepted=true});assert(!pdfIntercepted,'opening the reference PDF must not overwrite the HTML shell cache');
+ const rootBefore=await (await store.get(origin+'/').clone()).text();
+ response=undefined;listeners.fetch({request:request('/notes/spoken-english/Spoken_English_Notes.pdf','navigate'),respondWith:p=>response=p});
+ assert(response && (await response).status===200,'original PDF is available offline');
+ assert.strictEqual(await (await store.get(origin+'/').clone()).text(),rootBefore,'PDF navigation must not overwrite the HTML shell cache');
+ response=undefined;listeners.fetch({request:request('/notes/spoken-english/downloads/Spoken-English-Unit-3.docx'),respondWith:p=>response=p});assert(response && (await response).status===200,'unit Word file is available offline');
+ let rangeIntercepted=false;const ranged=request('/notes/spoken-english/Spoken_English_Notes.pdf');ranged.headers={has:name=>name.toLowerCase()==='range'};listeners.fetch({request:ranged,respondWith:()=>rangeIntercepted=true});assert(!rangeIntercepted,'partial requests must not corrupt cached full documents');
  const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));assert.strictEqual(manifest.display,'standalone');assert(manifest.icons.some(i=>i.sizes==='192x192'));assert(manifest.icons.some(i=>i.sizes==='512x512'));
  for(const icon of manifest.icons)assert(fs.existsSync('.'+icon.src));
  // Simulate update lifecycle, user consent, and mobile pull gestures.

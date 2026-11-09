@@ -17,7 +17,7 @@ const net=require('net');
    await new Promise(resolve=>setTimeout(resolve,100));
   }
   if(!ready)throw Error('Preview server did not start: '+serverError);
-  for(const testFile of ['tests/browser-reading-flow.cjs','tests/swipe-chat.cjs']){
+  for(const testFile of ['tests/browser-reading-flow.cjs','tests/swipe-chat.cjs','tests/spoken-downloads.cjs']){
    const test=spawn(process.execPath,[testFile],{stdio:'inherit',env:{...process.env,AMMU_TEST_URL:base}});
    const result=await new Promise((resolve,reject)=>{test.once('error',reject);test.once('exit',(code,signal)=>resolve({code,signal}))});
    if(result.code!==0)throw Error(`Mobile UI tests failed (${testFile}: ${result.signal||result.code})`);
