@@ -101,11 +101,25 @@ spoken_topic_ids = {
 }
 for unit, ids in spoken_topic_ids.items():
     entries = notes[f'course-4:{unit}']
-    assert [x['id'] for x in entries[-len(ids):]] == ids
+    assert [x['id'] for x in entries[1:1+len(ids)]] == ids
     for ident in ids:
         body = get(f'course-4:{unit}',ident)['text'].casefold()
         assert len(body) > 2200 and ('practice' in body or 'activity' in body), ident
         assert '## ' in body, ident
+# The user's PDF is available without replacing the earlier notes or changing their IDs.
+original_pdf = p/'notes/spoken-english/Spoken_English_Notes.pdf'
+assert original_pdf.read_bytes().startswith(b'%PDF-')
+original_pdf_checks = [
+ ('Compound-complex','Subject + Verb + Indirect Object + Direct Object'),
+ ('Acronyms: NASA, UNESCO, laser.','**take** your pen'),
+ ('Sample Dialogue','Extempore Speeches'),
+ ('Appointing Group Leaders to Communicate','PowerPoint Presentations'),
+ ('Listening for Gist, Style and Tone','Recommended Reading'),
+]
+for i, checks in enumerate(original_pdf_checks):
+    entry = get(f'course-4:{i}', f'spoken-original-pdf-unit-{i+1}')
+    assert entry['source'].startswith('/notes/spoken-english/Spoken_English_Notes.pdf#page=')
+    assert all(check in entry['text'] for check in checks), (i, checks)
 # Functional Communicative Writing: detailed topic notes in all five syllabus units.
 writing_topics = {
     0: ['writing-topic-types','writing-topic-messages','writing-topic-descriptions','writing-topic-narrating'],

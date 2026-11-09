@@ -1,5 +1,5 @@
 // Only cache the public app shell and prepared notes, never API responses or private user data.
-const CACHE = 'ammu-study-shell-v47';
+const CACHE = 'ammu-study-shell-v48';
 const SHELL = ['/', '/style.css?v=29', '/app.js?v=25', '/pwa.js?v=6', '/courses.json', '/prepared-notes.json', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png', '/icons/apple-touch-icon.png', '/icons/favicon.png'];
 const paths = new Set(SHELL.map(p => new URL(p, self.location.origin).pathname));
 self.addEventListener('install', event => {
@@ -15,6 +15,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const request = event.request, url = new URL(request.url);
   if (request.method !== 'GET' || url.origin !== self.location.origin || url.pathname.startsWith('/api/')) return;
+  // A PDF opened in a new tab is a navigation too. Do not overwrite the cached HTML shell with it.
+  if (url.pathname === '/notes/spoken-english/Spoken_English_Notes.pdf') return;
   const navigation = request.mode === 'navigate';
   if (!navigation && !paths.has(url.pathname)) return;
   event.respondWith((async () => {
