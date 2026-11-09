@@ -91,6 +91,21 @@ for i, (ident, topics) in spoken_coverage.items():
     assert len(text) > 4500 and 'practice' in text.casefold(), ident
     for topic in topics:
         assert topic.casefold() in text.casefold(), (ident, topic)
+# Spoken English now has individual topic lessons, in syllabus order after the original unit note.
+spoken_topic_ids = {
+ 0: ['spoken-topic-sentences','spoken-topic-parts','spoken-topic-auxiliaries','spoken-topic-number','spoken-topic-voice','spoken-topic-comparison','spoken-topic-agreement','spoken-topic-determiners','spoken-topic-editing'],
+ 1: ['spoken-topic-wordforms','spoken-topic-synonyms','spoken-topic-homonyms','spoken-topic-idioms','spoken-topic-joining','spoken-topic-sounds','spoken-topic-stress'],
+ 2: ['spoken-topic-greetings','spoken-topic-describing','spoken-topic-speeches','spoken-topic-narration'],
+ 3: ['spoken-topic-discussion','spoken-topic-tasks','spoken-topic-presentations'],
+ 4: ['spoken-topic-listening','spoken-topic-gist','spoken-topic-recording','spoken-topic-body'],
+}
+for unit, ids in spoken_topic_ids.items():
+    entries = notes[f'course-4:{unit}']
+    assert [x['id'] for x in entries[-len(ids):]] == ids
+    for ident in ids:
+        body = get(f'course-4:{unit}',ident)['text'].casefold()
+        assert len(body) > 2200 and ('practice' in body or 'activity' in body), ident
+        assert '## ' in body, ident
 # Functional Communicative Writing: detailed topic notes in all five syllabus units.
 writing_topics = {
     0: ['writing-topic-types','writing-topic-messages','writing-topic-descriptions','writing-topic-narrating'],
