@@ -55,7 +55,7 @@ npx playwright install chromium --only-shell
 npm run test:mobile
 ```
 
-On Linux, Playwright may also require `npx playwright install-deps chromium`. The command starts its own local preview server, tests five phone-sized and landscape viewports plus desktop, and stops the server when finished. It checks navigation, touch-target sizes, chat layout, swipe-to-close, saved notes, memory and topic-aware requests; AI responses are mocked, not live. On failure it saves a screenshot under `test-results/`. These are Chromium device emulations, not real iPhone Safari, Android or physical-device tests. Run `npm test` for the other simulated checks.
+On Linux, Playwright may also require `npx playwright install-deps chromium`. The command starts its own local preview server, tests five phone-sized and landscape viewports plus desktop, and stops the server when finished. It checks navigation, touch-target sizes, left/right topic swipes, table scrolling, chat layout, swipe-to-close, saved notes, memory and topic-aware requests; AI responses are mocked, not live. On failure it saves a screenshot under `test-results/`. These are Chromium device emulations, not real iPhone Safari, Android or physical-device tests. Run `npm test` for the other simulated checks.
 
 ## Developer notes
 

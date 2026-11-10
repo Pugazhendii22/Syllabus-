@@ -301,3 +301,10 @@ footer{display:block}
 .download-confirm{display:flex;align-items:center;justify-content:center;margin-top:22px;min-height:50px;padding:12px 16px;border-radius:12px;background:#216f9c;color:#fff;text-decoration:none;font-weight:700}
 .download-confirm:hover{background:#185a80}
 @media(max-width:480px){.download-notes-button{width:100%;text-align:center}.download-dialog{max-height:85dvh}}
+
+/* A gentle cue for touch navigation; topic buttons remain available to everyone. */
+.topic-swipe-hint{display:none}
+@media(hover:none) and (pointer:coarse){.topic-swipe-hint:not([hidden]){display:block;margin:4px 0 14px;color:#507b93;font-size:13px;line-height:1.4}}
+@keyframes topic-enter-next{from{opacity:.65;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+@keyframes topic-enter-previous{from{opacity:.65;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
+@media(prefers-reduced-motion:no-preference){.topic-enter-next{animation:topic-enter-next .18s ease-out}.topic-enter-previous{animation:topic-enter-previous .18s ease-out}}

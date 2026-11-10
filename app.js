@@ -104,6 +104,7 @@ function updateScreenLabels(){
  $('#openTopics').disabled=!u;
  const list=prepared[key()]||[],showPagination=view==='reading'&&tab==='notes'&&!!note&&list.length>0;
  $('#readingPagination').hidden=!showPagination;
+ $('#topicSwipeHint').hidden=!showPagination||list.length<2;
  if(showPagination){$('#topicPosition').textContent='Topic '+(topicIndex+1)+' of '+list.length;$('#previousTopic').disabled=topicIndex===0;$('#nextTopic').disabled=topicIndex===list.length-1}
 }
 function showView(next,addHistory=true){
@@ -227,6 +228,42 @@ function moveTopic(delta){
  topicIndex=next;render();showView('reading');
 }
 $('#previousTopic').onclick=()=>moveTopic(-1);$('#nextTopic').onclick=()=>moveTopic(1);
+// Swipe through notes without taking over scrolling, selection, tables or controls.
+(function enableTopicSwipe(){
+ const area=$('#readingView'),article=area.querySelector('.materials');let gesture=null;
+ const textSelected=()=>{const selection=window.getSelection?.();return !!selection&&!selection.isCollapsed};
+ const unavailable=()=>view!=='reading'||tab!=='notes'||!course||!preparedNote()||!$('#chatPanel').hidden||!!document.querySelector('dialog[open]');
+ function insideHorizontalScroller(target){
+  if(target.closest('.note-table-wrap,pre'))return true;
+  for(let node=target;node&&node!==area;node=node.parentElement){
+   if(node.scrollWidth>node.clientWidth+1&&/(auto|scroll)/.test(window.getComputedStyle(node).overflowX))return true;
+  }
+  return false;
+ }
+ area.addEventListener('touchstart',event=>{
+  gesture=null;if(unavailable()||event.touches.length!==1||textSelected())return;
+  const target=event.target?.nodeType===1?event.target:event.target?.parentElement,t=event.touches[0];
+  if(!target||target.closest('button,a,input,textarea,select,summary,[contenteditable],[role="button"],dialog')||insideHorizontalScroller(target))return;
+  // Leave system back/forward gestures at the edges to the browser.
+  if(t.clientX<24||t.clientX>window.innerWidth-24)return;
+  gesture={id:t.identifier,x:t.clientX,y:t.clientY,time:Date.now(),courseId:course.id,unit,topicIndex};
+ },{passive:true});
+ area.addEventListener('touchmove',event=>{if(gesture&&event.touches.length!==1)gesture=null},{passive:true});
+ area.addEventListener('touchcancel',()=>{gesture=null},{passive:true});
+ area.addEventListener('touchend',event=>{
+  const start=gesture;gesture=null;
+  if(!start||event.touches.length||unavailable()||textSelected()||course.id!==start.courseId||unit!==start.unit||topicIndex!==start.topicIndex)return;
+  const t=Array.from(event.changedTouches).find(touch=>touch.identifier===start.id);if(!t)return;
+  const dx=t.clientX-start.x,dy=t.clientY-start.y,delta=dx<0?1:-1;
+  if(Date.now()-start.time>1000||Math.abs(dx)<80||Math.abs(dx)<Math.abs(dy)*1.8)return;
+  const next=topicIndex+delta,list=prepared[key()]||[];if(next<0||next>=list.length)return;
+  moveTopic(delta);
+  // A short, optional visual cue after the new topic opens.
+  article.classList.remove('topic-enter-next','topic-enter-previous');void article.offsetWidth;
+  article.classList.add(delta>0?'topic-enter-next':'topic-enter-previous');
+ },{passive:true});
+ article.addEventListener('animationend',()=>article.classList.remove('topic-enter-next','topic-enter-previous'));
+})();
 $('#backToHome').onclick=()=>showView('home');$('#backToTopics').onclick=()=>{tab='notes';renderMaterial();showView('topics')};
 $('#openChat').onclick=()=>{if(!course)return;const panel=$('#chatPanel');panel.hidden=!panel.hidden;$('#chatWidget').classList.toggle('chat-open',!panel.hidden);$('#openChat').setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden){updateScreenLabels();renderChat();scrollChatToEnd();$('#chatHeading').focus?.({preventScroll:true})}saveNavigation()};
 $('#closeChat').onclick=()=>{$('#chatPanel').hidden=true;$('#chatWidget').classList.remove('chat-open');$('#openChat').setAttribute('aria-expanded','false');$('#openChat').focus?.();saveNavigation()};
