@@ -17,11 +17,11 @@ ROOT = Path(__file__).resolve().parent.parent
 DEST = ROOT/'notes/spoken-english/downloads'
 ORIGINAL = ROOT/'notes/spoken-english/Spoken_English_Notes.pdf'
 NOTES = json.loads((ROOT/'prepared-notes.json').read_text(encoding='utf-8'))
-PAGES = [(1, 5), (5, 9), (9, 11), (11, 13), (13, 15)] # zero-based, inclusive start/exclusive end
+PAGES = [(1, 11), (11, 21), (21, 26), (26, 30), (30, 35)] # zero-based, inclusive start/exclusive end
 ROMAN = ['I','II','III','IV','V']
 DEST.mkdir(parents=True, exist_ok=True)
 reader = PdfReader(str(ORIGINAL))
-assert len(reader.pages) == 15
+assert len(reader.pages) == 35
 
 def inline(paragraph, text):
     parts=re.split(r'(\*\*.*?\*\*)', text)
@@ -45,10 +45,10 @@ def render(doc, text):
             while i<len(lines) and lines[i].strip().startswith('|'):
                 rows.append(split(lines[i])); i+=1
             table=doc.add_table(rows=1, cols=len(header));table.style='Table Grid';table.alignment=WD_TABLE_ALIGNMENT.CENTER
-            for c,val in zip(table.rows[0].cells,header): c.text=val; shade(c)
+            for c,val in zip(table.rows[0].cells,header): inline(c.paragraphs[0],val); shade(c)
             for row in rows:
                 cells=table.add_row().cells
-                for c,val in zip(cells,row): c.text=val
+                for c,val in zip(cells,row): inline(c.paragraphs[0],val)
             for row in table.rows:
                 for cell in row.cells:
                     for p in cell.paragraphs:
@@ -67,8 +67,8 @@ def render(doc, text):
         chunks=[line];i+=1
         while i<len(lines):
             nxt=lines[i].strip()
-            if not nxt or nxt.startswith(('•','## ','|')) or re.match(r'^\d+\. ',nxt) or re.match(r'^[AB]: ',nxt): break
-            if re.match(r'^[AB]: ',chunks[0]) or re.match(r'^\d+\. ',chunks[0]): break
+            if not nxt or nxt.startswith(('•','## ','|')) or re.match(r'^\d+\. ',nxt) or re.match(r'^(?:A|B|C|D|Priya|Arun|Tourist|Local|Opening|Close|Closing|Point \d+): ',nxt): break
+            if re.match(r'^\d+\. ',chunks[0]): break
             chunks.append(nxt);i+=1
         paragraph=doc.add_paragraph(); inline(paragraph,' '.join(chunks))
 

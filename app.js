@@ -56,7 +56,7 @@ Read the full poem in a reliable edition; verify wording and line numbers agains
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function md(s){
  const lines=escapeHtml(s).split('\n'), html=[];
- const cells=l=>l.trim().slice(1,-1).split('|').map(c=>c.trim());
+ const cells=l=>l.trim().slice(1,-1).split('|').map(c=>c.trim().replace(/\*\*(.*?)\*\*/g,'<b>$1</b>'));
  for(let i=0;i<lines.length;i++){
   const l=lines[i], next=lines[i+1]||'';
   if(l.trim().startsWith('|')&&l.trim().endsWith('|')&&/^\s*\|(?:\s*:?-+:?\s*\|)+\s*$/.test(next)){

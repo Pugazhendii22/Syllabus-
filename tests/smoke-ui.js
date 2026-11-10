@@ -58,6 +58,7 @@ setImmediate(async ()=>{
   const tableHtml=vm.runInContext('md("| Heading | Value |\\n| --- | --- |\\n| &lt;safe&gt; | example |")', context);
   assert(tableHtml.includes('<table') && tableHtml.includes('<th scope="col">Heading</th>'));
   assert(!tableHtml.includes('<safe>'),'table cells must escape input');
+  assert(vm.runInContext('md('+JSON.stringify('| Sentence | Meaning |\n| --- | --- |\n| I did not **take** your pen. | Borrowed |')+')',context).includes('<b>take</b>'),'table emphasis is retained');
   const rich = vm.runInContext('chatMarkdown('+JSON.stringify('### Example\n\n**Bold** and *italics*\n\n- first\n- second\n\n| Head | Meaning |\n| ---- | ---- |\n| item | first line\n- another detail |\n\n```\n<script>alert(1)</script>\n```')+')',context);
   assert(rich.includes('<h4>Example</h4>')&&rich.includes('<strong>Bold</strong>')&&rich.includes('<em>italics</em>'));
   assert(rich.includes('<ul><li>first</li><li>second</li></ul>')&&rich.includes('<table'));

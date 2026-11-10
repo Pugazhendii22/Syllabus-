@@ -110,15 +110,15 @@ for unit, ids in spoken_topic_ids.items():
 original_pdf = p/'notes/spoken-english/Spoken_English_Notes.pdf'
 assert original_pdf.read_bytes().startswith(b'%PDF-')
 original_pdf_checks = [
- ('Compound-complex','Subject + Verb + Indirect Object + Direct Object'),
- ('Acronyms: NASA, UNESCO, laser.','**take** your pen'),
- ('Sample Dialogue','Extempore Speeches'),
+ ('Detailed Unit-wise Notes (Units I to V)','Subject + Verb + Indirect Object + Direct Object'),
+ ('NASA, UNESCO, laser, radar.','**take** your pen'),
+ ('Sample dialogue: meeting a new classmate','Extempore Speeches'),
  ('Appointing Group Leaders to Communicate','PowerPoint Presentations'),
  ('Listening for Gist, Style and Tone','Recommended Reading'),
 ]
 for i, checks in enumerate(original_pdf_checks):
     entry = get(f'course-4:{i}', f'spoken-original-pdf-unit-{i+1}')
-    assert entry['source'].startswith('/notes/spoken-english/Spoken_English_Notes.pdf#page=')
+    assert entry['source'] == '/notes/spoken-english/Spoken_English_Notes.pdf#page='+str([2,12,22,27,31][i])
     assert all(check in entry['text'] for check in checks), (i, checks)
 # Functional Communicative Writing: detailed topic notes in all five syllabus units.
 writing_topics = {

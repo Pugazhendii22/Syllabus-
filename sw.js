@@ -1,8 +1,8 @@
 // Only cache the public app shell and prepared notes, never API responses or private user data.
-const CACHE = 'ammu-study-shell-v49';
+const CACHE = 'ammu-study-shell-v50';
 const DOCUMENTS = ['/notes/spoken-english/Spoken_English_Notes.pdf', '/notes/spoken-english/downloads/Spoken-English-All-Units.docx', ...[1,2,3,4,5].flatMap(n=>[`/notes/spoken-english/downloads/Spoken-English-Unit-${n}.pdf`,`/notes/spoken-english/downloads/Spoken-English-Unit-${n}.docx`])];
 const documentPaths = new Set(DOCUMENTS);
-const SHELL = ['/', '/style.css?v=30', '/app.js?v=26', '/pwa.js?v=6', '/courses.json', '/prepared-notes.json', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png', '/icons/apple-touch-icon.png', '/icons/favicon.png', ...DOCUMENTS];
+const SHELL = ['/', '/style.css?v=30', '/app.js?v=27', '/pwa.js?v=6', '/courses.json', '/prepared-notes.json', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png', '/icons/apple-touch-icon.png', '/icons/favicon.png', ...DOCUMENTS];
 const paths = new Set(SHELL.map(p => new URL(p, self.location.origin).pathname));
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)));

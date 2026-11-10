@@ -33,7 +33,8 @@ const sha=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
    const chunks=[];for await(const chunk of await download.createReadStream())chunks.push(chunk);
    assert.equal(sha(Buffer.concat(chunks)),sha(fs.readFileSync(path)),`${scope} ${format} must contain the actual complete file`);
   }
-  await page.locator('#closeDownload').tap();await page.locator('#preparedPicker [data-topic]').first().tap();
+  await page.locator('#closeDownload').tap();await page.locator('#preparedPicker [data-topic]').filter({hasText:'Original PDF notes'}).tap();
+  assert((await page.locator('#materialBody').textContent()).includes('The Honest Woodcutter'),'new detailed PDF transcription appears in Unit III');
   assert(await page.locator('#openDownloadsReading').isVisible(),'downloads also available in the reading screen');
   await page.locator('#openDownloadsReading').tap();assert.equal(await page.locator('#downloadScope').inputValue(),'3');await page.locator('#closeDownload').tap();
   await page.reload();await page.waitForFunction(()=>!document.querySelector('#readingView').hidden);
